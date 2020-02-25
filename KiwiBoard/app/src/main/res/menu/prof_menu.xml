@@ -25,6 +25,12 @@
     <!-- These items only trigger an action-->
     <item android:title="Manage App">
         <menu>
+            <item android:id="@+id/nav_professor_createmc"
+                android:icon="@drawable/ic_add"
+                android:title="Create MC Question"/>
+            <item android:id="@+id/nav_professor_createsa"
+                android:icon="@drawable/ic_add"
+                android:title="Create Short Answer"/>
             <item android:id="@+id/nav_professor_logout"
                 android:icon="@drawable/ic_signout"
                 android:title="Logout"/>
