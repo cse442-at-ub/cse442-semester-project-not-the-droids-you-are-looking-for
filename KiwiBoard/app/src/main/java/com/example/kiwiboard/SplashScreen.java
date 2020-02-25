@@ -25,11 +25,11 @@ public class SplashScreen extends AppCompatActivity {
                 img.startAnimation(aniFade);
 
                 finish(); // Close the splash screen
-                startActivity(new Intent(SplashScreen.this, Mode.class));
+                startActivity(new Intent(SplashScreen.this, Login.class));
                 //overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
         };
         Timer opening = new Timer();
-        opening.schedule(task, 2000); // 5000ms is 5 seconds
+        opening.schedule(task, 900); // 5000ms is 5 seconds
     }
 }
