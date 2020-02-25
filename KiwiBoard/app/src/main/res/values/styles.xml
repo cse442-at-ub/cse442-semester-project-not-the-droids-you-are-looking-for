@@ -24,7 +24,7 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:ems">10</item>
     </style>
-
+  
     <style name="loginField">
         <item name="android:gravity">center</item>
         <item name="android:background">@layout/edit_text_style</item>
@@ -32,5 +32,5 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:ems">10</item>
     </style>
-
+  
 </resources>
