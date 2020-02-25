@@ -13,7 +13,8 @@
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+            <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".ProfMain" />
         <activity android:name=".Mode"></activity>
@@ -26,10 +27,10 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
         </activity>
-        <activity android:name=".CreateQuestionFragment" />
         <activity android:name=".CreateCourseFragment" />
         <activity android:name=".ShortAnswer" />
         <activity android:name=".StudentGradesFragment" />
+        <activity android:name=".MultipleChoice" />
         <activity android:name=".AddCourseFragment" />
         <activity android:name=".StudentMain" />
         <activity android:name=".ForgotPassword" />

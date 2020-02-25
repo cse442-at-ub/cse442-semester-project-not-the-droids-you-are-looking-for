@@ -20,8 +20,6 @@
     <string name="empty_mc3">Choice C</string>
     <string name="empty_mc4">Choice D</string>
 
-    <string name="kiwi_logo">Logo</string>
-
     <string name="prof_multchoice_questionbox">Enter the question:</string>
     <string name="prof_multchoice_questionLabel">Enter question #:</string>
     <string name="prof_settimer_label">Set timer (00:00):</string>
