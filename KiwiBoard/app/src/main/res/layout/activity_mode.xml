@@ -8,12 +8,12 @@
 
     <Button
         android:id="@+id/btnStumode"
-        android:layout_width="390dp"
-        android:layout_height="260dp"
+        android:layout_width="354dp"
+        android:layout_height="238dp"
         android:background="@drawable/hat"
         android:onClick="studentMode"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnProfmode"
+        app:layout_constraintBottom_toTopOf="@+id/txtStudentMode"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,14 +21,38 @@
 
     <Button
         android:id="@+id/btnProfmode"
-        android:layout_width="392dp"
-        android:layout_height="348dp"
+        android:layout_width="362dp"
+        android:layout_height="320dp"
         android:background="@drawable/professor"
         android:onClick="professorMode"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/txtProfessorMode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtStudentMode" />
+
+    <TextView
+        android:id="@+id/txtStudentMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Student Mode"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnProfmode"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnStumode" />
+
+    <TextView
+        android:id="@+id/txtProfessorMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Professor Mode"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnProfmode" />
 </androidx.constraintlayout.widget.ConstraintLayout>
