@@ -1,7 +1,240 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".StudentGradesFragment">
+
+
+    <EditText
+        android:id="@+id/txtGradesTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:editable="false"
+        android:ems="10"
+        android:inputType="none"
+        android:text="My Grades"
+        app:layout_constraintBottom_toTopOf="@+id/txtClassAvglbl"
+        app:layout_constraintStart_toStartOf="@+id/txtClassAvglbl"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TableLayout
+        android:id="@+id/tblStudentGrades"
+        android:layout_width="359dp"
+        android:layout_height="415dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/prgStuClassavg">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/txtQnum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Q#"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Points"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Total"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="%"
+                android:textSize="18sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/txtq1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Q1"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="6"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="10"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/txtPerc1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="60"
+                android:textSize="18sp" />
+
+            <ProgressBar
+                android:id="@+id/prgstu1"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="155dp"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:progress="60" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/txtq2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="Q2"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="4"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="10"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/txtPerc2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="40"
+                android:textSize="18sp" />
+
+            <ProgressBar
+                android:id="@+id/prgstu2"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:progress="40" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/txtq3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Q3"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="10"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="10"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/txtPerc3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="100"
+                android:textSize="18sp" />
+
+            <ProgressBar
+                android:id="@+id/prgstu3"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:progress="100" />
+        </TableRow>
+    </TableLayout>
+
+    <ProgressBar
+        android:id="@+id/prgStuClassavg"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="165dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="51dp"
+        android:layout_marginEnd="123dp"
+        android:progress="82"
+        app:layout_constraintBottom_toBottomOf="@+id/txtStuClassavg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtStuClassavg"
+        app:layout_constraintTop_toTopOf="@+id/txtStuClassavg" />
+
+    <TextView
+        android:id="@+id/txtStuClassavg"
+        android:layout_width="46dp"
+        android:layout_height="27dp"
+        android:text="82%"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/tblStudentGrades"
+        app:layout_constraintStart_toStartOf="@+id/tblStudentGrades"
+        app:layout_constraintTop_toBottomOf="@+id/txtClassAvglbl" />
+
+    <TextView
+        android:id="@+id/txtClassAvglbl"
+        android:layout_width="130dp"
+        android:layout_height="32dp"
+        android:text="Class Average"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/txtStuClassavg"
+        app:layout_constraintStart_toStartOf="@+id/txtStuClassavg"
+        app:layout_constraintTop_toBottomOf="@+id/txtGradesTitle" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
