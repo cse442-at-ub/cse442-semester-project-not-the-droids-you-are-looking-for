@@ -37,40 +37,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            
 
-            <Button
-                android:id="@+id/button14"
-                android:layout_width="match_parent"
-                android:layout_height="110dp"
-                android:background="@drawable/ic_rounded_corners"
-                android:padding="10dp"
-                android:text="GLY 101: Natural Hazards"
-                android:textSize="30sp" />
 
-            <Button
-                android:id="@+id/button13"
-                android:layout_width="match_parent"
-                android:layout_height="110dp"
-                android:background="@drawable/ic_rounded_corners"
-                android:padding="10dp"
-                android:text="EAS 360: STEM Communication"
-                android:textSize="30sp" />
-
-            <Button
-                android:id="@+id/button12"
-                android:layout_width="match_parent"
-                android:layout_height="110dp"
-                android:background="@drawable/ic_rounded_corners"
-                android:text="CSE 379: Microprocessors"
-                android:textSize="30sp" />
-
-            <Button
-                android:id="@+id/button11"
-                android:layout_width="match_parent"
-                android:layout_height="110dp"
-                android:background="@drawable/ic_rounded_corners"
-                android:text="CSE 442: Software Enginnering"
-                android:textSize="30sp" />
 
             <Button
                 android:id="@+id/button10"
