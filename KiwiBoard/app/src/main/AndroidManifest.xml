@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Login"></activity>
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,9 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ProfMain" />
-        <activity android:name=".Mode">
-
-        </activity>
+        <activity android:name=".Mode"></activity>
         <activity android:name=".QuestionLog" />
         <activity android:name=".ProfReportFragment" />
         <activity android:name=".CreateQuestionFragment" />

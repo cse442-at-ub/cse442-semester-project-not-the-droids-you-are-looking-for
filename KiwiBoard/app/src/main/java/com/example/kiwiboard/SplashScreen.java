@@ -25,7 +25,7 @@ public class SplashScreen extends AppCompatActivity {
                 img.startAnimation(aniFade);
 
                 finish(); // Close the splash screen
-                startActivity(new Intent(SplashScreen.this, Mode.class));
+                startActivity(new Intent(SplashScreen.this, Login.class));
                 //overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
         };
