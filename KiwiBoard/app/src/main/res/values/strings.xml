@@ -16,6 +16,7 @@
     <string name="title_activity_multiplechoice">multiplechoice</string>
 
     <string name="submit_button">Submit</string>
+    <string name="return_button">Return</string>
 
     <string name="choice_A_label">Max Stalk</string>
     <string name="choice_B_label">Brandon Clarke</string>
@@ -23,7 +24,7 @@
     <string name="choice_D_label">Jewan Jeffries</string>
     <string name="question_label">Question #1</string>
     <string name="questionbox_template">A UB CSE Professor told 4 students that one of them is his favorite. Who is it?</string>
-    <string name="timer_label">Timer</string>
+    <string name="timer_label">00:30</string>
     <string name="kiwi_logo">Logo</string>
 
 </resources>
