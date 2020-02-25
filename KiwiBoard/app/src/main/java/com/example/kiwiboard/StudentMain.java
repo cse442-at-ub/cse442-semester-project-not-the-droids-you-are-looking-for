@@ -22,11 +22,11 @@ public class StudentMain extends AppCompatActivity implements NavigationView.OnN
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.student_toolbar);
         setSupportActionBar(toolbar);
 
-        drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        drawer = findViewById(R.id.student_drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_student_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
@@ -35,35 +35,43 @@ public class StudentMain extends AppCompatActivity implements NavigationView.OnN
         toggle.syncState();
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new HomeFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_home);
+            getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
+                    new StudentHomeFragment()).commit();
+            navigationView.setCheckedItem(R.id.nav_student_home);
         }
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.nav_home:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new HomeFragment()).commit();
+            case R.id.nav_student_home:
+                getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
+                        new StudentHomeFragment()).commit();
                 break;
-            case R.id.nav_grades:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+            case R.id.nav_student_grades:
+                getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
                         new StudentGradesFragment()).commit();
                 break;
-            case R.id.nav_classes:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+            case R.id.nav_student_classes:
+                getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
                         new StudentCoursesFragment()).commit();
                 break;
-            case R.id.nav_logout:
+            case R.id.nav_student_addclass:
+                getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
+                        new AddCourseFragment()).commit();
+                break;
+            case R.id.nav_student_question_log:
+                getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
+                        new StudentLogFragment()).commit();
+                break;
+            case R.id.nav_student_logout:
                 // Log the user out here
                 Toast.makeText(this, "Logging out...", Toast.LENGTH_SHORT).show();
                 this.finish();
                 startActivity(new Intent(StudentMain.this, Mode.class));
                 break;
-            case R.id.nav_settings:
-                startActivity(new Intent(StudentMain.this, Settings.class));
+            case R.id.nav_student_settings:
+                startActivity(new Intent(StudentMain.this, StuSettings.class));
                 break;
         }
 

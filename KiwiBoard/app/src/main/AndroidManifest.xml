@@ -9,11 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ProfMain"></activity>
-        <activity android:name=".Mode">
+        <activity android:name=".Login"></activity>
+        <activity android:name=".SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
         </activity>
-        <activity android:name=".Settings" />
+        <activity android:name=".ProfMain" />
+        <activity android:name=".Mode"></activity>
         <activity android:name=".QuestionLog" />
         <activity android:name=".ProfReportFragment" />
         <activity android:name=".ProfMultipleChoice">
@@ -31,6 +34,8 @@
         <activity android:name=".StudentMain" />
         <activity android:name=".ForgotPassword" />
         <activity android:name=".Register" />
+        <activity android:name=".ProfSettings" />
+        <activity android:name=".StuSettings" />
     </application>
 
 </manifest>
