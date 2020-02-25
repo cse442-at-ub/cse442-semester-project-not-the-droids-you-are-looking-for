@@ -7,17 +7,16 @@
     tools:context=".StudentGradesFragment">
 
 
-    <EditText
-        android:id="@+id/txtGradesTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:editable="false"
-        android:ems="10"
-        android:inputType="none"
-        android:text="My Grades"
-        app:layout_constraintBottom_toTopOf="@+id/txtClassAvglbl"
-        app:layout_constraintStart_toStartOf="@+id/txtClassAvglbl"
-        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/txtStuClassavg"
+        android:layout_width="46dp"
+        android:layout_height="27dp"
+        android:text="82%"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/tblStudentGrades"
+        app:layout_constraintStart_toStartOf="@+id/tblStudentGrades"
+        app:layout_constraintTop_toBottomOf="@+id/txtGradesTitle"
+        app:layout_constraintVertical_bias="0.735" />
 
     <TableLayout
         android:id="@+id/tblStudentGrades"
@@ -25,7 +24,7 @@
         android:layout_height="415dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.557"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/prgStuClassavg">
 
@@ -203,27 +202,28 @@
         </TableRow>
     </TableLayout>
 
+    <EditText
+        android:id="@+id/txtGradesTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:editable="false"
+        android:ems="10"
+        android:inputType="none"
+        android:text="My Grades"
+        app:layout_constraintBottom_toTopOf="@+id/txtClassAvglbl"
+        app:layout_constraintStart_toStartOf="@+id/txtClassAvglbl"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ProgressBar
         android:id="@+id/prgStuClassavg"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="165dp"
         android:layout_height="26dp"
-        android:layout_marginStart="51dp"
-        android:layout_marginEnd="123dp"
         android:progress="82"
-        app:layout_constraintBottom_toBottomOf="@+id/txtStuClassavg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txtStuClassavg"
-        app:layout_constraintTop_toTopOf="@+id/txtStuClassavg" />
-
-    <TextView
-        android:id="@+id/txtStuClassavg"
-        android:layout_width="46dp"
-        android:layout_height="27dp"
-        android:text="82%"
-        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/tblStudentGrades"
-        app:layout_constraintStart_toStartOf="@+id/tblStudentGrades"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/txtStuClassavg"
         app:layout_constraintTop_toBottomOf="@+id/txtClassAvglbl" />
 
     <TextView
@@ -232,7 +232,7 @@
         android:layout_height="32dp"
         android:text="Class Average"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtStuClassavg"
+        app:layout_constraintBottom_toTopOf="@+id/prgStuClassavg"
         app:layout_constraintStart_toStartOf="@+id/txtStuClassavg"
         app:layout_constraintTop_toBottomOf="@+id/txtGradesTitle" />
 
