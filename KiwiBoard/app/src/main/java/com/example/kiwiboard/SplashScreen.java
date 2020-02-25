@@ -30,6 +30,6 @@ public class SplashScreen extends AppCompatActivity {
             }
         };
         Timer opening = new Timer();
-        opening.schedule(task, 2000); // 5000ms is 5 seconds
+        opening.schedule(task, 900); // 5000ms is 5 seconds
     }
 }
