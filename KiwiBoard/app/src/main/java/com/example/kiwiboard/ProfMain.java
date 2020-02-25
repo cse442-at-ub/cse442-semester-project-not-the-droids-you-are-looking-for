@@ -66,6 +66,12 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
                 getSupportFragmentManager().beginTransaction().replace(R.id.professor_fragment_container,
                         new ProfessorLogFragment()).commit();
                 break;
+            case R.id.nav_professor_createmc:
+                startActivity(new Intent(ProfMain.this, ProfMultipleChoice.class));
+                break;
+            case R.id.nav_professor_createsa:
+                startActivity(new Intent(ProfMain.this, CreateShortAnwserQuestionActivity.class));
+                break;
             case R.id.nav_professor_logout:
                 // Log the user out here
                 Toast.makeText(this, "Logging out...", Toast.LENGTH_SHORT).show();

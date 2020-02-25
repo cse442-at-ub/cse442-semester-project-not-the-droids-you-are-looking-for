@@ -64,6 +64,12 @@ public class StudentMain extends AppCompatActivity implements NavigationView.OnN
                 getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
                         new StudentLogFragment()).commit();
                 break;
+            case R.id.nav_student_mc:
+                startActivity(new Intent(StudentMain.this, MultipleChoice.class));
+                break;
+            case R.id.nav_student_sa:
+                startActivity(new Intent(StudentMain.this, ShortAnswer.class));
+                break;
             case R.id.nav_student_logout:
                 // Log the user out here
                 Toast.makeText(this, "Logging out...", Toast.LENGTH_SHORT).show();
