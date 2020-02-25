@@ -14,7 +14,7 @@ public class StudentGradesFragment extends Fragment {
     @Nullable
 @Override
 public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-    return inflater.inflate(R.layout.fragment_home,container,false);
+    return inflater.inflate(R.layout.fragment_student_grades,container,false);
 }
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

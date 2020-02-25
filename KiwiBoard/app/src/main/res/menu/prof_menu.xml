@@ -5,24 +5,30 @@
 
     <!-- These items are each a fragment activity-->
     <group android:checkableBehavior="single">
-        <item android:id="@+id/nav_home"
+        <item android:id="@+id/nav_professor_home"
             android:icon="@drawable/ic_home"
             android:title="Home"/>
-        <item android:id="@+id/nav_classes"
+        <item android:id="@+id/nav_professor_grades"
+            android:icon="@drawable/ic_grades"
+            android:title="Student Report"/>
+        <item android:id="@+id/nav_professor_classes"
             android:icon="@drawable/ic_school"
             android:title="Choose Class"/>
-        <item android:id="@+id/nav_addclass"
+        <item android:id="@+id/nav_professor_create_class"
             android:icon="@drawable/ic_add"
-            android:title="Add Class"/>
+            android:title="Create Class"/>
+        <item android:id="@+id/nav_professor_question_log"
+            android:icon="@drawable/ic_log"
+            android:title="Question Log"/>
     </group>
 
     <!-- These items only trigger an action-->
     <item android:title="Manage App">
         <menu>
-            <item android:id="@+id/nav_logout"
+            <item android:id="@+id/nav_professor_logout"
                 android:icon="@drawable/ic_signout"
                 android:title="Logout"/>
-            <item android:id="@+id/nav_settings"
+            <item android:id="@+id/nav_professor_settings"
                 android:icon="@drawable/ic_settings"
                 android:title="Settings"/>
         </menu>
