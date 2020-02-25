@@ -14,4 +14,25 @@
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
     <string name="title_activity_multiplechoice">multiplechoice</string>
+
+    <string name="empty_mc1">Choice A</string>
+    <string name="empty_mc2">Choice B</string>
+    <string name="empty_mc3">Choice C</string>
+    <string name="empty_mc4">Choice D</string>
+
+    <string name="kiwi_logo">Logo</string>
+
+    <string name="prof_multchoice_questionbox">Enter the question:</string>
+    <string name="prof_multchoice_questionLabel">Enter question #:</string>
+    <string name="prof_settimer_label">Set timer (00:00):</string>
+
+    <string name="select_multiple_answers">Select all that apply?</string>
+    <string name="multchoice_total_points">Enter total points:</string>
+
+    <string name="question_box_label">Question</string>
+    <string name="question_number_label">Question Number</string>
+
+    <string name="points_label">Points</string>
+    <string name="timer_label">Timer</string>
+    <string name="submit_label">Submit</string>
 </resources>

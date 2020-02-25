@@ -11,15 +11,18 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ProfMain"></activity>
         <activity android:name=".Mode">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Settings" />
         <activity android:name=".QuestionLog" />
         <activity android:name=".ProfReportFragment" />
+        <activity android:name=".ProfMultipleChoice">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity android:name=".CreateQuestionFragment" />
         <activity android:name=".CreateCourseFragment" />
         <activity android:name=".ShortAnswer" />
