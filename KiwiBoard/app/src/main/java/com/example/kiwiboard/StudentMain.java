@@ -71,7 +71,7 @@ public class StudentMain extends AppCompatActivity implements NavigationView.OnN
                 startActivity(new Intent(StudentMain.this, Mode.class));
                 break;
             case R.id.nav_student_settings:
-                startActivity(new Intent(StudentMain.this, Settings.class));
+                startActivity(new Intent(StudentMain.this, StuSettings.class));
                 break;
         }
 

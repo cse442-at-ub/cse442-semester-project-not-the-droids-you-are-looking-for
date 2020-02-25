@@ -30,6 +30,8 @@
         <activity android:name=".StudentMain" />
         <activity android:name=".ForgotPassword" />
         <activity android:name=".Register" />
+        <activity android:name=".ProfSettings" />
+        <activity android:name=".StuSettings" />
     </application>
 
 </manifest>
