@@ -13,8 +13,10 @@
         android:text="Multiple Choice"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/btnSAquestion"
-        app:layout_constraintTop_toBottomOf="@+id/txtStuHome"
-        tools:layout_editor_absoluteX="91dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtStuHome" />
 
     <Button
         android:id="@+id/btnSAquestion"
@@ -23,8 +25,10 @@
         android:text="Short Answer"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnMCquestion"
-        tools:layout_editor_absoluteX="91dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnMCquestion" />
 
     <TextView
         android:id="@+id/txtStuHome"
