@@ -5,4 +5,7 @@
     <color name="colorAccent">#9C3153</color>
     <color name="multChoiceBackground">#2F4F4F</color>
     <color name="White">#FFFFFF</color>
+    <color name="Black">#111111</color>
+    <color name="hintGray">#808080</color>
+
 </resources>

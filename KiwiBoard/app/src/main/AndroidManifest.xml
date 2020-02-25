@@ -14,13 +14,18 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ProfMain" />
         <activity android:name=".Mode"></activity>
         <activity android:name=".QuestionLog" />
         <activity android:name=".ProfReportFragment" />
+        <activity android:name=".ProfMultipleChoice">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity android:name=".CreateQuestionFragment" />
         <activity android:name=".CreateCourseFragment" />
         <activity android:name=".ShortAnswer" />
