@@ -10,6 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MultipleChoice"></activity>
+        <activity android:name=".StuSettings"></activity>
+        <activity android:name=".ProfSettings" />
         <activity android:name=".ProfMain" />
         <activity android:name=".Mode">
             <intent-filter>
@@ -18,7 +20,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Settings" />
         <activity android:name=".QuestionLog" />
         <activity android:name=".ProfReportFragment" />
         <activity android:name=".CreateQuestionFragment" />

@@ -65,7 +65,7 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
                 startActivity(new Intent(ProfMain.this, Mode.class));
                 break;
             case R.id.nav_settings:
-                startActivity(new Intent(ProfMain.this, Settings.class));
+                startActivity(new Intent(ProfMain.this, ProfSettings.class));
                 break;
         }
 
