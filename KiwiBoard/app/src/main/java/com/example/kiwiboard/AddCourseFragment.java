@@ -5,10 +5,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 public class AddCourseFragment extends Fragment {
     @Nullable
@@ -26,4 +29,5 @@ public class AddCourseFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         // Initialise View objects here
     }
+
 }
