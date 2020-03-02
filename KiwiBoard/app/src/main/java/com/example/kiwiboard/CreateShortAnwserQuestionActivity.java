@@ -13,14 +13,7 @@ public class CreateShortAnwserQuestionActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_shrt_awnsr_question);
     }
-    public void branch(View v){
-        try {
-            Toast.makeText(this.getApplicationContext(), "Question has been posted", Toast.LENGTH_LONG).show();
-        }
-        catch (Exception e){}
-        this.finish();
-        startActivity(new Intent(CreateShortAnwserQuestionActivity.this, ProfMain.class));
-    }
+
 
 
 }

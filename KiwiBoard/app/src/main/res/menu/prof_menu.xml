@@ -10,7 +10,7 @@
             android:title="Home"/>
         <item android:id="@+id/nav_professor_grades"
             android:icon="@drawable/ic_grades"
-            android:title="Student Report"/>
+            android:title="Professor Report"/>
         <item android:id="@+id/nav_professor_classes"
             android:icon="@drawable/ic_school"
             android:title="Choose Class"/>
