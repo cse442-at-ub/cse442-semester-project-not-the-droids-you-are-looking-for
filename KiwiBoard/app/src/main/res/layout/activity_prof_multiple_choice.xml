@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/multChoiceBackground"
+    tools:context=".ProfMultipleChoice">
+
+
+    <ImageView
+        android:id="@+id/appLogo"
+        android:layout_width="141dp"
+        android:layout_height="143dp"
+        android:contentDescription="@string/kiwi_logo"
+        app:layout_constraintBottom_toBottomOf="@+id/enterQuestionText"
+        app:layout_constraintEnd_toStartOf="@+id/profSetTimerText"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/enterQuestionText"
+        app:layout_constraintTop_toTopOf="@+id/enterQuestionText"
+        app:layout_constraintVertical_bias="0.533"
+        app:srcCompat="@drawable/kiwi" />
+
+    <RadioGroup
+        android:id="@+id/multipleChoiceOptions"
+        android:layout_width="392dp"
+        android:layout_height="199dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@color/material_on_surface_emphasis_high_type"
+        app:layout_constraintBottom_toTopOf="@+id/profSubmitButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox">
+
+        <RadioButton
+            android:id="@+id/emptymc1"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:background="#03A9F4"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/empty_mc1"
+            android:textColor="@color/White"
+            android:textSize="25sp" />
+
+        <RadioButton
+            android:id="@+id/emptymc2"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:background="@color/colorPrimary"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/empty_mc2"
+            android:textColor="@color/White"
+            android:textSize="25sp" />
+
+        <RadioButton
+            android:id="@+id/emptymc3"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:background="@color/colorPrimaryDark"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/empty_mc3"
+            android:textColor="@color/White"
+            android:textSize="25sp" />
+
+        <RadioButton
+            android:id="@+id/emptymc4"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/colorAccent"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/empty_mc4"
+            android:textColor="@color/White"
+            android:textSize="25sp" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/profQuestionInputBox"
+        android:layout_width="376dp"
+        android:layout_height="172dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="17dp"
+        android:background="@color/White"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="@string/prof_multchoice_questionbox"
+        android:textColor="@color/hintGray"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/totalPointsLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profQuestionBoxLabel" />
+
+    <TextView
+        android:id="@+id/profSetTimerText"
+        android:layout_width="107dp"
+        android:layout_height="56dp"
+        android:layout_marginEnd="10dp"
+        android:background="@color/White"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="@string/prof_settimer_label"
+        android:textColor="@color/hintGray"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/appLogo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/appLogo"
+        app:layout_constraintStart_toStartOf="@+id/timerLabel"
+        app:layout_constraintTop_toTopOf="@+id/appLogo" />
+
+    <TextView
+        android:id="@+id/enterQuestionText"
+        android:layout_width="104dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="10dp"
+        android:background="@color/White"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="@string/prof_multchoice_questionLabel"
+        android:textColor="@color/hintGray"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/profQuestionBoxLabel"
+        app:layout_constraintStart_toStartOf="@+id/questionNumberLabel"
+        app:layout_constraintTop_toBottomOf="@+id/questionNumberLabel" />
+
+    <Button
+        android:id="@+id/profSubmitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/White"
+        android:text="@string/submit_label"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/multipleChoiceOptions"
+        app:layout_constraintTop_toBottomOf="@+id/multipleChoiceOptions" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="185dp"
+        android:layout_height="35dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="@string/select_multiple_answers"
+        android:textColor="@color/White"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/totalPoints"
+        app:layout_constraintEnd_toEndOf="@+id/profQuestionInputBox"
+        app:layout_constraintTop_toTopOf="@+id/totalPoints" />
+
+    <TextView
+        android:id="@+id/totalPoints"
+        android:layout_width="75dp"
+        android:layout_height="34dp"
+        android:background="@color/White"
+        android:text="@string/multchoice_total_points"
+        android:textColor="@color/hintGray"
+        app:layout_constraintBottom_toBottomOf="@+id/totalPointsLabel"
+        app:layout_constraintStart_toEndOf="@+id/totalPointsLabel"
+        app:layout_constraintTop_toTopOf="@+id/totalPointsLabel" />
+
+    <TextView
+        android:id="@+id/profQuestionBoxLabel"
+        android:layout_width="88dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="18dp"
+        android:background="@color/multChoiceBackground"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="@string/question_box_label"
+        android:textColor="@color/White"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/profQuestionInputBox"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enterQuestionText" />
+
+    <TextView
+        android:id="@+id/questionNumberLabel"
+        android:layout_width="104dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="46dp"
+        android:layout_marginBottom="1dp"
+        android:background="@color/multChoiceBackground"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:paddingStart="10dp"
+        android:paddingTop="18dp"
+        android:paddingEnd="0dp"
+        android:text="@string/question_box_label"
+        android:textColor="@color/White"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/enterQuestionText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/timerLabel"
+        android:layout_width="79dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="46dp"
+        android:layout_marginEnd="47dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:paddingStart="6dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="0dp"
+        android:text="@string/timer_label"
+        android:textColor="@color/White"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/profSetTimerText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/totalPointsLabel"
+        android:layout_width="61dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="18dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:paddingStart="10dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="0dp"
+        android:text="@string/points_label"
+        android:textColor="@color/White"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/multipleChoiceOptions"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profQuestionInputBox" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
