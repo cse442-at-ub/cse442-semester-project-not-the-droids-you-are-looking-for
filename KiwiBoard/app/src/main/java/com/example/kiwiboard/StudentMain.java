@@ -10,6 +10,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -33,6 +36,26 @@ public class StudentMain extends AppCompatActivity implements NavigationView.OnN
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        // Change nav bar content
+        View hview = navigationView.getHeaderView(0);
+        ImageView navImage = hview.findViewById(R.id.navImage);
+        navImage.setImageResource(R.drawable.hat);
+        navImage.getLayoutParams().height = 200;
+        navImage.getLayoutParams().width = 200;
+
+        String coursetext;
+        int currentcourse = StudentData.getCurrentcourse();
+        if (currentcourse != -1){
+            coursetext = StudentData.getCourses().get(currentcourse).getCourseName();
+        } else {
+            coursetext = "No course selected";
+        }
+        TextView navheaderlbl = hview.findViewById(R.id.txtnavHeaderlbl);
+        navheaderlbl.setText(coursetext);
+
+        TextView navsublbl = hview.findViewById(R.id.txtNavSublbl);
+        navsublbl.setText(StudentData.getEmail());
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,

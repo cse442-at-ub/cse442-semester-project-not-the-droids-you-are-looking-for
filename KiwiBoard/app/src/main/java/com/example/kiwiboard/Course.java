@@ -68,4 +68,12 @@ class Course {
     public int getNumberOfStudents(){
       return students.size();
     }
+
+    public ArrayList<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(ArrayList<Question> questions) {
+        this.questions = questions;
+    }
 }
