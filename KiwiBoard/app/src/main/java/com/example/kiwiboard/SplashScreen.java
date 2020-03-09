@@ -17,12 +17,11 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
+
         TimerTask task = new TimerTask() { // Schedules a task
             @Override
             public void run() { // Runs when the timer completes
-                //ImageView img = (ImageView)findViewById(R.id.imgKiwiboot);
-                ///Animation aniFade = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fadein);
-                ///img.startAnimation(aniFade);
 
                 finish(); // Close the splash screen
                 startActivity(new Intent(SplashScreen.this, Login.class));

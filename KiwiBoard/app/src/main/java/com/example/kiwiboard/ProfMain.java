@@ -12,9 +12,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+
+import org.w3c.dom.Text;
 
 public class ProfMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
@@ -35,6 +40,29 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        // Change nav bar content
+        View hview = navigationView.getHeaderView(0);
+
+        ImageView navImage = hview.findViewById(R.id.navImage);
+        navImage.setImageResource(R.drawable.professor);
+        navImage.getLayoutParams().height = 200;
+        navImage.getLayoutParams().width = 200;
+
+        String coursetext;
+        int currentcourse = ProfData.getCurrentcourse();
+        if (currentcourse != -1){
+            coursetext = ProfData.getCourses().get(currentcourse).getCourseName();
+        } else {
+            coursetext = "No course selected";
+        }
+        TextView navheaderlbl = hview.findViewById(R.id.txtnavHeaderlbl);
+        navheaderlbl.setText(coursetext);
+
+        TextView navsublbl = hview.findViewById(R.id.txtNavSublbl);
+        navsublbl.setText(ProfData.getEmail());
+
+
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.professor_fragment_container,
