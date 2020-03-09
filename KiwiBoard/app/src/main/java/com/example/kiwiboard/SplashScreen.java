@@ -23,7 +23,6 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             public void run() { // Runs when the timer completes
 
-
                 finish(); // Close the splash screen
                 startActivity(new Intent(SplashScreen.this, Login.class));
                 //overridePendingTransition(R.anim.fadein, R.anim.fadeout);
