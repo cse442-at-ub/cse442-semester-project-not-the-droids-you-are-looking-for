@@ -33,6 +33,50 @@ class Course {
         questions.remove(index);
     }
 
+    public ArrayList<Double> calculateAverages() {
+        ArrayList<Double>averages = new ArrayList<>();
+
+        int numQuestions = questions.size();
+        int numStudents = students.size();
+        double sum, grade, avg, total;
+        Question question;
+        Student student;
+
+        for(int i=0;i < numQuestions;i++)
+        {
+            sum=0;
+            for(int j=0;j<numStudents;j++)
+            {
+                student=students.get(j);
+                question=student.getQuestions().get(i);
+                grade=question.calculateScore();
+                sum+=grade;
+            }
+            total=(questions.get(i).getMaxpoints())*numStudents;
+            if(total==0)
+            {
+                avg = 0;
+            }
+            avg=sum/total;
+            averages.add(avg);
+        }
+        return averages;
+    }
+
+    public double calculateClassAverage(){
+        double sum=0,maxSum=0;
+        int numQuestions=questions.size();
+        ArrayList<Double>averages=calculateAverages();
+        for(int i=0;i<numQuestions;i++)
+        {
+            sum+=averages.get(i);
+            maxSum=questions.get(i).getMaxpoints();
+        }
+        return sum/maxSum*100;
+    }
+
+
+
     public String getCourseName() {
         return courseName;
     }
