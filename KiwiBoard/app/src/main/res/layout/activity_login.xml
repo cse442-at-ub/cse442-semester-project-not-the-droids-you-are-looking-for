@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Login"
-    android:background="@color/multChoiceBackground">
+    android:background="@color/themeColor">
 
 
     <Button
@@ -53,7 +53,7 @@
         android:layout_height="13dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="10dp"
-        android:background="@color/multChoiceBackground"
+        android:background="@color/themeColor"
         android:text="Forgot Password?"
         android:textSize="8sp"
         app:layout_constraintBottom_toBottomOf="parent"
