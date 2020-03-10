@@ -61,12 +61,17 @@
     <string name="submit_label">Submit</string>
 
     <string name="submit_button">Submit</string>
-    <string name="questionbox_template"></string>
+    <string name="questionbox_template">Who da best?</string>
     <string name="choice_A_label">Max Stalk</string>
     <string name="choice_B_label">Brandon Clarke</string>
     <string name="choice_C_label">Zach Congi</string>
     <string name="choice_D_label">Jewan Jeffries</string>
     <string name="question_label">Question #1</string>
 
-    >>>>>>> Stashed changes
+    <string name="student_registration_slogan">Welcome to KiwiBoard!</string>
+    <string name="text_name_hint">Name</string>
+    <string name="text_email_address_hint">Email Address</string>
+    <string name="text_password">Password</string>
+    <string name="text_register">Register</string>
+    <string name="text_login_prompt">Already have an account?</string>
 </resources>
