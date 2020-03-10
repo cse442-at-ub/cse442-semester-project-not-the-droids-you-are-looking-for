@@ -21,5 +21,9 @@ public class Login extends AppCompatActivity {
         startActivity(new Intent(Login.this, Mode.class));
     }
 
-
+    public void forgotPW(View view){
+        this.finish();
+        startActivity(new Intent(Login.this, ForgotPassword.class));
     }
+
+}
