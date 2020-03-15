@@ -9,4 +9,5 @@
     <color name="hintGray">#808080</color>
     <color name="registerButtonGreen">#9EBB40</color>
 
+    <color name="multChoiceBackground">#2F4F4F</color>
 </resources>
