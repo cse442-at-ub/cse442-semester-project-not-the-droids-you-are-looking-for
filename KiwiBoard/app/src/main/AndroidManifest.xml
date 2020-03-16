@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".StudentRegistration"></activity>
+        <activity android:name=".ResetPassword"></activity>
         <activity android:name=".Login" />
         <activity android:name=".SplashScreen">
             <intent-filter>
