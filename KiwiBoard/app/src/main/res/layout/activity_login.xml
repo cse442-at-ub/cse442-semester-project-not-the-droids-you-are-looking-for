@@ -26,11 +26,11 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="107dp"
+            android:layout_width="wrap_content"
             android:layout_height="38dp"
             android:layout_gravity="center"
             android:fontFamily="sans-serif-condensed-medium"
-            android:text="Kiwi Board"
+            android:text="Login"
             android:textColor="@color/White"
             android:textSize="22sp" />
     </LinearLayout>
@@ -68,6 +68,7 @@
             android:layout_width="134dp"
             android:layout_height="13dp"
             android:background="@color/multChoiceBackground"
+            android:onClick="forgotPW"
             android:text="Forgot Password?"
             android:textColor="#ffffffff"
             android:textSize="8sp"
