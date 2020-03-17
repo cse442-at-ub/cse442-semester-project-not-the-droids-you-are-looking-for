@@ -87,6 +87,10 @@ public class StudentMain extends AppCompatActivity implements NavigationView.OnN
                 getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
                         new StudentLogFragment()).commit();
                 break;
+            case R.id.nav_student_roster:
+                getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
+                        new StudentRosterFragment()).commit();
+                break;
             case R.id.nav_student_mc:
                 startActivity(new Intent(StudentMain.this, MultipleChoice.class));
                 break;
