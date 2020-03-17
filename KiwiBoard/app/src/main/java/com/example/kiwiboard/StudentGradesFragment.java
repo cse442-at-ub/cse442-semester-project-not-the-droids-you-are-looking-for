@@ -25,17 +25,27 @@ public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup c
 
         View rootView = inflater.inflate(R.layout.fragment_student_grades,container,false);
 
+        int courseindex = ProfData.getCurrentcourse();
+        Course currentcourse = ProfData.getCourses().get(courseindex);
+        ArrayList<Question> questions = currentcourse.getQuestions();
+        Question question;
+        double pointsreceived, percentage;
+        int maxpoints;
+        ArrayList<Double> averages = currentcourse.calculateAverages();
+
+        // Class Average
+        TextView avgTotal=(TextView)rootView.findViewById(R.id.txtStuClassavg);
+        double Classaverage = currentcourse.calculateClassAverage();
+        avgTotal.setText(Classaverage+"%");
+        ProgressBar avgProgress = (ProgressBar) rootView.findViewById(R.id.prgStuClassavg);
+        avgProgress.setProgress((int) Classaverage);
+
         // Table layout
 
         TableLayout gradesTable;
         gradesTable = (TableLayout) rootView.findViewById(R.id.tblStudentGrades);
 
-        int courseindex = StudentData.getCurrentcourse();
-        Course currentcourse = StudentData.getCourses().get(courseindex);
-        ArrayList<Question> questions = currentcourse.getQuestions();
-        Question question;
-        double pointsreceived, percentage;
-        int maxpoints;
+
 
         for (int i = 0; i < questions.size(); i++) {
 
