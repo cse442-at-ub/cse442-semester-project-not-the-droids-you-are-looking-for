@@ -20,7 +20,7 @@ public class StudentData {
     }
 
     // Clears all student data
-    public void clearAllData(){
+    public static void clearAllData(){
         name = "";
         email = "";
         password = "";

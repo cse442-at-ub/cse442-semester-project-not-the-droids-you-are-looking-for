@@ -78,7 +78,7 @@
                     style="@style/parent">
 
                     <EditText
-                        android:id="@+id/sub_txt_name"
+                        android:id="@+id/edit_txt_name"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:backgroundTint="@color/themeColor"
@@ -98,7 +98,7 @@
                     style="@style/parent">
 
                     <EditText
-                        android:id="@+id/sub_txt_emailAddress"
+                        android:id="@+id/edit_txt_emailAddress"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:backgroundTint="@color/themeColor"
@@ -118,7 +118,7 @@
                     style="@style/parent">
 
                     <EditText
-                        android:id="@+id/sub_txt_password"
+                        android:id="@+id/edit_txt_password"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:backgroundTint="@color/themeColor"
