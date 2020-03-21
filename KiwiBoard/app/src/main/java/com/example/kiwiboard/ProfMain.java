@@ -92,7 +92,7 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
                 break;
             case R.id.nav_professor_question_log:
                 getSupportFragmentManager().beginTransaction().replace(R.id.professor_fragment_container,
-                        new ProfessorLogFragment()).commit();
+                        new QuestionLogFragment()).commit();
                 break;
             case R.id.nav_professor_createmc:
                 startActivity(new Intent(ProfMain.this, ProfMultipleChoice.class));

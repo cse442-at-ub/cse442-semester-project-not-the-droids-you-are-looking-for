@@ -20,7 +20,7 @@
         </activity>
         <activity android:name=".ProfMain" />
         <activity android:name=".Mode" />
-        <activity android:name=".QuestionLog" />
+        <activity android:name=".QuestionLogFragment" />
         <activity android:name=".ProfReportFragment" />
         <activity android:name=".ProfMultipleChoice"></activity>
         <activity android:name=".CreateCourseFragment" />
