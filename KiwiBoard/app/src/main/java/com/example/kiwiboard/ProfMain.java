@@ -19,8 +19,6 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
-import org.w3c.dom.Text;
-
 public class ProfMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
 
@@ -98,7 +96,7 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
                 startActivity(new Intent(ProfMain.this, ProfMultipleChoice.class));
                 break;
             case R.id.nav_professor_createsa:
-                startActivity(new Intent(ProfMain.this, CreateShortAnwserQuestionActivity.class));
+                startActivity(new Intent(ProfMain.this, CreateShortAnswerQuestionActivity.class));
                 break;
             case R.id.nav_professor_logout:
                 // Log the user out here

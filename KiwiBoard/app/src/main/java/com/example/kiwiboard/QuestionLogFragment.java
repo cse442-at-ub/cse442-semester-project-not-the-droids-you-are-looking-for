@@ -2,9 +2,6 @@ package com.example.kiwiboard;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +11,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import android.os.Build;
+
 import android.widget.TextView;
 
 
 public class QuestionLogFragment extends Fragment {
     private ListView listView;
     private ArrayList<Question> questions;
-    private ArrayAdapter<String> questionArrayAdapter;
+    private ArrayAdapter<String> arrayAdapter;
     private TextView tv;
-    // new ArrayAdapter<Question>(this,
-    //            android.R.layout.simple_list_item_1, questions)
 
     @Nullable
     @Override
@@ -42,12 +37,11 @@ public class QuestionLogFragment extends Fragment {
         // Populate String array of student names
         String[] questionArray = new String[numQuestions];
         for (int i = 0; i < numQuestions; i++) {
-            questionDescription = questions.get(i).getDescription();
+            questionDescription = "Q" + i + " - " + questions.get(i).getDescription();
             questionArray[i] = questionDescription;
         }
-
-        questionArrayAdapter = new ArrayAdapter<>(rosterview.getContext(), android.R.layout.simple_list_item_1, questionArray);
-        listView.setAdapter(questionArrayAdapter);
+        arrayAdapter = new ArrayAdapter<>(rosterview.getContext(), android.R.layout.simple_list_item_1, questionArray);
+        listView.setAdapter(arrayAdapter);
         return rosterview;
     }
 
@@ -60,6 +54,13 @@ public class QuestionLogFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         // Initialise View objects here
     }
+
+    // method to return how many questions are in the users list
+    public int getNumOfQuestions() {
+        return questions.size();
+    }
+
+
 
 }
 

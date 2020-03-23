@@ -57,14 +57,14 @@
         android:textColor="#FFFFFF"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txt_anwser"
+        app:layout_constraintBottom_toTopOf="@+id/txt_answer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
     <EditText
-        android:id="@+id/txt_anwser"
+        android:id="@+id/txt_answer"
         android:layout_width="369dp"
         android:layout_height="325dp"
         android:background="@drawable/ic_rounded_corners"
@@ -83,14 +83,14 @@
         android:layout_width="182dp"
         android:layout_height="53dp"
         android:background="@drawable/ic_rounded_corners"
-        android:onClick="clear_txt_anwser"
+        android:onClick="clear_txt_answer"
         android:text="CLEAR"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_submit"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_anwser" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_answer" />
 
     <Button
         android:id="@+id/btn_submit"
@@ -105,6 +105,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btn_clear"
-        app:layout_constraintTop_toBottomOf="@+id/txt_anwser"
+        app:layout_constraintTop_toBottomOf="@+id/txt_answer"
         app:layout_constraintVertical_bias="0.486" />
 </androidx.constraintlayout.widget.ConstraintLayout>

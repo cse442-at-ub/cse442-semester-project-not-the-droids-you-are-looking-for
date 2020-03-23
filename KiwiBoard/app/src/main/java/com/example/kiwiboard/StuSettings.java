@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
 public class StuSettings extends AppCompatActivity {
@@ -14,17 +15,16 @@ public class StuSettings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stu_settings);
 
-        toolbar = findViewById(R.id.activity_toolbar);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Settings");
-
+        toolbar = (Toolbar) findViewById(R.id.settings_toolbar);
+        toolbar.setTitle("Settings");
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_back));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // finish activity when back button is pressed
+                //What to do on back clicked
                 onBackPressed();
             }
         });
+
     }
 }

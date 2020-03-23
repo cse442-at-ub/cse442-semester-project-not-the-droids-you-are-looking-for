@@ -8,10 +8,14 @@
     android:layout_height="match_parent"
     tools:context=".QuestionLogFragment">
 
-    <ListView
+d    <ListView
         android:id="@+id/qLog_ListView"
         android:layout_width="match_parent"
         android:layout_height="673dp"
+        android:textAlignment="center"
+        android:paddingTop="20dp"
+        android:background="@drawable/ic_rounded_corners"
+        android:hapticFeedbackEnabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
