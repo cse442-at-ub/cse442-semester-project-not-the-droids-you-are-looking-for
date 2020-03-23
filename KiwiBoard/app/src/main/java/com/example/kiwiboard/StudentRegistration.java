@@ -53,15 +53,12 @@ public class StudentRegistration extends AppCompatActivity {
         });
 
         // Need max's code
-        /*
         professorLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(StudentRegistration.this, ProfessorRegistration.class));
+            //    startActivity(new Intent(StudentRegistration.this, ProfessorRegistration.class));
             }
         });
-        */
-
     }
 
     public void createUser() {

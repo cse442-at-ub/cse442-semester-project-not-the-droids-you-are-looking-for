@@ -1,6 +1,7 @@
 package com.example.kiwiboard;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,11 +10,23 @@ import android.widget.EditText;
 
 public class ShortAnswer extends AppCompatActivity {
     private EditText answer_view;
+    private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_short_answer);
+
+        toolbar = (Toolbar) findViewById(R.id.shortAnswer_toolbar);
+        toolbar.setTitle("Settings");
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_back));
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //What to do on back clicked
+                onBackPressed();
+            }
+        });
 
     }
     public void switch_to_main(View view){
