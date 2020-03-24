@@ -2,7 +2,7 @@
 <!--Src: https://stackoverflow.com/questions/18781902/rounded-corner-for-textview-in-android; First post -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android" >
     <stroke
-        android:width="7dp"
+        android:width="4dp"
         android:color="#000000" />
 
     <solid android:color="#ffffff" />

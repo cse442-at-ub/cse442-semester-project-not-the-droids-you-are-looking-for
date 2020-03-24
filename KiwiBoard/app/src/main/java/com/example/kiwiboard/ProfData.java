@@ -9,16 +9,22 @@ public class ProfData {
     private static String password;             // Professor's password
     private static int currentcourse;           // Professor's current course
     private static ArrayList<Course> courses;   // Professor's currently selected course
-
+    private static String university;
     // Default constructor with parameters
-    public ProfData(String name, String email, int currentcourse, ArrayList<Course> courses) {
+    public ProfData(String name, String email, String password, int currentcourse, ArrayList<Course> courses) {
         ProfData.name = name;
         ProfData.email = email;
         ProfData.password = password;
         ProfData.currentcourse = currentcourse;
         ProfData.courses = courses;
     }
-
+    public ProfData(String name, String email,String password,String university){
+        ProfData.name = name;
+        ProfData.email = email;
+        ProfData.password = password;
+        ProfData.university = university;
+        courses = new ArrayList<>();
+    }
     // Clears all professor data
     public void clearAllData(){
         name = "";
