@@ -7,7 +7,8 @@ public class StudentData {
     private static String name;                 // Student's name
     private static String email;                // Student's email
     private static String password;             // Student's password
-    private static int currentcourse;           // Student's currently selected course
+    private static int currentcourse = -1;           // Student's currently selected course
+    private static int lastclickedquestion = -1;     // The most recently selected question index
     private static ArrayList<Course> courses;   // Student's courses
 
     // Default constructor with parameters
@@ -81,5 +82,13 @@ public class StudentData {
 
     public static void setCourses(ArrayList<Course> courses) {
         StudentData.courses = courses;
+    }
+
+    public static int getLastclickedquestion() {
+        return lastclickedquestion;
+    }
+
+    public static void setLastclickedquestion(int lastclickedquestion) {
+        StudentData.lastclickedquestion = lastclickedquestion;
     }
 }
