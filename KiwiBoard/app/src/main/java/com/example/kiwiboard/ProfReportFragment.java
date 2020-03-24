@@ -14,6 +14,6 @@ public class ProfReportFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_student_home,container,false);
+        return inflater.inflate(R.layout.fragment_prof_report,container,false);
     }
 }
