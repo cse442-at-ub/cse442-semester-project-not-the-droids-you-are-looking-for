@@ -13,7 +13,7 @@
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".ProfMain" />
@@ -30,7 +30,7 @@
         <activity android:name=".AddCourseFragment" />
         <activity android:name=".StudentMain" />
         <activity android:name=".ForgotPassword" />
-        <activity android:name=".Register" />
+        <activity android:name=".ProfessorRegister"/>
         <activity android:name=".ProfSettings" />
         <activity android:name=".StuSettings" />
     </application>

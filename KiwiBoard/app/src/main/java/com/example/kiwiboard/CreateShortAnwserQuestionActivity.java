@@ -13,7 +13,10 @@ public class CreateShortAnwserQuestionActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_shrt_awnsr_question);
     }
-
+    public void switch_to_main(View view){
+        this.finish();
+        startActivity(new Intent(CreateShortAnwserQuestionActivity.this, ProfMain.class));
+    }
 
 
 }
