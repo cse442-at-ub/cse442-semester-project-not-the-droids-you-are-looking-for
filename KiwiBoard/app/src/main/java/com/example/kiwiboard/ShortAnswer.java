@@ -85,4 +85,8 @@ public class ShortAnswer extends AppCompatActivity {
     public String collect_answer(){ return findViewById(R.id.txt_anwser).toString(); }
     public Question get_Question(){return question;}
     public void set_Question(Question quest){ question = quest; }
+
+    public void set_title(Question question){((TextView)findViewById(R.id.txt_quest)).setText("Question: " +question.getQuestionnumber());}
+    public void set_title(int num){((TextView)findViewById(R.id.txt_quest)).setText("Question: " +num);}
+    public void set_title(String data){((TextView)findViewById(R.id.txt_quest)).setText(data);}
 }
