@@ -39,7 +39,7 @@ public class ShortAnswer extends AppCompatActivity {
             question = new Question(Question.QuestionType.SHORTANSWER,"What is 2 plus 2",null,0,64,10,10,0,null,null,0,null,null,0);
 
         txt_box = findViewById(R.id.txt_question);
-        answer_view = findViewById(R.id.txt_anwser);
+        answer_view = findViewById(R.id.txt_answer);
         set_description();
     }
 
@@ -55,7 +55,6 @@ public class ShortAnswer extends AppCompatActivity {
         String answer = collect_answer();
 
         Toast toast = Toast.makeText(getApplicationContext(),"Submitting Answer!",Toast.LENGTH_SHORT);
-        toast.setMargin(50,50);
         toast.show();
 
         System.out.println("Answer Collected:\t" + answer);
@@ -76,14 +75,14 @@ public class ShortAnswer extends AppCompatActivity {
      *  used to derive line 26
      */
 
-    public void clear_txt_anwser(View view) { try { answer_view.getText().clear(); } catch (Exception e){} }
+    public void clear_txt_answer(View view) { try { answer_view.getText().clear(); } catch (Exception e){} }
 
     /*
      *  public String collect_answer()
      *  returns the text stored in txt_answer as a string
      *
      */
-    public String collect_answer(){ return findViewById(R.id.txt_anwser).toString(); }
+    public String collect_answer(){ return findViewById(R.id.txt_answer).toString(); }
     public Question get_Question(){return question;}
     public void set_Question(Question quest){ question = quest; }
 

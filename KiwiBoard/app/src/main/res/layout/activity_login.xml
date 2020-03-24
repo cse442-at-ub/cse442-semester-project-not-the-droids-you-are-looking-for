@@ -12,9 +12,10 @@
         android:id="@+id/linearLayout6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout7"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -40,12 +41,11 @@
         android:layout_width="278dp"
         android:layout_height="201dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/RegisterButtons"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout6"
-        app:layout_constraintVertical_bias="0.237">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
 
         <EditText
             android:id="@+id/forgottenPasswordEmail"
@@ -66,13 +66,13 @@
 
         <Button
             android:id="@+id/forgotPW"
-            android:layout_width="134dp"
-            android:layout_height="13dp"
+            android:layout_width="140dp"
+            android:layout_height="18dp"
             android:background="@color/multChoiceBackground"
             android:onClick="forgotPW"
             android:text="Forgot Password?"
             android:textColor="#ffffffff"
-            android:textSize="8sp"
+            android:textSize="10sp"
             android:translationY="18dp" />
 
         <Button
@@ -87,48 +87,47 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/RegisterButtons"
-        android:layout_width="308dp"
-        android:layout_height="62dp"
-        android:layout_marginTop="146dp"
-        android:layout_marginBottom="72dp"
-        android:orientation="horizontal"
+        android:id="@+id/linearLayout5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
 
-        <Button
-            android:id="@+id/AmStudent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="I am a Student" />
+        <TextView
+            android:id="@+id/registerAsk"
+            android:layout_width="369dp"
+            android:layout_height="49dp"
+            android:text="Dont have an account? Register Now!"
+            android:textColor="@color/White"
+            android:textSize="22sp" />
 
-        <Button
-            android:id="@+id/button15"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="I am a professor" />
+        <LinearLayout
+            android:id="@+id/RegisterButtons"
+            android:layout_width="308dp"
+            android:layout_height="62dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/AmStudent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="StudentRegistration"
+                android:text="I am a Student" />
+
+            <Button
+                android:id="@+id/button15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="ProfessorRegistration"
+                android:text="I am a professor" />
+        </LinearLayout>
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/registerAsk"
-        android:layout_width="369dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="83dp"
-        android:layout_marginTop="111dp"
-        android:layout_marginEnd="84dp"
-        android:layout_marginBottom="14dp"
-        android:text="Dont have an account? Register Now!"
-        android:textColor="@color/White"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/RegisterButtons"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout7"
-        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

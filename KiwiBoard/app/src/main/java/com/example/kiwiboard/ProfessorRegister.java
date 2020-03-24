@@ -109,7 +109,7 @@ public class ProfessorRegister extends AppCompatActivity {
         else
             return 1;
     }
-    public void loadDummyData() {
+    public void  loadDummyData() {
 
         // Loading dummy data into Questions
         ArrayList<String> choices;

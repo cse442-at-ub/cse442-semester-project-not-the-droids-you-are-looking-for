@@ -90,7 +90,7 @@ public class StudentRegistration extends AppCompatActivity {
         professorLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // startActivity(new Intent(StudentRegistration.this, ProfessorRegistration.class));
+                startActivity(new Intent(StudentRegistration.this, ProfessorRegister.class));
             }
         });
     }

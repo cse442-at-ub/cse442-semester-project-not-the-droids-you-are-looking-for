@@ -33,6 +33,7 @@ public class QuestionLogFragment extends Fragment {
             return rosterview;
         }
         */
+
         Course currentcourse = StudentData.getCourses().get(courseindex);
         questions = currentcourse.getQuestions();
         int numQuestions = questions.size();
