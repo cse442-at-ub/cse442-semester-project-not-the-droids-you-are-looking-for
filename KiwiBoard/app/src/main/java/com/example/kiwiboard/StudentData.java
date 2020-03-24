@@ -10,14 +10,16 @@ public class StudentData {
     private static int currentcourse;           // Student's currently selected course
     private static ArrayList<Course> courses;   // Student's courses
 
-    // Default constructor with parameters
-    public StudentData(String name, String email, String password, int currentcourse, ArrayList<Course> courses) {
+    // Default constructor
+    public StudentData(){
         StudentData.name = name;
         StudentData.email = email;
         StudentData.password = password;
-        StudentData.currentcourse = currentcourse;
-        StudentData.courses = courses;
+        StudentData.currentcourse = -1;
+        StudentData.courses = new ArrayList<>();
     }
+
+
 
     // Clears all student data
     public static void clearAllData(){

@@ -131,12 +131,15 @@ public class Mode extends AppCompatActivity {
         students.add(new Student("Becky", "btellys239@gmail.com", questions));
 
         Course Geology = new Course("Geology", "Kimberly Meehan", 10323, questions, students);
+        Course Software = new Course("Software Engineering", "Matthew Hertz", 10323, questions, students);
 
         ArrayList<Course> courses = new ArrayList<>();
         courses.add(Geology);
+        courses.add(Software);
 
         StudentData.setCourses(courses);
-        StudentData.setCurrentcourse(courses.indexOf(Geology));
+        //StudentData.setCurrentcourse(courses.indexOf(Geology));
+        StudentData.setCurrentcourse(-1);
         StudentData.setName("John");
         StudentData.setEmail("jfebedai12@gmail.com");
         StudentData.setPassword("iamastudent1");
