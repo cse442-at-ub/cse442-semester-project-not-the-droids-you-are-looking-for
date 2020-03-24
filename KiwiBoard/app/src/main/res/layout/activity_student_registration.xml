@@ -12,8 +12,8 @@
 
     <LinearLayout
         android:id="@+id/LinearLayout1"
-        android:layout_width="403dp"
-        android:layout_height="550dp"
+        android:layout_width="match_parent"
+        android:layout_height="650dp"
         android:orientation="vertical"
         android:padding="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -78,7 +78,7 @@
                     style="@style/parent">
 
                     <EditText
-                        android:id="@+id/sub_txt_name"
+                        android:id="@+id/edit_txt_name"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:backgroundTint="@color/themeColor"
@@ -98,7 +98,7 @@
                     style="@style/parent">
 
                     <EditText
-                        android:id="@+id/sub_txt_emailAddress"
+                        android:id="@+id/edit_txt_emailAddress"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:backgroundTint="@color/themeColor"
@@ -118,7 +118,7 @@
                     style="@style/parent">
 
                     <EditText
-                        android:id="@+id/sub_txt_password"
+                        android:id="@+id/edit_txt_password"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:backgroundTint="@color/themeColor"
@@ -137,6 +137,8 @@
                     android:id="@+id/registerRelativeLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/loginViewsMargin"
+                    android:background="@color/White"
                     android:paddingTop="0dp">
 
                     <Button
@@ -156,7 +158,19 @@
                     android:id="@+id/txt_hasAccount"
                     style="@style/parent"
                     android:layout_marginTop="@dimen/loginViewsMargin"
+                    android:clickable="true"
                     android:text="@string/text_login_prompt"
+                    android:textAlignment="center"
+                    android:textColor="@color/themeColor"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_profLogin"
+                    style="@style/parent"
+                    android:layout_marginTop="@dimen/loginViewsMargin"
+                    android:clickable="true"
+                    android:text="@string/text_prof_login_prompt"
                     android:textAlignment="center"
                     android:textColor="@color/themeColor"
                     android:textSize="17sp"

@@ -1,132 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     android:background="@color/themeColor">
 
-    <TextView
-        android:id="@+id/txtTimer"
-        android:layout_width="101dp"
-        android:layout_height="92dp"
-        android:layout_marginTop="30dp"
-        android:background="@color/themeColor"
-        android:text="@string/timer_label"
-        android:textColor="@color/White"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/questionTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imgLogo"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4" />
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/multChoice_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/design_default_color_secondary_variant"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="300dp"
-        android:layout_marginTop="659dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="24dp"
-        android:text="@string/submit_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/questionTextView"
-        android:layout_width="368dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="130dp"
-        android:layout_marginEnd="15dp"
-        android:background="@color/themeColor"
-        android:paddingTop="10dp"
-        android:text="@string/questionbox_template"
-        android:textColor="@color/White"
-        android:textSize="32sp"
-        app:layout_constraintBottom_toTopOf="@+id/multipleChoiceOptions"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <RadioGroup
-        android:id="@+id/multipleChoiceOptions"
-        android:layout_width="373dp"
-        android:layout_height="201dp"
-        android:layout_marginBottom="20dp"
-        android:background="@color/themeColor"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/submit_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/multipleChoiceOptions"
+            app:layout_constraintTop_toBottomOf="@+id/multipleChoiceOptions" />
 
-        <RadioButton
-            android:id="@+id/multchoice1"
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:text="@string/choice_A_label"
+        <TextView
+            android:id="@+id/questionTextView"
+            android:layout_width="368dp"
+            android:layout_height="200dp"
+            android:background="@color/themeColor"
+            android:paddingTop="10dp"
+            android:text="@string/questionbox_template"
             android:textColor="@color/White"
-            android:textSize="25sp" />
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/multipleChoiceOptions"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-        <RadioButton
-            android:id="@+id/multchoice2"
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:text="@string/choice_B_label"
-            android:textColor="@color/White"
-            android:textSize="25sp" />
+        <RadioGroup
+            android:id="@+id/multipleChoiceOptions"
+            android:layout_width="373dp"
+            android:layout_height="201dp"
+            android:background="@color/themeColor"
+            app:layout_constraintBottom_toTopOf="@+id/button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/questionTextView">
 
-        <RadioButton
-            android:id="@+id/multchoice3"
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:text="@string/choice_C_label"
-            android:textColor="@color/White"
-            android:textSize="25sp" />
+            <RadioButton
+                android:id="@+id/multchoice1"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:text="@string/choice_A_label"
+                android:textColor="@color/White"
+                android:textSize="25sp" />
 
-        <RadioButton
-            android:id="@+id/multchoice4"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="@string/choice_D_label"
-            android:textColor="@color/White"
-            android:textSize="25sp" />
-    </RadioGroup>
+            <RadioButton
+                android:id="@+id/multchoice2"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:text="@string/choice_B_label"
+                android:textColor="@color/White"
+                android:textSize="25sp" />
 
-    <TextView
-        android:id="@+id/questionNumber"
-        android:layout_width="101dp"
-        android:layout_height="92dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="30dp"
-        android:background="@color/themeColor"
-        android:text="@string/question_label"
-        android:textColor="@color/White"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/questionTextView"
-        app:layout_constraintEnd_toStartOf="@+id/imgLogo"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.403" />
+            <RadioButton
+                android:id="@+id/multchoice3"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:text="@string/choice_C_label"
+                android:textColor="@color/White"
+                android:textSize="25sp" />
 
-    <ImageView
-        android:id="@+id/imgLogo"
-        android:layout_width="180dp"
-        android:layout_height="153dp"
-        android:layout_marginTop="23dp"
-        android:layout_marginBottom="18dp"
-        android:contentDescription="@string/kiwi_logo"
-        app:layout_constraintBottom_toTopOf="@+id/questionTextView"
-        app:layout_constraintEnd_toStartOf="@+id/txtTimer"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/questionNumber"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@mipmap/kiwi" />
+            <RadioButton
+                android:id="@+id/multchoice4"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="@string/choice_D_label"
+                android:textColor="@color/White"
+                android:textSize="25sp" />
+        </RadioGroup>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/questionTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/questionNumber"
+                android:layout_width="105dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:background="@color/themeColor"
+                android:text="@string/question_label"
+                android:textColor="@color/White"
+                android:textStyle="bold"
+                android:textSize="25sp" />
+
+            <ImageView
+                android:id="@+id/imgLogo"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:contentDescription="@string/kiwi_logo"
+                app:srcCompat="@drawable/kiwi" />
+
+            <TextView
+                android:id="@+id/txtTimer"
+                android:layout_width="105dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:background="@color/themeColor"
+                android:text="@string/timer_label"
+                android:textColor="@color/White"
+                android:textSize="25sp" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

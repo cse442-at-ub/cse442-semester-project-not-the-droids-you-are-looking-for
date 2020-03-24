@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-public class CreateShortAnwserQuestionActivity extends Activity {
+public class CreateShortAnswerQuestionActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
