@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ProfMain" />
+        <activity android:name=".StudentRosterFragment" />
         <activity android:name=".Mode" />
         <activity android:name=".QuestionLog" />
         <activity android:name=".ProfReportFragment" />
