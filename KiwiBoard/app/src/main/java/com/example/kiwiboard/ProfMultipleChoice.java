@@ -15,7 +15,7 @@ public class ProfMultipleChoice extends AppCompatActivity {
         setContentView(R.layout.activity_prof_multiple_choice);
 
         toolbar = (Toolbar) findViewById(R.id.profMultChoice_toolbar);
-        toolbar.setTitle("Settings");
+        toolbar.setTitle("Create Multiple Choice Question");
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_back));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

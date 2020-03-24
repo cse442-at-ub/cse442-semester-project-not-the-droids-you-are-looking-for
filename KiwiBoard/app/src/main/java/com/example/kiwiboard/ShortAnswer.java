@@ -18,7 +18,7 @@ public class ShortAnswer extends AppCompatActivity {
         setContentView(R.layout.activity_short_answer);
 
         toolbar = (Toolbar) findViewById(R.id.shortAnswer_toolbar);
-        toolbar.setTitle("Settings");
+        toolbar.setTitle("Short Answer");
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_back));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

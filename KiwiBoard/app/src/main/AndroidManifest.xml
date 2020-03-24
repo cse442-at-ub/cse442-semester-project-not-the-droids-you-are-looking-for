@@ -24,7 +24,7 @@
         <activity android:name=".ProfReportFragment" />
         <activity android:name=".ProfMultipleChoice"></activity>
         <activity android:name=".CreateCourseFragment" />
-        <activity android:name=".CreateShortAnwserQuestionActivity" />
+        <activity android:name=".CreateShortAnswerQuestionActivity" />
         <activity android:name=".ShortAnswer" />
         <activity android:name=".StudentGradesFragment" />
         <activity android:name=".MultipleChoice" />

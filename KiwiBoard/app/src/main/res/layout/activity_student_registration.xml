@@ -137,6 +137,8 @@
                     android:id="@+id/registerRelativeLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/loginViewsMargin"
+                    android:background="@color/White"
                     android:paddingTop="0dp">
 
                     <Button

@@ -8,5 +8,6 @@
     <color name="Black">#111111</color>
     <color name="hintGray">#808080</color>
     <color name="registerButtonGreen">#9EBB40</color>
+    <color name="error">#F44336</color>
 
 </resources>

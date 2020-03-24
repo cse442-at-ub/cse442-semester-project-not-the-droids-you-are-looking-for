@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -14,14 +13,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.material.navigation.NavigationView;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class StudentMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
+    private String name;
+    private String email;
+    private String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -232,11 +232,16 @@ public class StudentMain extends AppCompatActivity implements NavigationView.OnN
         ArrayList<Course> courses = new ArrayList<>();
         courses.add(Geology);
 
+
+        //name = StudentData.getName();
+        //email = StudentData.getEmail();
+        //password = StudentData.getPassword();
         StudentData.setCourses(courses);
-        StudentData.setCurrentcourse(courses.indexOf(Geology));
-        StudentData.setName("John");
-        StudentData.setEmail("jfebedai12@gmail.com");
-        StudentData.setPassword("iamastudent1");
+        StudentData.setCurrentcourse(-1);
+        //StudentData.setCurrentcourse(courses.indexOf(Geology));
+        //StudentData.setName(name);
+        //StudentData.setEmail(email);
+        //StudentData.setPassword(password);
 
         ProfData.setCourses(courses);
         ProfData.setCurrentcourse(courses.indexOf(Geology));

@@ -30,7 +30,7 @@
     <string name="multchoice_total_points">Enter total points:</string>
 
     <string name="question_box_label">Question</string>
-    <string name="question_number_label">Question Number</string>
+    <string name="question_number_label">Q#:</string>
     <string name="question_log_label">Question Log</string>
 
     <string name="points_label">Points</string>

@@ -9,9 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
 import java.util.ArrayList;
-
 import android.widget.TextView;
 
 
@@ -29,6 +27,12 @@ public class QuestionLogFragment extends Fragment {
 
         // Get the current course and declare variables
         int courseindex = StudentData.getCurrentcourse();
+        /*
+        if(courseindex < 0) {
+            noCourseSelected(rosterview); // if no course was selected, display message to user to join a course
+            return rosterview;
+        }
+        */
         Course currentcourse = StudentData.getCourses().get(courseindex);
         questions = currentcourse.getQuestions();
         int numQuestions = questions.size();
@@ -45,6 +49,14 @@ public class QuestionLogFragment extends Fragment {
         return rosterview;
     }
 
+    /*
+    public void noCourseSelected(View view) {
+        String[] message = new String[1];
+        message[0] = "You must join a course!";
+        arrayAdapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_list_item_1, message);
+        listView.setAdapter(arrayAdapter);
+    }
+     */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Variable initializations here, excluding View objects
