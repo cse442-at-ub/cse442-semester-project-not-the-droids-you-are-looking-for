@@ -69,6 +69,7 @@
         android:layout_height="325dp"
         android:background="@drawable/ic_rounded_corners"
         android:ems="10"
+        android:padding="10dp"
         android:gravity="start|top"
         android:inputType="textMultiLine"
         android:textAlignment="center"
