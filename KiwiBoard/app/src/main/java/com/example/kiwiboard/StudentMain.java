@@ -17,19 +17,23 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.Objects;
+
 public class StudentMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
+    NavigationView navigationView;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_main);
 
-        Toolbar toolbar = findViewById(R.id.student_toolbar);
+        toolbar = (Toolbar) findViewById(R.id.student_toolbar);
         setSupportActionBar(toolbar);
 
         drawer = findViewById(R.id.student_drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_student_view);
+        navigationView = findViewById(R.id.nav_student_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
@@ -46,22 +50,34 @@ public class StudentMain extends AppCompatActivity implements NavigationView.OnN
 
         String coursetext;
         int currentcourse = StudentData.getCurrentcourse();
-        if (currentcourse != -1){
+        if (currentcourse >= 0){
             coursetext = StudentData.getCourses().get(currentcourse).getCourseName();
         } else {
-            coursetext = "No course selected";
+            coursetext = "";
         }
-        TextView navheaderlbl = hview.findViewById(R.id.txtnavHeaderlbl);
-        navheaderlbl.setText(coursetext);
+
+        setDrawerCourse(coursetext);
 
         TextView navsublbl = hview.findViewById(R.id.txtNavSublbl);
         navsublbl.setText(StudentData.getEmail());
+
+        setToolbarText(coursetext);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
                     new StudentHomeFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_student_home);
         }
+    }
+
+    public void setToolbarText(String text){
+        Objects.requireNonNull(getSupportActionBar()).setTitle(text);
+    }
+
+    public void setDrawerCourse(String text){
+        View hview = navigationView.getHeaderView(0);
+        TextView navheaderlbl = hview.findViewById(R.id.txtnavHeaderlbl);
+        navheaderlbl.setText(text);
     }
 
     @Override
