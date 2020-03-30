@@ -4,91 +4,130 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login"
-    android:background="@color/multChoiceBackground">
+    android:background="@color/multChoiceBackground"
+    tools:context=".Login">
 
 
-    <Button
-        android:id="@+id/SignIn"
-        android:layout_width="100dp"
-        android:layout_height="58dp"
-        android:layout_marginTop="49dp"
-        android:onClick="loginPassthrough"
-        android:text="Sign In"
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="135dp"
+            android:layout_height="140dp"
+            app:srcCompat="@drawable/kiwi" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Login"
+            android:textColor="@color/White"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout7"
+        android:layout_width="278dp"
+        android:layout_height="201dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+
+        <EditText
+            android:id="@+id/forgottenPasswordEmail"
+            style="@style/loginField"
+            android:layout_width="274dp"
+            android:layout_height="42dp"
+            android:hint="Email"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/PWfield"
+            style="@style/loginField"
+            android:layout_width="272dp"
+            android:layout_height="41dp"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:translationY="10dp" />
+
+        <Button
+            android:id="@+id/forgotPW"
+            android:layout_width="140dp"
+            android:layout_height="18dp"
+            android:background="@color/multChoiceBackground"
+            android:onClick="forgotPW"
+            android:text="Forgot Password?"
+            android:textColor="#ffffffff"
+            android:textSize="10sp"
+            android:translationY="18dp" />
+
+        <Button
+            android:id="@+id/SendEmail"
+            android:layout_width="100dp"
+            android:layout_height="58dp"
+            android:layout_gravity="right"
+            android:onClick="loginPassthrough"
+            android:text="Sign In"
+            android:translationY="10dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.781"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="135dp"
-        android:layout_height="140dp"
-        app:layout_constraintBottom_toTopOf="@+id/editText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.335"
-        app:srcCompat="@drawable/kiwi" />
+        <TextView
+            android:id="@+id/registerAsk"
+            android:layout_width="369dp"
+            android:layout_height="49dp"
+            android:text="Dont have an account? Register Now!"
+            android:textColor="@color/White"
+            android:textSize="22sp" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="107dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="19dp"
-        android:fontFamily="sans-serif-condensed-medium"
-        android:text="Kiwi Board"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/editText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.241" />
+        <LinearLayout
+            android:id="@+id/RegisterButtons"
+            android:layout_width="308dp"
+            android:layout_height="62dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/forgotPW"
-        android:layout_width="134dp"
-        android:layout_height="13dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/multChoiceBackground"
-        android:text="Forgot Password?"
-        android:textSize="8sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.151"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2"
-        app:layout_constraintVertical_bias="0.003" />
+            <Button
+                android:id="@+id/AmStudent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="StudentRegistration"
+                android:text="I am a Student" />
 
-    <EditText
-        android:id="@+id/editText"
-        style="@style/loginField"
-        android:layout_width="274dp"
-        android:layout_height="42dp"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.413" />
-
-    <EditText
-        android:id="@+id/editText2"
-        style="@style/loginField"
-        android:layout_width="272dp"
-        android:layout_height="41dp"
-        android:hint="Password"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
-        app:layout_constraintVertical_bias="0.084" />
+            <Button
+                android:id="@+id/button15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="ProfessorRegistration"
+                android:text="I am a professor" />
+        </LinearLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

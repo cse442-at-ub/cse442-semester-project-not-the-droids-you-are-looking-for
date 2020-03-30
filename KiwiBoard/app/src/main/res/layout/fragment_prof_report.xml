@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfReportFragment">
+    tools:context=".StudentGradesFragment">
 
 
     <TextView
@@ -13,227 +13,130 @@
         android:layout_height="27dp"
         android:text="82%"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/tblProfGrades"
-        app:layout_constraintStart_toStartOf="@+id/tblProfGrades"
-        app:layout_constraintTop_toBottomOf="@+id/txtGradesTitle"
-        app:layout_constraintVertical_bias="0.735" />
+        app:layout_constraintBottom_toTopOf="@+id/tablecontainerProf"
+        app:layout_constraintStart_toStartOf="@+id/tablecontainerProf"
+        app:layout_constraintTop_toBottomOf="@+id/txtProfClassAvglbl" />
 
     <EditText
-        android:id="@+id/txtGradesTitle"
+        android:id="@+id/txtProfGradesTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:editable="false"
         android:ems="10"
+        android:textSize="24dp"
+        android:textAlignment="center"
         android:inputType="none"
-        android:text="Professor Report"
-        app:layout_constraintBottom_toTopOf="@+id/txtClassAvglbl"
-        app:layout_constraintStart_toStartOf="@+id/txtClassAvglbl"
+        android:text="My Grades"
+        app:layout_constraintBottom_toTopOf="@+id/txtProfClassAvglbl"
+        app:layout_constraintStart_toStartOf="@+id/txtProfClassAvglbl"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TableLayout
-        android:id="@+id/tblProfGrades"
-        android:layout_width="359dp"
-        android:layout_height="415dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.557"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/prgProfClassavg">
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/txtQnum"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="Q#"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="Profs"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="Total"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="%"
-                android:textSize="18sp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/txtq1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="Q1"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="5"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="10"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/txtPerc1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="50"
-                android:textSize="18sp" />
-
-            <ProgressBar
-                android:id="@+id/prgProf1"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="155dp"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:progress="50" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/txtq2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="Q2"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textView13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="2"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textView15"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="10"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/txtPerc2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="20"
-                android:textSize="18sp" />
-
-            <ProgressBar
-                android:id="@+id/prgProf2"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:progress="20" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/txtq3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="Q3"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="10"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="10"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/txtPerc3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="100"
-                android:textSize="18sp" />
-
-            <ProgressBar
-                android:id="@+id/prgProf3"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="8dp"
-                android:progress="100" />
-        </TableRow>
-    </TableLayout>
 
     <ProgressBar
         android:id="@+id/prgProfClassavg"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="165dp"
         android:layout_height="26dp"
+        android:layout_marginStart="66dp"
+        android:layout_marginEnd="111dp"
         android:progress="82"
-        app:layout_constraintBottom_toTopOf="@+id/tblProfGrades"
+        app:layout_constraintBottom_toBottomOf="@+id/txtProfClassavg"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.163"
         app:layout_constraintStart_toEndOf="@+id/txtProfClassavg"
-        app:layout_constraintTop_toBottomOf="@+id/txtClassAvglbl" />
+        app:layout_constraintTop_toTopOf="@+id/txtProfClassavg" />
 
     <TextView
-        android:id="@+id/txtClassAvglbl"
+        android:id="@+id/txtProfClassAvglbl"
         android:layout_width="130dp"
         android:layout_height="32dp"
         android:text="Class Average"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/prgProfClassavg"
+        app:layout_constraintBottom_toTopOf="@+id/txtProfClassavg"
         app:layout_constraintStart_toStartOf="@+id/txtProfClassavg"
-        app:layout_constraintTop_toBottomOf="@+id/txtGradesTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/txtProfGradesTitle" />
+
+    <LinearLayout
+        android:id="@+id/tablecontainerProf"
+        android:layout_width="365dp"
+        android:layout_height="461dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtProfClassavg">
+
+        <TableRow
+            android:id="@+id/tblProfrowtitles"
+            android:layout_width="362dp"
+            android:layout_height="49dp">
+
+            <TextView
+                android:id="@+id/txtpqnum"
+                android:layout_width="51dp"
+                android:layout_height="match_parent"
+                android:paddingTop="5dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="5dp"
+                android:text="Q#"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txtAvgslbl"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:paddingEnd="10dp"
+                android:text="Avg   "
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txtpTotallbl"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:paddingEnd="10dp"
+                android:text="Total"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txtpPerclbl"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:paddingStart="2dp"
+                android:paddingEnd="20dp"
+                android:text="%"
+                android:textSize="20sp" />
+        </TableRow>
+
+        <ScrollView
+            android:id="@+id/scrllprof"
+            android:layout_width="362dp"
+            android:layout_height="match_parent">
+
+            <TableLayout
+                android:id="@+id/tblProfGrades"
+                android:layout_width="359dp"
+                android:layout_height="415dp"
+                android:fadeScrollbars="true"
+                android:isScrollContainer="true"
+                tools:layout_editor_absoluteX="29dp"
+                tools:layout_editor_absoluteY="274dp">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </TableLayout>
+        </ScrollView>
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

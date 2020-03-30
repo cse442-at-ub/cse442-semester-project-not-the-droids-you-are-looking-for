@@ -7,36 +7,33 @@
     <group android:checkableBehavior="single">
         <item android:id="@+id/nav_student_home"
             android:icon="@drawable/ic_home"
-            android:title="Home"/>
+            android:title="@string/home"/>
         <item android:id="@+id/nav_student_grades"
             android:icon="@drawable/ic_grades"
-            android:title="Grades"/>
+            android:title="@string/grades"/>
         <item android:id="@+id/nav_student_classes"
             android:icon="@drawable/ic_school"
-            android:title="Choose Class"/>
+            android:title="@string/choose_class"/>
         <item android:id="@+id/nav_student_addclass"
             android:icon="@drawable/ic_add"
-            android:title="Add Class"/>
+            android:title="@string/add_class"/>
         <item android:id="@+id/nav_student_question_log"
             android:icon="@drawable/ic_log"
-            android:title="Question Log"/>
+            android:title="@string/question_log"/>
+        <item android:id="@+id/nav_student_roster"
+            android:icon="@drawable/ic_roster"
+            android:title="@string/roster"/>
     </group>
 
     <!-- These items only trigger an action-->
-    <item android:title="Manage App">
+    <item android:title="@string/manage_app">
         <menu>
-            <item android:id="@+id/nav_student_mc"
-                android:icon="@drawable/ic_add"
-                android:title="Multiple Choice"/>
-            <item android:id="@+id/nav_student_sa"
-                android:icon="@drawable/ic_add"
-                android:title="Short Answer"/>
             <item android:id="@+id/nav_student_logout"
                 android:icon="@drawable/ic_signout"
-                android:title="Logout"/>
+                android:title="@string/logout"/>
             <item android:id="@+id/nav_student_settings"
                 android:icon="@drawable/ic_settings"
-                android:title="Settings"/>
+                android:title="@string/settings"/>
         </menu>
     </item>
 

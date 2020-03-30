@@ -5,74 +5,92 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#2F4F4F"
-    tools:context=".ShortAnswer">
+    tools:context=".StudentShortAnswer">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/shortAnswer_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/design_default_color_secondary_variant"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
 
     <TextView
         android:id="@+id/txt_time"
-        android:layout_width="151dp"
+        android:layout_width="100dp"
         android:layout_height="83dp"
-        android:layout_marginStart="1dp"
-        android:text="Time Left: 2 minutes"
+        android:text="2:00"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
-        android:textSize="24sp"
+        android:textSize="40sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/txt_question"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageView6"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/shortAnswer_toolbar"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="103dp"
-        android:layout_height="97dp"
+        android:layout_width="105dp"
+        android:layout_height="104dp"
         android:background="@drawable/ic_rounded_corners"
         app:layout_constraintBottom_toTopOf="@+id/txt_question"
         app:layout_constraintEnd_toStartOf="@+id/txt_time"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/txt_quest"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shortAnswer_toolbar"
         app:srcCompat="@drawable/professor" />
 
     <TextView
         android:id="@+id/txt_quest"
-        android:layout_width="142dp"
+        android:layout_width="100dp"
         android:layout_height="81dp"
         android:text="Question #1"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/txt_question"
         app:layout_constraintEnd_toStartOf="@+id/imageView6"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/shortAnswer_toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/txt_question"
-        android:layout_width="296dp"
-        android:layout_height="128dp"
+        android:layout_width="400dp"
+        android:layout_height="120dp"
         android:text="What is a task test used for?"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txt_anwser"
+        app:layout_constraintBottom_toTopOf="@+id/txt_answer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
     <EditText
-        android:id="@+id/txt_anwser"
+        android:id="@+id/txt_answer"
         android:layout_width="369dp"
         android:layout_height="325dp"
         android:background="@drawable/ic_rounded_corners"
         android:ems="10"
+        android:padding="10dp"
         android:gravity="start|top"
         android:inputType="textMultiLine"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/btn_clear"
+        android:textAlignment="textStart"
+        app:layout_constraintBottom_toTopOf="@+id/btn_submit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -83,20 +101,19 @@
         android:layout_width="182dp"
         android:layout_height="53dp"
         android:background="@drawable/ic_rounded_corners"
-        android:onClick="clear_txt_anwser"
+        android:onClick="clear_txt_answer"
         android:text="CLEAR"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_submit"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_anwser" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_answer" />
 
     <Button
         android:id="@+id/btn_submit"
         android:layout_width="178dp"
         android:layout_height="56dp"
-        android:layout_marginStart="3dp"
         android:background="@drawable/ic_rounded_corners"
         android:onClick="switch_to_main"
         android:text="SUBMIT"
@@ -105,6 +122,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btn_clear"
-        app:layout_constraintTop_toBottomOf="@+id/txt_anwser"
-        app:layout_constraintVertical_bias="0.486" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_answer" />
 </androidx.constraintlayout.widget.ConstraintLayout>

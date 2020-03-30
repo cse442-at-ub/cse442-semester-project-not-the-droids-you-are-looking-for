@@ -12,6 +12,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -22,7 +25,13 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_professor_main);
+        setContentView(R.layout.activity_prof_main);
+
+        // Load in sample courses for the professor
+        SampleData loader = new SampleData();
+        loader.loadProfCourses();
+        if (ProfData.getEmail() == null || ProfData.getEmail().equals(""))
+            loader.loadProfInfo();
 
         Toolbar toolbar = findViewById(R.id.professor_toolbar);
         setSupportActionBar(toolbar);
@@ -36,9 +45,31 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        // Change nav bar content
+        View hview = navigationView.getHeaderView(0);
+
+        // Set the navigation drawer image
+        ImageView navImage = hview.findViewById(R.id.navImage);
+        navImage.setImageResource(R.drawable.professor);
+        navImage.getLayoutParams().height = 200;
+        navImage.getLayoutParams().width = 200;
+
+        String coursetext;
+        int currentcourse = ProfData.getCurrentcourse();
+        if (currentcourse != -1){
+            coursetext = ProfData.getCourses().get(currentcourse).getCourseName();
+        } else {
+            coursetext = "No course selected";
+        }
+        TextView navheaderlbl = hview.findViewById(R.id.txtnavHeaderlbl);
+        navheaderlbl.setText(coursetext);
+
+        TextView navsublbl = hview.findViewById(R.id.txtNavSublbl);
+        navsublbl.setText(ProfData.getEmail());
+
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.professor_fragment_container,
-                    new ProfessorHomeFragment()).commit();
+                    new ProfHomeFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_professor_home);
         }
     }
@@ -48,7 +79,7 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
         switch (item.getItemId()) {
             case R.id.nav_professor_home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.professor_fragment_container,
-                        new ProfessorHomeFragment()).commit();
+                        new ProfHomeFragment()).commit();
                 break;
             case R.id.nav_professor_grades:
                 getSupportFragmentManager().beginTransaction().replace(R.id.professor_fragment_container,
@@ -64,19 +95,18 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
                 break;
             case R.id.nav_professor_question_log:
                 getSupportFragmentManager().beginTransaction().replace(R.id.professor_fragment_container,
-                        new ProfessorLogFragment()).commit();
+                        new StudentQuestionLogFragment()).commit();
                 break;
-            case R.id.nav_professor_createmc:
-                startActivity(new Intent(ProfMain.this, ProfMultipleChoice.class));
-                break;
-            case R.id.nav_professor_createsa:
-                startActivity(new Intent(ProfMain.this, CreateShortAnwserQuestionActivity.class));
+            case R.id.nav_professor_roster:
+                getSupportFragmentManager().beginTransaction().replace(R.id.professor_fragment_container,
+                        new ProfRosterFragment()).commit();
                 break;
             case R.id.nav_professor_logout:
                 // Log the user out here
                 Toast.makeText(this, "Logging out...", Toast.LENGTH_SHORT).show();
                 this.finish();
-                startActivity(new Intent(ProfMain.this, Mode.class));
+
+                startActivity(new Intent(ProfMain.this, Login.class));
                 break;
             case R.id.nav_professor_settings:
                 startActivity(new Intent(ProfMain.this, ProfSettings.class));
@@ -95,6 +125,13 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
             super.onBackPressed();
         }
     }
+
+    // Buttons for fragments
+
+    public void createQuestionClick(View view) {
+        startActivity(new Intent(this, CreateMultipleChoice.class));
+    }
+
 }
 
 
