@@ -233,7 +233,7 @@ class Question {
                     return 0;
                 }
             case SHORTANSWER:
-                if (textresponse.length() > 0){
+                if (textresponse != null && textresponse.length() > 0){
                     return maxpoints;
                 } else {
                     return 0;

@@ -22,20 +22,21 @@
         <activity android:name=".ProfMain" />
         <activity android:name=".StudentRosterFragment" />
         <activity android:name=".Mode" />
-        <activity android:name=".QuestionLogFragment" />
+        <activity android:name=".StudentQuestionLogFragment" />
+        <activity android:name=".ProfQuestionLogFragment" />
         <activity android:name=".ProfReportFragment" />
-        <activity android:name=".ProfMultipleChoice"></activity>
+        <activity android:name=".CreateMultipleChoice"></activity>
         <activity android:name=".CreateCourseFragment" />
-        <activity android:name=".CreateShortAnswerQuestionActivity" />
-        <activity android:name=".ShortAnswer" />
+        <activity android:name=".CreateShortAnswer" />
+        <activity android:name=".StudentShortAnswer" />
         <activity android:name=".StudentGradesFragment" />
-        <activity android:name=".MultipleChoice" />
+        <activity android:name=".StudentMultipleChoice" />
         <activity android:name=".AddCourseFragment" />
         <activity android:name=".StudentMain" />
         <activity android:name=".ForgotPassword" />
-        <activity android:name=".ProfessorRegister"/>
+        <activity android:name=".ProfRegistration"/>
         <activity android:name=".ProfSettings" />
-        <activity android:name=".StuSettings" />
+        <activity android:name=".StudentSettings" />
     </application>
 
 </manifest>

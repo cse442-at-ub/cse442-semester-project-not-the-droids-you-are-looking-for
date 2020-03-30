@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import android.widget.TextView;
 
 
-public class QuestionLogFragment extends Fragment {
+public class StudentQuestionLogFragment extends Fragment {
     private ListView listView;
     private ArrayList<Question> questions;
     private ArrayAdapter<String> arrayAdapter;
@@ -22,7 +22,7 @@ public class QuestionLogFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View rosterview = inflater.inflate(R.layout.fragment_question_log,container,false);
+        final View rosterview = inflater.inflate(R.layout.fragment_student_question_log,container,false);
         listView = rosterview.findViewById(R.id.qLog_ListView);
 
         // Get the current course and declare variables

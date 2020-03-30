@@ -1,5 +1,10 @@
 <resources>
+    <!-- App -->
     <string name="app_name">KiwiBoard</string>
+
+    <string name="kiwi_logo">Logo</string>
+
+    <!-- Navigation Drawer Strings-->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -7,20 +12,42 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="menu_tools">Tools</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
+    <string name="home">Home</string>
+    <string name="professor_report">Professor Report</string>
+    <string name="choose_class">Choose Class</string>
+    <string name="create_class">Create Class</string>
+    <string name="question_log">Question Log</string>
+    <string name="roster">Roster</string>
+    <string name="manage_app">Manage App</string>
+    <string name="logout">Logout</string>
+    <string name="settings">Settings</string>
+    <string name="grades">Grades</string>
+    <string name="add_class">Add Class</string>
+
+    <!-- Login Process -->
+    <string name="student_registration_slogan">Welcome to KiwiBoard!</string>
+    <string name="text_name_hint">Name</string>
+    <string name="text_email_address_hint">Email Address</string>
+    <string name="text_password">Password</string>
+    <string name="text_register">Register</string>
+    <string name="text_login_prompt">Already have an account?</string>
+    <string name="text_prof_login_prompt">Click here to register as a professor</string>
+
+    <!-- Home -->
+    <string name="active_questions">Active Questions</string>
+    <string name="recent_questions">Recent Questions</string>
+    <string name="queue">Queue</string>
+
+    <!-- Choose Course Page -->
+    <string name="choose_your_course">Choose your course</string>
+
+    <!-- Multiple Choice Page -->
     <string name="title_activity_multiplechoice">multiplechoice</string>
 
     <string name="empty_mc1">Choice A</string>
     <string name="empty_mc2">Choice B</string>
     <string name="empty_mc3">Choice C</string>
     <string name="empty_mc4">Choice D</string>
-
-    <string name="kiwi_logo">Logo</string>
 
     <string name="prof_multchoice_questionbox">Enter the question:</string>
     <string name="prof_multchoice_questionLabel">Enter question #:</string>
@@ -35,7 +62,6 @@
 
     <string name="points_label">Points</string>
     <string name="timer_label">Timer</string>
-
 
     <string name="questionlog_label1">Q1</string>
     <string name="samplequestion1">How old is Earth?</string>
@@ -67,13 +93,8 @@
     <string name="choice_C_label">Zach Congi</string>
     <string name="choice_D_label">Jewan Jeffries</string>
     <string name="question_label">Question #1</string>
+    <string name="create_a_question">Create a question</string>
+    <!-- New Strings Appear Here-->
 
-    <string name="student_registration_slogan">Welcome to KiwiBoard!</string>
-    <string name="text_name_hint">Name</string>
-    <string name="text_email_address_hint">Email Address</string>
-    <string name="text_password">Password</string>
-    <string name="text_register">Register</string>
-    <string name="text_login_prompt">Already have an account?</string>
-    <string name="text_prof_login_prompt">Click here to register as a professor</string>
-    <string name="choose_your_course">Choose your course</string>
+
 </resources>

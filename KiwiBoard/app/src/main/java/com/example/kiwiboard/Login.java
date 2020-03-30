@@ -1,6 +1,5 @@
 package com.example.kiwiboard;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -33,7 +32,7 @@ public class Login extends AppCompatActivity {
 
     public void ProfessorRegistration(View view){
         this.finish();
-        startActivity(new Intent(Login.this,ProfessorRegister.class));
+        startActivity(new Intent(Login.this, ProfRegistration.class));
     }
 
 }

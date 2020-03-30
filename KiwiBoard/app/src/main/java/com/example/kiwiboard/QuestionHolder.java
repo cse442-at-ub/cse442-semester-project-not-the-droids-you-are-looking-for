@@ -26,17 +26,26 @@ public class QuestionHolder extends RecyclerView.ViewHolder {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Get the number of the question and calculate its index
                 int qnum = question.getQuestionnumber();
                 int qindex = qnum - 1;
-                StudentData.setLastclickedquestion(qindex);
+                Question.QuestionType type = question.getType(); // Determine the question type
 
-                Question.QuestionType type = question.getType();
-
-                if (type == Question.QuestionType.MULTIPLECHOICE) {
-                    activityContext.startActivity(new Intent(activityContext, MultipleChoice.class));
+                if (StudentData.isStudentmode()) {
+                    StudentData.setLastclickedquestion(qindex); // Notify student data of index
+                    if (type == Question.QuestionType.MULTIPLECHOICE) {
+                        activityContext.startActivity(new Intent(activityContext, StudentMultipleChoice.class));
+                    } else if (type == Question.QuestionType.SHORTANSWER) {
+                        activityContext.startActivity(new Intent(activityContext, StudentShortAnswer.class));
+                    }
                 }
-                else if (type == Question.QuestionType.SHORTANSWER) {
-                    activityContext.startActivity(new Intent(activityContext, ShortAnswer.class));
+                if (ProfData.isProfessormode()){
+                    ProfData.setLastclickedquestion(qindex); // Notify professor data of index
+                    if (type == Question.QuestionType.MULTIPLECHOICE) {
+                        activityContext.startActivity(new Intent(activityContext, CreateMultipleChoice.class));
+                    } else if (type == Question.QuestionType.SHORTANSWER) {
+                        activityContext.startActivity(new Intent(activityContext, CreateShortAnswer.class));
+                    }
                 }
             }
         });

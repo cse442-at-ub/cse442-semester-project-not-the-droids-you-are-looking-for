@@ -24,6 +24,11 @@ public class ProfReportFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_prof_report,container,false);
 
         int courseindex = ProfData.getCurrentcourse();
+        // Check if a course has been selected
+        if (courseindex < 0){
+            return rootView;
+        }
+
         Course currentcourse = ProfData.getCourses().get(courseindex);
         ArrayList<Question> questions = currentcourse.getQuestions();
         Question question;

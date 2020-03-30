@@ -33,6 +33,15 @@ class Course {
         questions.remove(index);
     }
 
+    public void assignQuestionNumbers(){
+        Question q;
+        for (int i = 0; i < questions.size(); i++){
+            q = questions.get(i);
+            q.setQuestionnumber(i+1);
+            questions.set(i, q);
+        }
+    }
+
     public ArrayList<Double> calculateAverages() {
         ArrayList<Double>averages = new ArrayList<>();
 

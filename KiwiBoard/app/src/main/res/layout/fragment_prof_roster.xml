@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/themeColor"
     android:orientation="vertical"
-    tools:context=".StudentRosterFragment">
+    tools:context=".ProfRosterFragment">
 
 
     <TextView
@@ -16,7 +16,7 @@
         android:layout_marginTop="10dp"
         android:text="Student Roster"
         android:textColor="#FFFFFF"
-        android:textSize="24sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="118dp"
         tools:layout_editor_absoluteY="38dp" />
@@ -38,7 +38,7 @@
             android:fontFamily="sans-serif"
             android:text="Student Total:"
             android:textColor="#FFFFFF"
-            android:textSize="20sp"
+            android:textSize="22sp"
             android:textStyle="bold"/>
 
         <TextView
@@ -48,7 +48,7 @@
             android:paddingStart="12dp"
             android:text="0"
             android:textColor="#FFFFFF"
-            android:textSize="20sp"
+            android:textSize="22sp"
             android:textStyle="bold"/>
     </LinearLayout>
 

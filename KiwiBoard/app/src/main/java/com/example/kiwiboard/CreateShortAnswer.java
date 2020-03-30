@@ -4,18 +4,17 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
-public class CreateShortAnswerQuestionActivity extends Activity {
+public class CreateShortAnswer extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_shrt_awnsr_question);
+        setContentView(R.layout.activity_create_short_answer);
     }
     public void switch_to_main(View view){
         this.finish();
-        startActivity(new Intent(CreateShortAnswerQuestionActivity.this, ProfMain.class));
+        startActivity(new Intent(CreateShortAnswer.this, ProfMain.class));
     }
 
 

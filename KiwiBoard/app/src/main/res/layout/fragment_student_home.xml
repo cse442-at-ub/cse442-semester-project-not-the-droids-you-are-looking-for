@@ -2,46 +2,64 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/StuHome"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".StudentHomeFragment">
+
+    <TextView
+        android:id="@+id/txtActiveQuestions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/active_questions"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/rcyActiveQuestions"
+        app:layout_constraintStart_toStartOf="@+id/rcyActiveQuestions"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcyActiveQuestions"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/txtRecentQuestions"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtActiveQuestions" />
 
     <TextView
         android:id="@+id/txtRecentQuestions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Recent Questions"
+        android:layout_marginTop="8dp"
+        android:text="@string/recent_questions"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/rcyRecentQuestions"
         app:layout_constraintStart_toStartOf="@+id/rcyRecentQuestions"
         app:layout_constraintTop_toBottomOf="@+id/rcyActiveQuestions" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcyActiveQuestions"
-        android:layout_width="362dp"
-        android:layout_height="203dp"
-        app:layout_constraintBottom_toTopOf="@+id/txtRecentQuestions"
-        app:layout_constraintStart_toStartOf="@+id/txtRecentQuestions"
-        app:layout_constraintTop_toBottomOf="@+id/txtActiveQuestions" />
-
-    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcyRecentQuestions"
-        android:layout_width="362dp"
-        android:layout_height="323dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtRecentQuestions" />
 
-    <TextView
-        android:id="@+id/txtActiveQuestions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Active Questions"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/rcyActiveQuestions"
-        app:layout_constraintStart_toStartOf="@+id/rcyActiveQuestions"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,13 +7,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.google.android.material.textfield.TextInputLayout;
-import java.util.ArrayList;
 
 public class StudentRegistration extends AppCompatActivity {
     private String name;
     private String email;
     private String password;
-    private ArrayList<Course> courses = new ArrayList<>();
     private EditText nameInput;
     private EditText emailInput;
     private EditText passwordInput;
@@ -58,6 +56,7 @@ public class StudentRegistration extends AppCompatActivity {
                 // create the user only if all the textfields are not null
                 if(!name.equals("") && !email.equals("") && !password.equals("")) {
                     createUser();
+                    StudentData.setStudentmode(true); // Activate professor mode
                     startActivity(new Intent(StudentRegistration.this, StudentMain.class));
                 }
                 // make background red to indicate error to user.
@@ -86,11 +85,10 @@ public class StudentRegistration extends AppCompatActivity {
             }
         });
 
-        // Need max's code
         professorLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(StudentRegistration.this, ProfessorRegister.class));
+                startActivity(new Intent(StudentRegistration.this, ProfRegistration.class));
             }
         });
     }
@@ -100,7 +98,5 @@ public class StudentRegistration extends AppCompatActivity {
         StudentData.setName(name);
         StudentData.setEmail(email);
         StudentData.setPassword(password);
-        StudentData.setCurrentcourse(-1);
-        StudentData.setCourses(courses);
     }
 }

@@ -1,7 +1,6 @@
 package com.example.kiwiboard;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ShortAnswer extends AppCompatActivity {
+public class StudentShortAnswer extends AppCompatActivity {
     /*
     * Question question
     * As the name implies this textfield will be used to hold the question being
@@ -34,7 +33,7 @@ public class ShortAnswer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_short_answer);
+        setContentView(R.layout.activity_student_short_answer);
         if(question == null)
             question = new Question(Question.QuestionType.SHORTANSWER,"What is 2 plus 2",null,0,64,10,10,0,null,null,0,null,null,0);
 
@@ -63,7 +62,7 @@ public class ShortAnswer extends AppCompatActivity {
         question.setTextresponse(collect_answer());
 
         this.finish();
-        startActivity(new Intent(ShortAnswer.this, StudentMain.class));
+        startActivity(new Intent(StudentShortAnswer.this, StudentMain.class));
     }
 
 
