@@ -95,7 +95,7 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
                 break;
             case R.id.nav_professor_question_log:
                 getSupportFragmentManager().beginTransaction().replace(R.id.professor_fragment_container,
-                        new StudentQuestionLogFragment()).commit();
+                        new ProfQuestionLogFragment()).commit();
                 break;
             case R.id.nav_professor_roster:
                 getSupportFragmentManager().beginTransaction().replace(R.id.professor_fragment_container,

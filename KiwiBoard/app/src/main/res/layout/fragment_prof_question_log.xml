@@ -12,7 +12,6 @@
         android:id="@+id/txtProfLogTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:padding="10dp"
         android:text="Question Log"
         android:textColor="#FFFFFF"
@@ -24,11 +23,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-     <ListView
+    <ListView
         android:id="@+id/profqLog_ListView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="8dp"
+        android:layout_width="405dp"
+        android:layout_height="530dp"
         android:background="@drawable/ic_rounded_corners"
         android:hapticFeedbackEnabled="true"
         android:textAlignment="center"
