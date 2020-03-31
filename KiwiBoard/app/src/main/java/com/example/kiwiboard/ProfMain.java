@@ -19,8 +19,12 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.Objects;
+
 public class ProfMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
+    NavigationView navigationView;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +41,7 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
         setSupportActionBar(toolbar);
 
         drawer = findViewById(R.id.professor_drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_professor_view);
+        navigationView = findViewById(R.id.nav_professor_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
@@ -72,6 +76,16 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
                     new ProfHomeFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_professor_home);
         }
+    }
+
+    public void setToolbarText(String text){
+        Objects.requireNonNull(getSupportActionBar()).setTitle(text);
+    }
+
+    public void setDrawerCourse(String text){
+        View hview = navigationView.getHeaderView(0);
+        TextView navheaderlbl = hview.findViewById(R.id.txtnavHeaderlbl);
+        navheaderlbl.setText(text);
     }
 
     @Override
