@@ -9,8 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StudentRegistration"></activity>
-        <activity android:name=".ResetPassword"></activity>
+        <activity android:name=".StudentRegistration" />
+        <activity android:name=".ResetPassword" />
         <activity android:name=".Login" />
         <activity android:name=".SplashScreen">
             <intent-filter>
@@ -21,11 +21,12 @@
         </activity>
         <activity android:name=".ProfMain" />
         <activity android:name=".StudentRosterFragment" />
+        <activity android:name=".ProfRosterFragment" />
         <activity android:name=".Mode" />
         <activity android:name=".StudentQuestionLogFragment" />
         <activity android:name=".ProfQuestionLogFragment" />
         <activity android:name=".ProfReportFragment" />
-        <activity android:name=".CreateMultipleChoice"></activity>
+        <activity android:name=".CreateMultipleChoice" />
         <activity android:name=".CreateCourseFragment" />
         <activity android:name=".CreateShortAnswer" />
         <activity android:name=".StudentShortAnswer" />
@@ -34,7 +35,7 @@
         <activity android:name=".AddCourseFragment" />
         <activity android:name=".StudentMain" />
         <activity android:name=".ForgotPassword" />
-        <activity android:name=".ProfRegistration"/>
+        <activity android:name=".ProfRegistration" />
         <activity android:name=".ProfSettings" />
         <activity android:name=".StudentSettings" />
     </application>
