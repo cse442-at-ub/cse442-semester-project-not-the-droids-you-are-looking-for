@@ -16,6 +16,7 @@ class Question {
     private double numerictolerance = 0.002;    // Tolerance for double answers
     private ArrayList<String> choices;          // Container for choices
     private int questionnumber;                 // The index of the question
+    private boolean inQueue = false;           // Whether the question is in the queue
 
     private double pointsreceived;               // Points received by student. Null for professors.
     private int maxpoints;                       // Max points possible
@@ -100,6 +101,14 @@ class Question {
 
     public void setQuestionnumber(int questionnumber) {
         this.questionnumber = questionnumber;
+    }
+
+    public boolean isinQueue() {
+        return inQueue;
+    }
+
+    public void setinQueue(boolean inQueue) {
+        this.inQueue = inQueue;
     }
 
     public double getPointsreceived() {

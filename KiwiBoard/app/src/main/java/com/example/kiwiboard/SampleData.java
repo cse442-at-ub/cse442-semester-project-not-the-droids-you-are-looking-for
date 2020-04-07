@@ -155,6 +155,24 @@ public class SampleData {
         GeologyStudents.add(new Student("Becky", "btellys239@gmail.com", GeologyQuestions));
 
         Course Geology = new Course("Geology", "Kimberly Meehan", 10323, GeologyQuestions, GeologyStudents);
+        Geology.setDescription("Geology is the primary Earth science and looks at how the earth formed, its structure and composition, and the types of processes acting on it.");
+
+
+        // Sample queue questions
+        Question q16, q17;
+
+        description = "Why does the water cycle flow in different orders on different landscapes?";
+        q16 = new Question(Question.QuestionType.SHORTANSWER, description, null, -1, 10,10, 0,0,null, null, 0, null, null, 0);
+        q16.setinQueue(true);
+
+        description = "The color of a mineral in powdered form is termed ______";
+        choices = new ArrayList<>(Arrays.asList("Color", "Streak", "Specific Gravity", "Sulfides"));
+        mcanswer = 1;
+        q17 = new Question(Question.QuestionType.MULTIPLECHOICE, description, choices, -1, 10,10, mcanswer,0,null, null, 0, null, null, 0);
+        q17.setinQueue(true);
+
+        Geology.addQueueQuestion(q16);
+        Geology.addQueueQuestion(q17);
 
         return Geology;
     }

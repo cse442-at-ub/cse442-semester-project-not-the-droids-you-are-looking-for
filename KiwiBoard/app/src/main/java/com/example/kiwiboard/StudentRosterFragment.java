@@ -25,11 +25,29 @@ public class StudentRosterFragment extends Fragment {
         Course currentcourse = StudentData.getCourses().get(courseindex);
         ArrayList<Student> students = currentcourse.getStudents();
         int numStudents = students.size();
-        String name;
 
         // Display number of students to textview
         TextView stuTotal=(TextView)rosterview.findViewById(R.id.txtStuTotal);
         stuTotal.setText(" " + numStudents);
+
+        setRoster(rosterview, students);
+
+        return rosterview;
+    }
+
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // Variable initializations here, excluding View objects
+    }
+
+    public void onViewCreated(View view, Bundle savedInstanceState){
+        super.onViewCreated(view, savedInstanceState);
+        // Initialise View objects here
+    }
+
+    public void setRoster(View rosterview, ArrayList<Student> students) {
+        int numStudents = students.size();
+        String name;
 
         // Populate String array of student names
         String[] studentArray = new String[numStudents];
@@ -49,17 +67,6 @@ public class StudentRosterFragment extends Fragment {
         );
 
         studentlist.setAdapter(rosterViewAdapter);
-        return rosterview;
-    }
-
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // Variable initializations here, excluding View objects
-    }
-
-    public void onViewCreated(View view, Bundle savedInstanceState){
-        super.onViewCreated(view, savedInstanceState);
-        // Initialise View objects here
     }
 
     

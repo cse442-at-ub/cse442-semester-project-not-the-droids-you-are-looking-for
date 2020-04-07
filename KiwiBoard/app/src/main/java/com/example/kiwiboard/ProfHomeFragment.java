@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,59 +20,61 @@ import java.util.ArrayList;
 public class ProfHomeFragment extends Fragment {
 
     private RecyclerView activeRecyclerView;
-    private RecyclerView recentRecyclerView;
+    private RecyclerView queueRecyclerView;
     private QuestionAdapter activeAdapter;
-    private QuestionAdapter recentAdapter;
+    private QuestionAdapter queueAdapter;
     private ArrayList<Question> questions;
     private ArrayList<Question> activeQuestions;
-    private ArrayList<Question> recentQuestions;
+    private ArrayList<Question> queueQuestions;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View professorView =  inflater.inflate(R.layout.fragment_professor_home, container,false); // Inflate student_home fragment into StudentMain activity
 
+        Button btn = (Button) professorView.findViewById(R.id.btnCreateQuestion);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ProfMain profmain = (ProfMain) getActivity();
+                assert profmain != null;
+                profmain.createQuestionMenu(v);
+            }
+        });
+
+
         // Find views from within root activity StudentMain.java
         activeRecyclerView = (RecyclerView) professorView.findViewById(R.id.rcyProfActiveQuestions);
-        recentRecyclerView = (RecyclerView) professorView.findViewById(R.id.rcyQuestionQueue);
+        queueRecyclerView = (RecyclerView) professorView.findViewById(R.id.rcyQuestionQueue);
 
         activeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recentRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        queueRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        ProfData.setCurrentcourse(0);
+
         int courseindex = ProfData.getCurrentcourse();
         if (courseindex < 0){
             return professorView;
         }
         Course currentcourse = ProfData.getCourses().get(courseindex);
+        currentcourse.refreshQuestionNumbers();
         questions = currentcourse.getQuestions();
-        int numQuestions = questions.size();
-
-        // Refresh question numbers
-        Question question;
-        for(int i = 0; i < numQuestions; i++){
-            question = questions.get(i);
-            question.setQuestionnumber(i+1);
-            questions.set(i, question);
-        }
+        queueQuestions = currentcourse.getQueue();
 
         activeQuestions = new ArrayList<>();
-        recentQuestions = new ArrayList<>();
 
         activeAdapter = new QuestionAdapter(getActivity(), activeQuestions);
-        recentAdapter = new QuestionAdapter(getActivity(), recentQuestions);
+        queueAdapter = new QuestionAdapter(getActivity(), queueQuestions);
 
         activeRecyclerView.setAdapter(activeAdapter);
-        recentRecyclerView.setAdapter(recentAdapter);
+        queueRecyclerView.setAdapter(queueAdapter);
+
 
         generateActiveQuestionList();
-        generateQueue();
 
         activeAdapter.notifyDataSetChanged();
-        recentAdapter.notifyDataSetChanged();
+        queueAdapter.notifyDataSetChanged();
 
         return professorView;
-
     }
 
     private void generateActiveQuestionList() {
@@ -81,13 +86,4 @@ public class ProfHomeFragment extends Fragment {
         }
     }
 
-    private void generateQueue() {
-        // Get the current recent question(s)
-        int numQuestions = questions.size();
-        if (numQuestions > 2){
-            for (int i = numQuestions - 3; i > 0; i--){
-                recentQuestions.add(questions.get(i));
-            }
-        }
-    }
 }

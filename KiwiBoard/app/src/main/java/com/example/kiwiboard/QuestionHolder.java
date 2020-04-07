@@ -20,7 +20,8 @@ public class QuestionHolder extends RecyclerView.ViewHolder {
 
     public void setQuestionDetails(final Question question) {
 
-        txtNumber.setText("Q" + question.getQuestionnumber());
+        if(!question.isinQueue())
+            txtNumber.setText("Q" + question.getQuestionnumber());
         txtText.setText(question.getDescription());
 
         itemView.setOnClickListener(new View.OnClickListener() {

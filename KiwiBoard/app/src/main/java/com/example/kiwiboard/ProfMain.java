@@ -14,12 +14,13 @@ import android.content.Intent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class ProfMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class ProfMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, PopupMenu.OnMenuItemClickListener  {
     private DrawerLayout drawer;
 
     @Override
@@ -32,6 +33,7 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
         loader.loadProfCourses();
         if (ProfData.getEmail() == null || ProfData.getEmail().equals(""))
             loader.loadProfInfo();
+        ProfData.setCurrentcourse(0);
 
         Toolbar toolbar = findViewById(R.id.professor_toolbar);
         setSupportActionBar(toolbar);
@@ -128,10 +130,27 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
 
     // Buttons for fragments
 
-    public void createQuestionClick(View view) {
-        startActivity(new Intent(this, CreateMultipleChoice.class));
+    public void createQuestionMenu(View view) {
+        PopupMenu popup = new PopupMenu(this, view);
+        popup.setOnMenuItemClickListener(this);
+        popup.inflate(R.menu.question_creation_menu);
+        popup.show();
     }
 
+    @Override
+    public boolean onMenuItemClick(MenuItem menuItem) {
+        switch(menuItem.getItemId()){
+            case R.id.mcoption:
+                startActivity(new Intent(this, CreateMultipleChoice.class));
+                break;
+            case R.id.saoption:
+                startActivity(new Intent(this, CreateShortAnswer.class));
+                break;
+            default:
+                return false;
+        }
+        return true;
+    }
 }
 
 

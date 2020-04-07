@@ -17,5 +17,12 @@ public class CreateShortAnswer extends Activity {
         startActivity(new Intent(CreateShortAnswer.this, ProfMain.class));
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        View decorView = getWindow().getDecorView();
+        // Hide the status bar.
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+    }
 }
