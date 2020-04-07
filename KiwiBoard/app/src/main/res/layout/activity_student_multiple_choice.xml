@@ -54,10 +54,12 @@
 
                 <ProgressBar
                     android:id="@+id/progressBar"
-                    style="?android:attr/progressBarStyle"
+                    style="?android:progressBarStyleHorizontal"
+                    android:rotation="90"
+                    android:progressDrawable="@drawable/circularprogressbar"
+                    android:progress="0"
                     android:layout_width="84dp"
                     android:layout_height="match_parent"
-                    android:indeterminateDrawable="@drawable/circularprogressbar"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -102,11 +104,13 @@
         android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/button"
-            android:layout_width="0dp"
-            android:layout_height="45dp"
+            android:id="@+id/submitButton"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:background="@drawable/rounded_button"
             android:text="@string/submit_button"
+            android:textColor="@color/White"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -135,7 +139,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:background="@color/themeColor"
-            app:layout_constraintBottom_toTopOf="@+id/button"
+            app:layout_constraintBottom_toTopOf="@+id/submitButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
