@@ -54,12 +54,11 @@ public class ProfQuestionLogFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if(questions.get(i).getChoices() == null) {
-                    startActivity(new Intent(getActivity(), CreateShortAnswer.class));
-                }
-                else{
-                    startActivity(new Intent(getActivity(), CreateMultipleChoice.class));
-                }
+
+                    startActivity(new Intent(getActivity(), ProfQuestionView.class));
+
+
+
                 State state = new State(questions.get(i),i,courseindex);
             }
         });
