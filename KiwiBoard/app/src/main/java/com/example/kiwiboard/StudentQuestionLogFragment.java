@@ -42,7 +42,7 @@ public class StudentQuestionLogFragment extends Fragment {
         // Populate String array of student names
         String[] questionArray = new String[numQuestions];
         for (int i = 0; i < numQuestions; i++) {
-            questionDescription = "Q" + i + " - " + questions.get(i).getDescription();
+            questionDescription = "Q" + (i + 1) + " - " + questions.get(i).getDescription();
             questionArray[i] = questionDescription;
         }
         arrayAdapter = new ArrayAdapter<>(rosterview.getContext(), android.R.layout.simple_list_item_1, questionArray);
