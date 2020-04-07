@@ -48,6 +48,7 @@ public class StudentQuestionLogFragment extends Fragment {
         arrayAdapter = new ArrayAdapter<>(rosterview.getContext(), android.R.layout.simple_list_item_1, questionArray);
         listView.setAdapter(arrayAdapter);
         return rosterview;
+
     }
 
     /*

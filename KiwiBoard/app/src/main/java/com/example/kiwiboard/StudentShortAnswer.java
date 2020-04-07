@@ -15,7 +15,7 @@ public class StudentShortAnswer extends AppCompatActivity {
     * As the name implies this textfield will be used to hold the question being
     * asked by professor
     * */
-    private Question question;
+    public Question question;
 
     /*
      * EditText answer_view
@@ -34,6 +34,10 @@ public class StudentShortAnswer extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_short_answer);
+
+        State state = new State();
+        question = State.question;
+
         if(question == null)
             question = new Question(Question.QuestionType.SHORTANSWER,"What is 2 plus 2",null,0,64,10,10,0,null,null,0,null,null,0);
 
