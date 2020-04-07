@@ -54,12 +54,8 @@ public class ProfQuestionLogFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                    startActivity(new Intent(getActivity(), ProfQuestionView.class));
-
-
-
-                State state = new State(questions.get(i),i,courseindex);
+                ProfData.setLastclickedquestion(i);
+                startActivity(new Intent(getActivity(), ProfMCQuestionView.class));
             }
         });
         arrayAdapter = new ArrayAdapter<>(rosterview.getContext(), android.R.layout.simple_list_item_1, questionArray);

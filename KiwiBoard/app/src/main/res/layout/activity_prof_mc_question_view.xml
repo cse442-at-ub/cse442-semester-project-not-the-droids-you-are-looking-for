@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/multChoiceBackground"
     android:textAlignment="center"
-    tools:context=".ProfQuestionView">
+    tools:context=".ProfMCQuestionView">
 
     <ImageView
         android:id="@+id/imageView5"
