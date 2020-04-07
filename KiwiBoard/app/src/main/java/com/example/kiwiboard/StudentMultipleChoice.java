@@ -43,8 +43,8 @@ public class StudentMultipleChoice extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_multiple_choice);
+        setToolbar("Multiple Choice");
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.multChoice_toolbar);
         timerText = findViewById(R.id.txt_countdown);
         radioGroup = findViewById(R.id.multipleChoiceOptions);
         rb1 = findViewById(R.id.multchoice1);
@@ -56,12 +56,20 @@ public class StudentMultipleChoice extends AppCompatActivity {
         textColorDefaultRb = rb1.getTextColors();
         textColorDefaultCd = timerText.getTextColors();
 
-        setToolbar("Multiple Choice", toolbar);
         progressBar.setVisibility(View.VISIBLE);
 
         // dbHelper is not coded yet
         // immediately want to start timer when we display a new question
         displayQuestion();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        View decorView = getWindow().getDecorView();
+        // Hide the status bar.
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
     }
 
     private void displayQuestion() {

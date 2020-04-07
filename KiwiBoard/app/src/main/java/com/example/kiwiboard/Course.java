@@ -6,7 +6,9 @@ class Course {
     private String courseName;                  // Name of course
     private String instructorname;              // Name of instructor
     private int classKey;                       // Class key
+    private String description;                 // Class description
     private ArrayList<Question> questions;      // Question list
+    private ArrayList<Question> queue;          // Question queue
     private ArrayList<Student> students;        // Student list. Null for students.
 
     // Default constructor with parameters
@@ -14,12 +16,19 @@ class Course {
         this.courseName = courseName;
         this.instructorname = instructorname;
         this.classKey = classKey;
+        this.description = "";
         this.questions = questions;
+        this.queue = new ArrayList<>();
         this.students = students;
     }
 
     // Adds a new question from an existing Question object
     public void addQuestion(Question question){
+        if (questions.isEmpty()){
+            question.setQuestionnumber(0);
+        } else {
+            question.setQuestionnumber(questions.size());
+        }
         questions.add(question);
     }
 
@@ -39,6 +48,39 @@ class Course {
             q = questions.get(i);
             q.setQuestionnumber(i+1);
             questions.set(i, q);
+        }
+    }
+
+    // Adds a new question from an existing Question object
+    public void addQueueQuestion(Question question){
+        if (queue.isEmpty()){
+            question.setQuestionnumber(0);
+        } else {
+            question.setQuestionnumber(queue.size());
+        }
+        queue.add(question);
+    }
+    // Adds a new question using Question's default constructor with parameters
+    public void addNewQueueQuestion(Question.QuestionType type, String description, ArrayList<String> choices, int questionnumber, double pointsreceived, int maxpoints, int mcanswer, double numericanswer, String textanswer, ArrayList<Integer> multipleanswers, int mcresponse, ArrayList<Integer> multipleresponses, String textresponse, double numericresponse){
+        queue.add(new Question(type, description, choices, questionnumber, pointsreceived, maxpoints, mcanswer, numericanswer, textanswer, multipleanswers, mcresponse, multipleresponses, textresponse, numericresponse));
+    }
+
+    // Removes a question at a particular index. Indices start at 0
+    public void removeQueueQuestion(int index){
+        queue.remove(index);
+    }
+
+    public void refreshQuestionNumbers(){
+        Question question;
+        for(int i = 0; i < questions.size(); i++){
+            question = questions.get(i);
+            question.setQuestionnumber(i+1);
+            questions.set(i, question);
+        }
+        for(int i = 0; i < queue.size(); i++){
+            question = queue.get(i);
+            question.setQuestionnumber(i+1);
+            queue.set(i, question);
         }
     }
 
@@ -110,6 +152,14 @@ class Course {
         this.classKey = classKey;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public ArrayList<Student> getStudents() {
         return students;
     }
@@ -128,5 +178,13 @@ class Course {
 
     public void setQuestions(ArrayList<Question> questions) {
         this.questions = questions;
+    }
+
+    public ArrayList<Question> getQueue() {
+        return queue;
+    }
+
+    public void setQueue(ArrayList<Question> queue) {
+        this.queue = queue;
     }
 }

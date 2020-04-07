@@ -67,12 +67,11 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="4dp"
         android:background="@android:drawable/editbox_dropdown_light_frame"
-        android:onClick="createQuestionClick"
         android:shadowColor="#FFFFFF"
         android:text="@string/create_a_question"
         app:layout_constraintBottom_toTopOf="@+id/txtQuestionQueue"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rcyProfActiveQuestions" />
 
