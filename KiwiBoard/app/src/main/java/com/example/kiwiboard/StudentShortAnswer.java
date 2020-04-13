@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class StudentShortAnswer extends AppCompatActivity {
     /*
     * Question question
@@ -35,8 +37,7 @@ public class StudentShortAnswer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_short_answer);
 
-        State state = new State();
-        question = State.question;
+        question = getQuestion();
 
         if(question == null)
             question = new Question(Question.QuestionType.SHORTANSWER,"What is 2 plus 2",null,0,64,10,10,0,null,null,0,null,null,0);
@@ -44,6 +45,20 @@ public class StudentShortAnswer extends AppCompatActivity {
         txt_box = findViewById(R.id.txt_question);
         answer_view = findViewById(R.id.txt_answer);
         set_description();
+    }
+
+    private Question getQuestion(){
+        int courseindex = ProfData.getCurrentcourse();
+        if(courseindex < 0) {
+            return null;
+        }
+        Course currentcourse = ProfData.getCourses().get(courseindex);
+
+        int qindex = ProfData.getLastclickedquestion();
+        if (qindex < 0)
+            return null;
+        ArrayList<Question> questions = currentcourse.getQuestions();
+        return questions.get(qindex);
     }
 
     public void set_description(){ txt_box.setText(question.getDescription()); }
