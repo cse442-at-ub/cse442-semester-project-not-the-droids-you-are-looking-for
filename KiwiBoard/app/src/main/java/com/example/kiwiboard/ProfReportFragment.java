@@ -44,7 +44,6 @@ public class ProfReportFragment extends Fragment {
         avgProgress.setProgress((int)Classaverage);
 
         // Table layout
-
         TableLayout gradesTable;
         gradesTable = (TableLayout) rootView.findViewById(R.id.tblProfGrades);
 
@@ -59,7 +58,7 @@ public class ProfReportFragment extends Fragment {
             question = questions.get(i);
             pointsreceived = question.calculateScore();
             maxpoints = question.getMaxpoints();
-            percentage = averages.get(i)/maxpoints *100;
+            percentage = pointsreceived/maxpoints *100;
 
             //TEXTVIEWS********
             TextView qnum = new TextView(getActivity());
@@ -71,7 +70,7 @@ public class ProfReportFragment extends Fragment {
             tr.addView(qnum);
 
             TextView average = new TextView(getActivity());
-            average.setText("" + averages.get(i));
+            average.setText("" + pointsreceived);
             average.setId(i+i);
             //average.setTextColor(Color.WHITE);
             average.setTextSize(20);

@@ -43,7 +43,8 @@ public class StudentMultipleChoice extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_multiple_choice);
-        setToolbar("Multiple Choice");
+        Toolbar toolbar = (Toolbar) findViewById(R.id.multChoice_toolbar) ;
+        setToolbar("Multiple Choice", toolbar);
 
         timerText = findViewById(R.id.txt_countdown);
         radioGroup = findViewById(R.id.multipleChoiceOptions);
