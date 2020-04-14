@@ -13,7 +13,7 @@
         android:id="@+id/Prof_MC_Quest_Toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/design_default_color_secondary_variant"
         android:paddingEnd="25dp"
         android:theme="?attr/actionBarTheme"
         app:navigationIcon="@drawable/ic_back"
@@ -54,13 +54,12 @@
 
         <LinearLayout
             android:id="@+id/linearLayout10"
-            android:layout_width="375dp"
+            android:layout_width="371dp"
 
-            android:layout_height="444dp"
+            android:layout_height="466dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView5">
 
@@ -86,6 +85,10 @@
                 android:textColor="@color/Black"
                 android:textSize="24sp" />
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
             <TextView
                 android:id="@+id/Prof_Quest_View_Answers"
                 android:layout_width="match_parent"
@@ -99,8 +102,9 @@
             <ListView
                 android:id="@+id/Prof_Quest_View_List"
                 android:layout_width="match_parent"
-                android:layout_height="243dp"
+                android:layout_height="245dp"
                 android:background="@drawable/shape_rounded_white_rect" />
+
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

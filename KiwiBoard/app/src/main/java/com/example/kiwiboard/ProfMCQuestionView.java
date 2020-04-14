@@ -23,7 +23,7 @@ public class ProfMCQuestionView extends AppCompatActivity {
             return;
         }
         toolbar = (Toolbar) findViewById(R.id.Prof_MC_Quest_Toolbar);
-        toolbar.setTitle("View Multiple Choice");
+        toolbar.setTitle("Question Log: Question "+ (ProfData.getLastclickedquestion() + 1));
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_back));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

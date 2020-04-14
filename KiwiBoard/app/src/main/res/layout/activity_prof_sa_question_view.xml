@@ -13,9 +13,9 @@
         android:id="@+id/Prof_SA_Quest_Toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/design_default_color_secondary_variant"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:titleTextColor="@color/White"
         app:navigationIcon="@drawable/ic_back" />
 
@@ -57,13 +57,15 @@
 
         <LinearLayout
             android:id="@+id/linearLayout10"
-            android:layout_width="397dp"
-            android:layout_height="416dp"
+            android:layout_width="375dp"
+            android:layout_height="475dp"
             android:orientation="vertical"
             android:padding="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Prof_SA_Quest_Logo"
-            tools:layout_editor_absoluteX="-3dp">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.47"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Prof_SA_Quest_Logo">
 
             <TextView
 
@@ -87,6 +89,10 @@
                 android:textColor="@color/Black"
                 android:textSize="24sp" />
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
             <TextView
                 android:id="@+id/Prof_SA_Quest_View_Answer"
                 android:layout_width="match_parent"
@@ -99,8 +105,8 @@
 
             <TextView
                 android:id="@+id/Prof_SA_Quest_View_Answer_TXT"
-                android:layout_width="361dp"
-                android:layout_height="158dp"
+                android:layout_width="334dp"
+                android:layout_height="196dp"
                 android:background="@drawable/shape_rounded_white_rect"
                 android:padding="25sp"
                 android:text="Android"

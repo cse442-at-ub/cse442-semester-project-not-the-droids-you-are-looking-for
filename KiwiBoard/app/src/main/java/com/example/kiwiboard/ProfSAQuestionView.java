@@ -20,7 +20,7 @@ public class ProfSAQuestionView extends AppCompatActivity {
         setContentView(R.layout.activity_prof_sa_question_view);
 
         toolbar = (Toolbar) findViewById(R.id.Prof_SA_Quest_Toolbar);
-        toolbar.setTitle("Multiple Choice");
+        toolbar.setTitle("Question Log: Question " + (ProfData.getLastclickedquestion() + 1));
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_back));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
