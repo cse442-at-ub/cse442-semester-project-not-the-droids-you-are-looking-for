@@ -118,9 +118,11 @@ public class SampleData {
         choices = new ArrayList<>(Arrays.asList("James Hutton", "Alfred Wegener", "Charles Lyell", "Harry Hess"));
         mcanswer = 1;
         q14 = new Question(Question.QuestionType.MULTIPLECHOICE, description, choices, -1, 10,10, mcanswer,0,null, null, 0, null, null, 0);
+        q14.setActive(true);
 
         description = "What do you find difficult about Geology?";
         q15 = new Question(Question.QuestionType.SHORTANSWER, description, null, -1, 10,10, 0,0,null, null, 0, null, null, 0);
+        q15.setActive(true);
 
         GeologyQuestions.add(q1);
         GeologyQuestions.add(q2);
@@ -143,16 +145,16 @@ public class SampleData {
             GeologyQuestions.set(i, q1);
         }
 
-        GeologyStudents.add(new Student("John", "jfebedai12@gmail.com", GeologyQuestions));
-        GeologyStudents.add(new Student("Mary", "mhill@gmail.com", GeologyQuestions));
-        GeologyStudents.add(new Student("Wendy", "wtulip23@gmail.com", GeologyQuestions));
-        GeologyStudents.add(new Student("Edward", "edwhoff3@gmail.com", GeologyQuestions));
-        GeologyStudents.add(new Student("Kyle", "kmitchel93@gmail.com", GeologyQuestions));
-        GeologyStudents.add(new Student("Emily", "ehanson853@gmail.com", GeologyQuestions));
-        GeologyStudents.add(new Student("Andrew", "adijkstra213@gmail.com", GeologyQuestions));
-        GeologyStudents.add(new Student("Molly", "meverson425@gmail.com", GeologyQuestions));
-        GeologyStudents.add(new Student("Justin", "jmanning554@gmail.com", GeologyQuestions));
-        GeologyStudents.add(new Student("Becky", "btellys239@gmail.com", GeologyQuestions));
+        GeologyStudents.add(new Student("John", "jfebedai12@gmail.com", 0, GeologyQuestions));
+        GeologyStudents.add(new Student("Mary", "mhill@gmail.com", 1,GeologyQuestions));
+        GeologyStudents.add(new Student("Wendy", "wtulip23@gmail.com", 2,GeologyQuestions));
+        GeologyStudents.add(new Student("Edward", "edwhoff3@gmail.com", 3,GeologyQuestions));
+        GeologyStudents.add(new Student("Kyle", "kmitchel93@gmail.com", 4,GeologyQuestions));
+        GeologyStudents.add(new Student("Emily", "ehanson853@gmail.com", 5,GeologyQuestions));
+        GeologyStudents.add(new Student("Andrew", "adijkstra213@gmail.com", 6,GeologyQuestions));
+        GeologyStudents.add(new Student("Molly", "meverson425@gmail.com", 7,GeologyQuestions));
+        GeologyStudents.add(new Student("Justin", "jmanning554@gmail.com", 8,GeologyQuestions));
+        GeologyStudents.add(new Student("Becky", "btellys239@gmail.com", 9,GeologyQuestions));
 
         Course Geology = new Course("Geology", "Kimberly Meehan", 10323, GeologyQuestions, GeologyStudents);
         Geology.setDescription("Geology is the primary Earth science and looks at how the earth formed, its structure and composition, and the types of processes acting on it.");
@@ -163,13 +165,13 @@ public class SampleData {
 
         description = "Why does the water cycle flow in different orders on different landscapes?";
         q16 = new Question(Question.QuestionType.SHORTANSWER, description, null, -1, 10,10, 0,0,null, null, 0, null, null, 0);
-        q16.setinQueue(true);
+        q16.setInQueue(true);
 
         description = "The color of a mineral in powdered form is termed ______";
         choices = new ArrayList<>(Arrays.asList("Color", "Streak", "Specific Gravity", "Sulfides"));
         mcanswer = 1;
         q17 = new Question(Question.QuestionType.MULTIPLECHOICE, description, choices, -1, 10,10, mcanswer,0,null, null, 0, null, null, 0);
-        q17.setinQueue(true);
+        q17.setInQueue(true);
 
         Geology.addQueueQuestion(q16);
         Geology.addQueueQuestion(q17);

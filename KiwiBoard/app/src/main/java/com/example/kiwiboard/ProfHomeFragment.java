@@ -56,7 +56,6 @@ public class ProfHomeFragment extends Fragment {
         if (courseindex < 0){
             return professorView;
         }
-        final int newc = courseindex;
         Course currentcourse = ProfData.getCourses().get(courseindex);
         currentcourse.refreshQuestionNumbers();
         questions = currentcourse.getQuestions();
@@ -79,12 +78,16 @@ public class ProfHomeFragment extends Fragment {
         return professorView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
     private void generateActiveQuestionList() {
         // Get the current active question(s)
-        int numQuestions = questions.size();
-        if (numQuestions >= 2){
-            activeQuestions.add(questions.get(numQuestions - 1));
-            activeQuestions.add(questions.get(numQuestions - 2));
+        for (Question question : questions){
+            if (question.isActive())
+            activeQuestions.add(question);
         }
     }
 

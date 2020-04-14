@@ -94,6 +94,9 @@
     <string name="choice_D_label">Jewan Jeffries</string>
     <string name="question_label">Question\n#1</string>
     <string name="create_a_question">Create a question</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- New Strings Appear Here-->
 
 

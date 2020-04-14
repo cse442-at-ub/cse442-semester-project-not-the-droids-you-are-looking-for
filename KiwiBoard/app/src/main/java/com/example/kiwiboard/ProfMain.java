@@ -22,11 +22,12 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.Objects;
 
 
-public class ProfMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, PopupMenu.OnMenuItemClickListener  {
+public class ProfMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, PopupMenu.OnMenuItemClickListener, LauncherDialog.LauncherDialogListener {
     
     private DrawerLayout drawer;
-    NavigationView navigationView;
-    Toolbar toolbar;
+    private NavigationView navigationView;
+    private Toolbar toolbar;
+    private LauncherDialog launcherDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,6 +167,53 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
         }
         return true;
     }
+
+    // Queue functionlity
+    public void openLauncherDialog(){
+        launcherDialog = new LauncherDialog();
+        launcherDialog.show(getSupportFragmentManager(), "launcher dialog");
+    }
+    public void closeLanucherDialog(){
+        launcherDialog.dismiss();
+    }
+
+    // Refreshes the homepage for when a question is added to the queue or launched
+    public void refreshHome() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.professor_fragment_container,
+                new ProfHomeFragment()).commit();
+    }
+
+    // Gets the time info from the launcher dialog and completes the question launch process
+    @Override
+    public void launchQuestion(int minutes, int seconds) {
+        int cindex = ProfData.getCurrentcourse();          // Get the current course index
+        Course course = ProfData.getCourse(cindex);        // Get the current course
+        int qindex = ProfData.getLastclickedquestion();    // Get the last clicked question index
+        Question question = course.getQueueQuestion(qindex);    // Get the last clicked question
+
+        course.removeQueueQuestion(qindex);   // Remove the question from the queue
+        question.setTimelimit(60*minutes + seconds);   // Set the question time limit in seconds
+        question.setInQueue(false);           // The question is no longer in the queue
+        question.setActive(true);             // The question is now active
+        course.addQuestion(question);         // Add the question into the question list
+        ProfData.setCourse(cindex, course);   // Update ProfData with the new course info
+        refreshHome();
+    }
+
+    public void editQueueQuestion(){
+        // Open the edit page here
+
+    }
+
+    public void deleteQueueQuestion(){
+        int cindex = ProfData.getCurrentcourse();          // Get the current course index
+        Course course = ProfData.getCourse(cindex);        // Get the current course
+        int qindex = ProfData.getLastclickedquestion();    // Get the last clicked question index
+        course.removeQueueQuestion(qindex);   // Remove the question from the queue
+        ProfData.setCourse(cindex, course);   // Update ProfData with the new course info
+        refreshHome();
+    }
+
 }
 
 
