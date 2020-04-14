@@ -98,6 +98,10 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
                 getSupportFragmentManager().beginTransaction().replace(R.id.professor_fragment_container,
                         new ProfHomeFragment()).commit();
                 break;
+            case R.id.nav_professor_course_resources:
+                getSupportFragmentManager().beginTransaction().replace(R.id.professor_fragment_container,
+                        new ProfCourseResourcesFragment()).commit();
+                break;
             case R.id.nav_professor_grades:
                 getSupportFragmentManager().beginTransaction().replace(R.id.professor_fragment_container,
                         new ProfReportFragment()).commit();

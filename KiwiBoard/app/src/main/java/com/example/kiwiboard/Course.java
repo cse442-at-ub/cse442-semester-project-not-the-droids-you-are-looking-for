@@ -10,6 +10,9 @@ class Course {
     private ArrayList<Question> questions;      // Question list
     private ArrayList<Question> queue;          // Question queue
     private ArrayList<Student> students;        // Student list. Null for students.
+    private ArrayList<String> urls;             // Useful link url
+    private ArrayList<String> sitenames;         // Useful link sitename
+
 
     // Default constructor with parameters
     public Course(String courseName, String instructorname, int classKey, ArrayList<Question> questions, ArrayList<Student> students) {
@@ -20,6 +23,8 @@ class Course {
         this.questions = questions;
         this.queue = new ArrayList<>();
         this.students = students;
+        this.urls = new ArrayList<>();
+        this.sitenames = new ArrayList<>();
     }
 
     // Adds a new question from an existing Question object
@@ -69,6 +74,7 @@ class Course {
     public void removeQueueQuestion(int index){
         queue.remove(index);
     }
+
 
     public void refreshQuestionNumbers(){
         Question question;
@@ -126,6 +132,20 @@ class Course {
         return sum/maxSum*100;
     }
 
+    void setUrls(ArrayList<String> urls){ this.urls = urls;}
+    ArrayList<String> getUrls(){return urls;}
+    void setSitenames(ArrayList<String> sitenames){ this.sitenames = sitenames; }
+    ArrayList<String> getSitenames(){return sitenames;}
+
+    public void addUrl(String url){ urls.add(url);};
+    public void setUrl(int index, String url){ urls.add(index, url); };
+    public String getURL(int index){ return urls.get(index); };
+    public void removeUrl(int index){ urls.remove(index);};
+
+    public void addSite(String site){sitenames.add(site);}
+    public void setSite(int index, String site) {sitenames.add(index,site);}
+    public String getSite(int index){return sitenames.get(index);}
+    public void removeSite(int index){ sitenames.remove(index);}
 
 
     public String getCourseName() {
