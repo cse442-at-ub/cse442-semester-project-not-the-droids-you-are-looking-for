@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ProfCourses"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#2F4F4F">
+
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="4dp"
+        tools:layout_editor_absoluteY="37dp">
+
+        <TextView
+            android:id="@+id/CourseTitle"
+            android:layout_width="273dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="Geology 442"
+            android:textColor="#FFFFFF"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="94dp"
+            android:layout_height="84dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/kiwi" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/CourseDescritionText"
+        android:layout_width="match_parent"
+        android:layout_height="174dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/ic_rounded_corners"
+        android:padding="7dp"
+        android:text="Here lies the course description"
+        android:textColor="@color/Black"
+        android:textSize="19sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="171dp" />
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="420dp">
+
+        <TextView
+            android:id="@+id/UsefulLinkLabel"
+            android:layout_width="174dp"
+            android:layout_height="46dp"
+            android:text="Useful Links"
+            android:textColor="@color/White"
+            android:textSize="30sp" />
+
+        <ListView
+            android:id="@+id/UsefulLinks"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_rounded_corners"
+            android:hapticFeedbackEnabled="true" />
+    </LinearLayout>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

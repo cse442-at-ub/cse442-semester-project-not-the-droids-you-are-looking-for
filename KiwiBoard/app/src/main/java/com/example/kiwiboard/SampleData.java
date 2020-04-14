@@ -157,6 +157,19 @@ public class SampleData {
         Course Geology = new Course("Geology", "Kimberly Meehan", 10323, GeologyQuestions, GeologyStudents);
         Geology.setDescription("Geology is the primary Earth science and looks at how the earth formed, its structure and composition, and the types of processes acting on it.");
 
+        // Sample course resources
+
+        Geology.addUrl("https://geology.com/");
+        Geology.addSite("Geology.com");
+
+        Geology.addUrl("https://www.geosociety.org/gsa/pubs/geology/home.aspx");
+        Geology.addSite("GeoSociety.com");
+
+        Geology.addUrl("https://pubs.geoscienceworld.org/geology");
+        Geology.addSite("GeoScience World");
+
+        Geology.addUrl("https://www.britannica.com/science/geology/Study-of-the-composition-of-the-Earth");
+        Geology.addSite("ENCYCLOPEDIA BRITANNICA");
 
         // Sample queue questions
         Question q16, q17;
