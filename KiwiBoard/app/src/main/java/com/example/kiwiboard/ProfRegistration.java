@@ -96,6 +96,7 @@ public class ProfRegistration extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ProfRegistration.this, Login.class));
+                finish();
             }
         });
 
@@ -104,6 +105,7 @@ public class ProfRegistration extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ProfRegistration.this, StudentRegistration.class));
+                finish();
             }
         });
     }

@@ -43,7 +43,6 @@ public class ProfHomeFragment extends Fragment {
             }
         });
 
-
         // Find views from within root activity StudentMain.java
         activeRecyclerView = (RecyclerView) professorView.findViewById(R.id.rcyProfActiveQuestions);
         queueRecyclerView = (RecyclerView) professorView.findViewById(R.id.rcyQuestionQueue);
@@ -51,12 +50,11 @@ public class ProfHomeFragment extends Fragment {
         activeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         queueRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-
         int courseindex = ProfData.getCurrentcourse();
         if (courseindex < 0){
             return professorView;
         }
-        final int newc = courseindex;
+        //final int newc = courseindex;
         Course currentcourse = ProfData.getCourses().get(courseindex);
         currentcourse.refreshQuestionNumbers();
         questions = currentcourse.getQuestions();
@@ -70,9 +68,7 @@ public class ProfHomeFragment extends Fragment {
         activeRecyclerView.setAdapter(activeAdapter);
         queueRecyclerView.setAdapter(queueAdapter);
 
-
         generateActiveQuestionList();
-
         activeAdapter.notifyDataSetChanged();
         queueAdapter.notifyDataSetChanged();
 

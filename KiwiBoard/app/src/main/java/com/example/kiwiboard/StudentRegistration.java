@@ -82,6 +82,7 @@ public class StudentRegistration extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(StudentRegistration.this, Login.class));
+                finish();
             }
         });
 
@@ -89,6 +90,7 @@ public class StudentRegistration extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(StudentRegistration.this, ProfRegistration.class));
+                finish();
             }
         });
     }
