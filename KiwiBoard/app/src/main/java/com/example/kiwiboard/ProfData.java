@@ -113,7 +113,7 @@ public class ProfData {
     }
 
     // Clears all professor data
-    public void clearAllData(){
+    public static void clearAllData(){
         name = "";
         email = "";
         password = "";

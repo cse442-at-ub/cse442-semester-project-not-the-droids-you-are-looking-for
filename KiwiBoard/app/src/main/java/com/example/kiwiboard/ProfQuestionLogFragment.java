@@ -63,14 +63,6 @@ public class ProfQuestionLogFragment extends Fragment {
         return rosterview;
     }
 
-    /*
-    public void noCourseSelected(View view) {
-        String[] message = new String[1];
-        message[0] = "You must join a course!";
-        arrayAdapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_list_item_1, message);
-        listView.setAdapter(arrayAdapter);
-    }
-     */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Variable initializations here, excluding View objects

@@ -1,9 +1,6 @@
 package com.example.kiwiboard;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -11,33 +8,30 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.content.SharedPreferences;
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class StudentMultipleChoice extends AppCompatActivity {
+    private ArrayList<Question> questions;
+    ArrayList<String> choices;
+    private Course currentCourse;
+    private int courseIndex;
+    private int questionIndex;
+    private ProgressBar progressBar;
+    private TextView txt_timerText;
+    private TextView txt_questionNumber;
+    private TextView txt_questionDescription;
+    private RadioGroup radioGroup;
+    private Button submitButton;
     // Timer Variables
     private static final long COUNTDOWN_IN_MILLIS = 60000;
-    private ColorStateList textColorDefaultCd;  // Want to change textColor when less than 10 secs remains
-    private ProgressBar progressBar;
-    private TextView timerText;
-    private RadioGroup radioGroup;
-    private RadioButton rb1;
-    private RadioButton rb2;
-    private RadioButton rb3;
-    private RadioButton rb4;
-    private Button submitButton;
-    private ColorStateList textColorDefaultRb;
-
     private CountDownTimer countDownTimer;
     private long timeLeftInMillis;
-
     private long backPressedTime;
-    private boolean timerRunning;
+    //private boolean timerRunning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,21 +40,17 @@ public class StudentMultipleChoice extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.multChoice_toolbar) ;
         setToolbar("Multiple Choice", toolbar);
 
-        timerText = findViewById(R.id.txt_countdown);
+        txt_questionNumber = findViewById(R.id.questionNumber);
+        txt_timerText = findViewById(R.id.txt_countdown);
         radioGroup = findViewById(R.id.multipleChoiceOptions);
-        rb1 = findViewById(R.id.multchoice1);
-        rb2 = findViewById(R.id.multchoice2);
-        rb3 = findViewById(R.id.multchoice3);
         submitButton = findViewById(R.id.submitButton);
         progressBar = findViewById(R.id.progressBar);
 
-        textColorDefaultRb = rb1.getTextColors();
-        textColorDefaultCd = timerText.getTextColors();
-
+        courseIndex = StudentData.getCurrentcourse();
+        currentCourse = StudentData.getCourses().get(courseIndex);
+        questions = currentCourse.getQuestions();
+        choices = questions.get(courseIndex).getChoices();
         progressBar.setVisibility(View.VISIBLE);
-
-        // dbHelper is not coded yet
-        // immediately want to start timer when we display a new question
         displayQuestion();
     }
 
@@ -73,14 +63,47 @@ public class StudentMultipleChoice extends AppCompatActivity {
         decorView.setSystemUiVisibility(uiOptions);
     }
 
+    private Question getQuestion() {
+        int courseindex = StudentData.getCurrentcourse();
+        if(courseindex < 0) {
+            return null;
+        }
+        Course currentcourse = StudentData.getCourses().get(courseindex);
+        this.questionIndex = StudentData.getLastclickedquestion();
+        if (this.questionIndex < 0)
+            return null;
+        ArrayList<Question> questions = currentcourse.getQuestions();
+        return questions.get(this.questionIndex);
+    }
+
     private void displayQuestion() {
-        //rb1.setTextColor(textColorDefaultRb);
-        //rb2.setTextColor(textColorDefaultRb);
-        //rb3.setTextColor(textColorDefaultRb);
-        //rb4.setTextColor(textColorDefaultRb);
         radioGroup.clearCheck();
 
-        // code to set answer options will go here later
+        Question question = getQuestion();
+        if(question == null) {
+            return;
+        }
+
+        txt_questionDescription = findViewById(R.id.questionTextView);
+        txt_questionDescription.setText(question.getDescription());     // set text for question description
+        txt_questionNumber.setText("#" + question.getQuestionnumber());     // set text for question number
+
+        if(question.getChoices() != null) {
+            // populate the choices into the radio button texts
+            RadioButton rb1 = findViewById(R.id.multchoice1);
+            RadioButton rb2 = findViewById(R.id.multchoice2);
+            RadioButton rb3 = findViewById(R.id.multchoice3);
+            RadioButton rb4 = findViewById(R.id.multchoice4);
+            String choice1 = choices.get(0);
+            String choice2 = choices.get(1);
+            String choice3 = choices.get(2);
+            String choice4 = choices.get(3);
+
+            rb1.setText(choice1);
+            rb2.setText(choice2);
+            rb3.setText(choice3);
+            rb4.setText(choice4);
+        }
 
         timeLeftInMillis = COUNTDOWN_IN_MILLIS;
         startTimer();
@@ -119,10 +142,7 @@ public class StudentMultipleChoice extends AppCompatActivity {
         setTimerText(timeLeftFormatted);
 
         if(timeLeftInMillis < 10000) {
-            timerText.setTextColor(Color.RED);
-        }
-        else {
-            //timerText.setTextColor(textColorDefaultCd);
+            txt_timerText.setTextColor(Color.RED);
         }
     }
 
@@ -141,7 +161,7 @@ public class StudentMultipleChoice extends AppCompatActivity {
             finish();
         }
         else {
-            Toast.makeText(this, "Press back twice quickly to finish",
+            Toast.makeText(this, "Quickly press back twice to quit",
                     Toast.LENGTH_SHORT).show();
         }
         backPressedTime = System.currentTimeMillis();
@@ -160,7 +180,7 @@ public class StudentMultipleChoice extends AppCompatActivity {
     }
 
     public void setTimerText(String time) {
-        timerText.setText(time);
+        txt_timerText.setText(time);
     }
 
 }

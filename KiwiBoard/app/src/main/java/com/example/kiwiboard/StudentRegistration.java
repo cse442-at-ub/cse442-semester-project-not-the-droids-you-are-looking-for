@@ -26,7 +26,7 @@ public class StudentRegistration extends AppCompatActivity {
 
         Button registerButton = (Button) findViewById(R.id.register_button);
         TextView hasAccount = (TextView) findViewById(R.id.txt_hasAccount);
-        TextView professorLogin = (TextView) findViewById(R.id.txt_profLogin);
+        TextView professorRegistration = (TextView) findViewById(R.id.txt_profRegistration);
         nameTextInput = (TextInputLayout) findViewById(R.id.txt_nameInput);
         emailTextInput = (TextInputLayout) findViewById(R.id.txt_emailAddress);
         passwordTextInput = (TextInputLayout) findViewById(R.id.txt_password);
@@ -85,7 +85,7 @@ public class StudentRegistration extends AppCompatActivity {
             }
         });
 
-        professorLogin.setOnClickListener(new View.OnClickListener() {
+        professorRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(StudentRegistration.this, ProfRegistration.class));

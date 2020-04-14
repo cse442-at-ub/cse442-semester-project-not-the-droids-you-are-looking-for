@@ -26,7 +26,4 @@ public class CreateCourseFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         // Initialise View objects here
     }
-
-    
-
 }
