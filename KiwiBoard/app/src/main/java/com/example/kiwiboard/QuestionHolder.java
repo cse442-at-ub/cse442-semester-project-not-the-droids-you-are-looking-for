@@ -43,9 +43,9 @@ public class QuestionHolder extends RecyclerView.ViewHolder {
                 if (ProfData.isProfessormode()){
                     ProfData.setLastclickedquestion(qindex); // Notify professor data of index
                     if (type == Question.QuestionType.MULTIPLECHOICE) {
-                        activityContext.startActivity(new Intent(activityContext, CreateMultipleChoice.class));
+                        activityContext.startActivity(new Intent(activityContext, ProfMCQuestionView.class));
                     } else if (type == Question.QuestionType.SHORTANSWER) {
-                        activityContext.startActivity(new Intent(activityContext, CreateShortAnswer.class));
+                        activityContext.startActivity(new Intent(activityContext, ProfSAQuestionView.class));
                     }
                 }
             }

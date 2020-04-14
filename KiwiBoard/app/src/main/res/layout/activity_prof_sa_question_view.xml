@@ -7,17 +7,17 @@
     android:background="@color/multChoiceBackground"
     android:textAlignment="center"
     android:orientation="vertical"
-    tools:context=".ProfMCQuestionView">
+    tools:context=".ProfSAQuestionView">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/Prof_MC_Quest_Toolbar"
+        android:id="@+id/Prof_SA_Quest_Toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/design_default_color_secondary_variant"
-        android:paddingEnd="25dp"
-        android:theme="?attr/actionBarTheme"
-        app:navigationIcon="@drawable/ic_back"
-        app:titleTextColor="@color/White" />
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:titleTextColor="@color/White"
+        app:navigationIcon="@drawable/ic_back" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -26,20 +26,22 @@
         android:layout_marginEnd="8dp">
 
         <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="159dp"
-            android:layout_height="116dp"
+            android:id="@+id/Prof_SA_Quest_Logo"
+            android:layout_width="151dp"
+            android:layout_height="107dp"
             android:background="@drawable/ic_rounded_corners"
-            android:paddingStart="10dp"
+            android:paddingTop="10dp"
+
+
             app:layout_constraintBottom_toTopOf="@+id/linearLayout10"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/WELCOMETOMARIOKART"
+            app:layout_constraintStart_toEndOf="@+id/Prof_SA_Quest_Title"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/professor" />
 
         <TextView
-            android:id="@+id/WELCOMETOMARIOKART"
+            android:id="@+id/Prof_SA_Quest_Title"
             android:layout_width="147dp"
             android:layout_height="93dp"
             android:text="Question View"
@@ -47,36 +49,38 @@
             android:textColor="@color/White"
             android:textSize="28sp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout10"
-            app:layout_constraintEnd_toStartOf="@+id/imageView5"
+            app:layout_constraintEnd_toStartOf="@+id/Prof_SA_Quest_Logo"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.574" />
 
         <LinearLayout
             android:id="@+id/linearLayout10"
-            android:layout_width="371dp"
-
-            android:layout_height="466dp"
+            android:layout_width="375dp"
+            android:layout_height="475dp"
             android:orientation="vertical"
+            android:padding="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.47"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView5">
+            app:layout_constraintTop_toBottomOf="@+id/Prof_SA_Quest_Logo">
 
             <TextView
 
-                android:id="@+id/Prof_Quest_View_Desp"
+                android:id="@+id/Prof_SA_Quest_View_Desp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="47dp"
                 android:text="Question Description"
                 android:textAlignment="center"
                 android:textColor="@color/White"
                 android:textSize="28sp" />
 
             <TextView
-                android:id="@+id/Prof_Quest_View_Answers_TextView"
+                android:id="@+id/Prof_SA_Quest_View_Desp_TXT"
                 android:layout_width="match_parent"
-                android:layout_height="101dp"
+                android:layout_height="104dp"
                 android:autoSizeTextType="uniform"
                 android:background="@drawable/shape_rounded_white_rect"
                 android:padding="20dp"
@@ -90,22 +94,27 @@
                 android:layout_height="30dp" />
 
             <TextView
-                android:id="@+id/Prof_Quest_View_Answers"
+                android:id="@+id/Prof_SA_Quest_View_Answer"
                 android:layout_width="match_parent"
-                android:layout_height="53dp"
+                android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="Answers"
+                android:text="Answer"
                 android:textAlignment="center"
                 android:textColor="@color/White"
                 android:textSize="28sp" />
 
-            <ListView
-                android:id="@+id/Prof_Quest_View_List"
-                android:layout_width="match_parent"
-                android:layout_height="245dp"
-                android:background="@drawable/shape_rounded_white_rect" />
+            <TextView
+                android:id="@+id/Prof_SA_Quest_View_Answer_TXT"
+                android:layout_width="334dp"
+                android:layout_height="196dp"
+                android:background="@drawable/shape_rounded_white_rect"
+                android:padding="25sp"
+                android:text="Android"
+                android:textAlignment="center"
+                android:textColor="@color/Black"
+                android:textSize="25dp" />
 
         </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.appcompat.widget.LinearLayoutCompat>
