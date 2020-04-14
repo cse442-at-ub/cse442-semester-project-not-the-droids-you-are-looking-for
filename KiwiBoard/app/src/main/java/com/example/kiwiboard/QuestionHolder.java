@@ -20,7 +20,7 @@ public class QuestionHolder extends RecyclerView.ViewHolder {
 
     public void setQuestionDetails(final Question question) {
 
-        if(!question.isinQueue())
+        if(!question.isInQueue())
             txtNumber.setText("Q" + question.getQuestionnumber());
         txtText.setText(question.getDescription());
 
@@ -42,10 +42,15 @@ public class QuestionHolder extends RecyclerView.ViewHolder {
                 }
                 if (ProfData.isProfessormode()){
                     ProfData.setLastclickedquestion(qindex); // Notify professor data of index
-                    if (type == Question.QuestionType.MULTIPLECHOICE) {
-                        activityContext.startActivity(new Intent(activityContext, ProfMCQuestionView.class));
-                    } else if (type == Question.QuestionType.SHORTANSWER) {
-                        activityContext.startActivity(new Intent(activityContext, ProfSAQuestionView.class));
+                    if (question.isInQueue()){
+                        ProfMain profMain = (ProfMain) activityContext;
+                        profMain.openLauncherDialog();
+                    } else {
+                        if (type == Question.QuestionType.MULTIPLECHOICE) {
+                            activityContext.startActivity(new Intent(activityContext, ProfMCQuestionView.class));
+                        } else if (type == Question.QuestionType.SHORTANSWER) {
+                            activityContext.startActivity(new Intent(activityContext, ProfSAQuestionView.class));
+                        }
                     }
                 }
             }

@@ -29,17 +29,23 @@ class Course {
 
     // Adds a new question from an existing Question object
     public void addQuestion(Question question){
-        if (questions.isEmpty()){
-            question.setQuestionnumber(0);
-        } else {
-            question.setQuestionnumber(questions.size());
-        }
+        question.setQuestionnumber(questions.size());
         questions.add(question);
     }
 
     // Adds a new question using Question's default constructor with parameters
     public void addNewQuestion(Question.QuestionType type, String description, ArrayList<String> choices, int questionnumber, double pointsreceived, int maxpoints, int mcanswer, double numericanswer, String textanswer, ArrayList<Integer> multipleanswers, int mcresponse, ArrayList<Integer> multipleresponses, String textresponse, double numericresponse){
         questions.add(new Question(type, description, choices, questionnumber, pointsreceived, maxpoints, mcanswer, numericanswer, textanswer, multipleanswers, mcresponse, multipleresponses, textresponse, numericresponse));
+    }
+
+    // Set the question at the index given
+    public void setQuestion(int index, Question question){
+        questions.set(index, question);
+    }
+
+    // Get the question at the index given
+    public Question getQuestion(int index){
+        return questions.get(index);
     }
 
     // Removes a question at a particular index. Indices start at 0
@@ -65,6 +71,16 @@ class Course {
         }
         queue.add(question);
     }
+    // Get the queue question at the index given
+    public Question getQueueQuestion(int index){
+        return queue.get(index);
+    }
+
+    // Set the queue question at the index given
+    public void setQueueQuestion(int index, Question question){
+        queue.set(index, question);
+    }
+
     // Adds a new question using Question's default constructor with parameters
     public void addNewQueueQuestion(Question.QuestionType type, String description, ArrayList<String> choices, int questionnumber, double pointsreceived, int maxpoints, int mcanswer, double numericanswer, String textanswer, ArrayList<Integer> multipleanswers, int mcresponse, ArrayList<Integer> multipleresponses, String textresponse, double numericresponse){
         queue.add(new Question(type, description, choices, questionnumber, pointsreceived, maxpoints, mcanswer, numericanswer, textanswer, multipleanswers, mcresponse, multipleresponses, textresponse, numericresponse));
@@ -146,7 +162,21 @@ class Course {
     public void setSite(int index, String site) {sitenames.add(index,site);}
     public String getSite(int index){return sitenames.get(index);}
     public void removeSite(int index){ sitenames.remove(index);}
+    
+    // Adds a new student from an existing Student object
+    public void addStudent(Student student){
+        students.add(student);
+    }
 
+    // Adds a new student using Student's default constructor with parameters
+    public void addNewStudent(Question.QuestionType type, String description, ArrayList<String> choices, int questionnumber, double pointsreceived, int maxpoints, int mcanswer, double numericanswer, String textanswer, ArrayList<Integer> multipleanswers, int mcresponse, ArrayList<Integer> multipleresponses, String textresponse, double numericresponse){
+        queue.add(new Question(type, description, choices, questionnumber, pointsreceived, maxpoints, mcanswer, numericanswer, textanswer, multipleanswers, mcresponse, multipleresponses, textresponse, numericresponse));
+    }
+
+    // Set the student at the index given
+    public void setStudent(int index, Student student){
+        students.set(index, student);
+    }
 
     public String getCourseName() {
         return courseName;

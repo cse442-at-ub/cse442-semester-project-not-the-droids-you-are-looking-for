@@ -2,6 +2,7 @@ package com.example.kiwiboard;
 
 import java.lang.invoke.MutableCallSite;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 class Question {
 
@@ -16,7 +17,10 @@ class Question {
     private double numerictolerance = 0.002;    // Tolerance for double answers
     private ArrayList<String> choices;          // Container for choices
     private int questionnumber;                 // The index of the question
-    private boolean inQueue = false;           // Whether the question is in the queue
+    private boolean inQueue = false;            // Whether the question is in the queue
+    private boolean isActive = false;           // Whether the question is active
+    private int timelaunched = 0;               // Exact time when the question was launched
+    private int timelimit = 0;                  // Amount of time the question lasts
 
     private double pointsreceived;               // Points received by student. Null for professors.
     private int maxpoints;                       // Max points possible
@@ -34,6 +38,7 @@ class Question {
     private double numericresponse;              // The student's numeric submission
 
 
+    // Constructuor with parameters
     public Question(QuestionType type, String description, ArrayList<String> choices, int questionnumber, double pointsreceived, int maxpoints, int mcanswer, double numericanswer, String textanswer, ArrayList<Integer> multipleanswers, int mcresponse, ArrayList<Integer> multipleresponses, String textresponse, double numericresponse) {
         this.type = type;
         this.description = description;
@@ -51,6 +56,7 @@ class Question {
         this.numericresponse = numericresponse;
     }
 
+    // Clear all question data
     public void clearQuestion(){
         this.type = null;
         this.description = "";
@@ -67,54 +73,77 @@ class Question {
         this.numericresponse = 0;
     }
 
+    // Get the question type
     public QuestionType getType() {
         return type;
     }
 
+    // Set the question type
     public void setType(QuestionType type) {
         this.type = type;
     }
 
+    // Get the question description
     public String getDescription() {
         return description;
     }
 
+    // Set the question description
     public void setDescription(String description) {
         this.description = description;
     }
 
+    // Get the max amount of multiple selection choices
     public int getMAXCHOICES() {
         return MAXCHOICES;
     }
 
+    // Get the choices for a multiple choice question
     public ArrayList<String> getChoices() {
         return choices;
     }
 
+    // Set the choices for a multiple choice question
     public void setChoices(ArrayList<String> choices) {
         this.choices = choices;
     }
 
+    // Get the number of the question
     public int getQuestionnumber() {
         return questionnumber;
     }
 
+    // Set the number of the question
     public void setQuestionnumber(int questionnumber) {
         this.questionnumber = questionnumber;
     }
 
-    public boolean isinQueue() {
+    // Check if the question is in the queue
+    public boolean isInQueue() {
         return inQueue;
     }
 
-    public void setinQueue(boolean inQueue) {
+    // Set whether the question is in the queue
+    public void setInQueue(boolean inQueue) {
         this.inQueue = inQueue;
     }
 
+    // Check if the question is active
+    public boolean isActive() {
+        return isActive;
+    }
+
+    // Set whether the question is active
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    // Get the number of points received by the student
     public double getPointsreceived() {
         return pointsreceived;
     }
 
+    // Set the number of points received by the student
     public void setPointsreceived(double pointsreceived) {
         this.pointsreceived = pointsreceived;
     }
@@ -205,6 +234,22 @@ class Question {
 
     public void setMultipleresponses(ArrayList<Integer> multipleresponses) {
         this.multipleresponses = multipleresponses;
+    }
+
+    public int getTimelaunched() {
+        return timelaunched;
+    }
+
+    public void setTimelaunched(int timelaunched) {
+        this.timelaunched = timelaunched;
+    }
+
+    public int getTimelimit() {
+        return timelimit;
+    }
+
+    public void setTimelimit(int timelimit) {
+        this.timelimit = timelimit;
     }
 
     public double calculateScore(){

@@ -14,15 +14,15 @@
         <item android:id="@+id/nav_student_classes"
             android:icon="@drawable/ic_school"
             android:title="@string/choose_class"/>
-        <item android:id="@+id/nav_student_addclass"
-            android:icon="@drawable/ic_add"
-            android:title="@string/add_class"/>
         <item android:id="@+id/nav_student_question_log"
             android:icon="@drawable/ic_log"
             android:title="@string/question_log"/>
         <item android:id="@+id/nav_student_roster"
             android:icon="@drawable/ic_roster"
             android:title="@string/roster"/>
+        <item android:id="@+id/nav_student_addclass"
+            android:icon="@drawable/ic_add"
+            android:title="@string/add_class"/>
     </group>
 
     <!-- These items only trigger an action-->
