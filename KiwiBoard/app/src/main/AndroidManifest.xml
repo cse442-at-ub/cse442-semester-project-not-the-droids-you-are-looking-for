@@ -12,6 +12,8 @@
         <activity android:name=".IndividualGrades"></activity>
         <activity android:name=".ProfMCQuestionView" />
         <activity android:name=".ProfSAQuestionView"></activity>
+        <activity android:name=".StudentMCQuestionView"></activity>
+        <activity android:name=".ProfMultipleChoice" />
         <activity android:name=".StudentRegistration" />
         <activity android:name=".ResetPassword" />
         <activity android:name=".Login" />

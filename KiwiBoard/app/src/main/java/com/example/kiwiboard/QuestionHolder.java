@@ -47,7 +47,7 @@ public class QuestionHolder extends RecyclerView.ViewHolder {
                         profMain.openLauncherDialog();
                     } else {
                         if (type == Question.QuestionType.MULTIPLECHOICE) {
-                            activityContext.startActivity(new Intent(activityContext, ProfMCQuestionView.class));
+                            activityContext.startActivity(new Intent(activityContext, ProfMultipleChoice.class));
                         } else if (type == Question.QuestionType.SHORTANSWER) {
                             activityContext.startActivity(new Intent(activityContext, ProfSAQuestionView.class));
                         }
