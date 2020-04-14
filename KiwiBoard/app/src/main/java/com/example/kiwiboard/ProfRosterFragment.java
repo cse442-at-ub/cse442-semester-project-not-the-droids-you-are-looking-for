@@ -21,7 +21,7 @@ public class ProfRosterFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rosterview = inflater.inflate(R.layout.fragment_prof_roster,container,false);
+        final View rosterview = inflater.inflate(R.layout.fragment_prof_roster,container,false);
 
         // Declare variables
         int courseindex = ProfData.getCurrentcourse();
@@ -41,6 +41,9 @@ public class ProfRosterFragment extends Fragment {
         TextView stuTotal=(TextView)rosterview.findViewById(R.id.txtpStuTotal);
         stuTotal.setText(" " + numStudents);
 
+        // Identify List View in fragment
+        ListView studentlist = rosterview.findViewById(R.id.lstprof_roster);
+
         // Populate String array of student names
         String[] studentArray = new String[numStudents];
         for (int i = 0; i < numStudents; i++) {
@@ -48,7 +51,22 @@ public class ProfRosterFragment extends Fragment {
             studentArray[i] = name;
         }
 
-        roster(rosterview, studentArray);
+        // ListView Array Adapter
+        ArrayAdapter<String> rosterViewAdapter = new ArrayAdapter<String>(
+                rosterview.getContext(),
+                android.R.layout.simple_list_item_1,
+                studentArray
+        );
+        studentlist.setAdapter(rosterViewAdapter);
+
+        // Sends you to the next fragment based on the position in list view
+        studentlist.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent,View view,int position, long id) {
+                    ProfData.setLastclickedstudent(position);
+                    startActivity(new Intent(getActivity(),IndividualGrades.class));
+            }
+        });
 
         return rosterview;
     }
@@ -62,19 +80,4 @@ public class ProfRosterFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         // Initialise View objects here
     }
-
-    public void roster(View rosterview, String[] studentArray){
-        // Identify List View in fragment
-        ListView studentlist = rosterview.findViewById(R.id.lstprof_roster);
-
-        // ListView Array Adapter
-        ArrayAdapter<String> rosterViewAdapter = new ArrayAdapter<String>(
-                rosterview.getContext(),
-                android.R.layout.simple_list_item_1,
-                studentArray
-        );
-
-        studentlist.setAdapter(rosterViewAdapter);
-    }
-
 }

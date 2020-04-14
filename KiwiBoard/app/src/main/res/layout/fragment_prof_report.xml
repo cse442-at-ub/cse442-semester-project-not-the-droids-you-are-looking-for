@@ -26,7 +26,7 @@
         android:textSize="24dp"
         android:textAlignment="center"
         android:inputType="none"
-        android:text="My Grades"
+        android:text="Professor Report"
         app:layout_constraintBottom_toTopOf="@+id/txtProfClassAvglbl"
         app:layout_constraintStart_toStartOf="@+id/txtProfClassAvglbl"
         app:layout_constraintTop_toTopOf="parent" />
@@ -86,7 +86,7 @@
                 android:layout_height="match_parent"
                 android:padding="5dp"
                 android:paddingEnd="10dp"
-                android:text="Avg   "
+                android:text="Avg    "
                 android:textSize="20sp" />
 
             <TextView
@@ -95,7 +95,7 @@
                 android:layout_height="match_parent"
                 android:padding="5dp"
                 android:paddingEnd="10dp"
-                android:text="Total"
+                android:text="Total  "
                 android:textSize="20sp" />
 
             <TextView

@@ -9,6 +9,7 @@ public class ProfData {
     private static String password;             // Professor's password
     private static int currentcourse = -1;           // Professor's current course
     private static int lastclickedquestion = -1;     // The most recently selected question index
+    private static int lastclickedstudent = -1;     // The most recently selected student index
     private static boolean professormode = false;      // Flag to track when professor mode is entered
     private static ArrayList<Course> courses;   // Professor's currently selected course
     private static String university;
@@ -79,6 +80,14 @@ public class ProfData {
 
     public static void setLastclickedquestion(int lastclickedquestion) {
         ProfData.lastclickedquestion = lastclickedquestion;
+    }
+
+    public static int getLastclickedstudent() {
+        return lastclickedstudent;
+    }
+
+    public static void setLastclickedstudent(int lastclickedstudent) {
+        ProfData.lastclickedstudent = lastclickedstudent;
     }
 
     public static int getCurrentcourse() {
