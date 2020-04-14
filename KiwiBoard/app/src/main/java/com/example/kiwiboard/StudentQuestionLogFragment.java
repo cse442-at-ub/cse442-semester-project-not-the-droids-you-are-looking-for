@@ -52,7 +52,7 @@ public class StudentQuestionLogFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 StudentData.setLastclickedquestion(i);
-                startActivity(new Intent(getActivity(), StudentMultipleChoice.class));
+                startActivity(new Intent(getActivity(), StudentMCQuestionView.class));
             }
         });
 
