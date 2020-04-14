@@ -120,7 +120,7 @@ public class SampleData {
         q14 = new Question(Question.QuestionType.MULTIPLECHOICE, description, choices, -1, 10,10, mcanswer,0,null, null, 0, null, null, 0);
 
         description = "What do you find difficult about Geology?";
-        q15 = new Question(Question.QuestionType.SHORTANSWER, description, null, -1, 10,10, 0,0,null, null, 0, null, null, 0);
+        q15 = new Question(Question.QuestionType.SHORTANSWER, description, null, -1, 10,10, 0,0,"I hear to help", null, 0, null, null, 0);
 
         GeologyQuestions.add(q1);
         GeologyQuestions.add(q2);

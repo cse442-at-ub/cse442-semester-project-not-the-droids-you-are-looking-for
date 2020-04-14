@@ -55,7 +55,10 @@ public class ProfQuestionLogFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 ProfData.setLastclickedquestion(i);
-                startActivity(new Intent(getActivity(), ProfMCQuestionView.class));
+                if(ProfData.getCourses().get(ProfData.getCurrentcourse()).getQuestions().get(i).getChoices() == null)
+                    startActivity(new Intent(getActivity(), ProfSAQuestionView.class));
+                else
+                    startActivity(new Intent(getActivity(), ProfMCQuestionView.class));
             }
         });
         arrayAdapter = new ArrayAdapter<>(rosterview.getContext(), android.R.layout.simple_list_item_1, questionArray);
