@@ -38,7 +38,7 @@ class Question {
     private double numericresponse;              // The student's numeric submission
 
 
-    // Constructuor with parameters
+    // Constructor with parameters
     public Question(QuestionType type, String description, ArrayList<String> choices, int questionnumber, double pointsreceived, int maxpoints, int mcanswer, double numericanswer, String textanswer, ArrayList<Integer> multipleanswers, int mcresponse, ArrayList<Integer> multipleresponses, String textresponse, double numericresponse) {
         this.type = type;
         this.description = description;

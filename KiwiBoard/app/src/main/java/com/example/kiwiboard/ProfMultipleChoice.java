@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 public class ProfMultipleChoice extends AppCompatActivity {
-    // COUNTDOWN_IN_MILLIS can't be final when we are awaiting input from the user.
     private long COUNTDOWN_IN_MILLIS = 60000;
     private ArrayList<Question> questions;
     ArrayList<String> choices;
@@ -29,25 +28,21 @@ public class ProfMultipleChoice extends AppCompatActivity {
     private TextView txt_questionNumber;
     private TextView txt_questionDescription;
     private RadioGroup radioGroup;
-    private Button submitButton;
     private CountDownTimer countDownTimer;
     private long timeLeftInMillis;
     private long backPressedTime;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prof_multiple_choice);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.multChoice_toolbar) ;
-        //setToolbar("Multiple Choice", toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.prof_MC_toolbar);
+        setToolbar("Multiple Choice", toolbar);
 
         txt_questionNumber = findViewById(R.id.profQuestionNumber);
         txt_timerText = findViewById(R.id.prof_txt_countdown);
         radioGroup = findViewById(R.id.profmultipleChoiceOptions);
-        submitButton = findViewById(R.id.profSubmitButton);
         progressBar = findViewById(R.id.profProgressBar);
 
         courseIndex = ProfData.getCurrentcourse();
@@ -62,9 +57,11 @@ public class ProfMultipleChoice extends AppCompatActivity {
         radioGroup.clearCheck();
 
         Question question = getQuestion();
-        if(question == null) {
+        if(question == null)
             return;
-        }
+
+        COUNTDOWN_IN_MILLIS = question.getTimelimit() * 1000;   // get the time limit stored in questions data
+        timeLeftInMillis = COUNTDOWN_IN_MILLIS;                 // set the timeLeft in millis
 
         txt_questionDescription = findViewById(R.id.questionTextView);
         txt_questionDescription.setText(question.getDescription());     // set text for question description
@@ -76,6 +73,7 @@ public class ProfMultipleChoice extends AppCompatActivity {
             RadioButton rb2 = findViewById(R.id.profmultchoice2);
             RadioButton rb3 = findViewById(R.id.profmultchoice3);
             RadioButton rb4 = findViewById(R.id.profmultchoice4);
+
             String choice1 = choices.get(0);
             String choice2 = choices.get(1);
             String choice3 = choices.get(2);
@@ -86,8 +84,6 @@ public class ProfMultipleChoice extends AppCompatActivity {
             rb3.setText(choice3);
             rb4.setText(choice4);
         }
-
-        timeLeftInMillis = COUNTDOWN_IN_MILLIS;
         startTimer(question);
     }
 
@@ -114,7 +110,6 @@ public class ProfMultipleChoice extends AppCompatActivity {
     }
 
     private void startTimer(Question question) {
-        //timeLeftInMillis = question.getTimelimit() * 1000;
         countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {

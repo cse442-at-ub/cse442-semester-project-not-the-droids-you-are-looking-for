@@ -63,7 +63,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_countdown" />
+                    app:layout_constraintTop_toBottomOf="@+id/prof_txt_countdown" />
 
                 <TextView
                     android:id="@+id/prof_txt_countdown"
@@ -108,19 +108,7 @@
         - Need to add reset, pause, play buttons for timer above the question
         -->
 
-        <Button
-            android:id="@+id/submitButton"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:background="@drawable/rounded_button"
-            android:text="@string/submit_button"
-            android:textColor="@color/White"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/multipleChoiceOptions" />
+
 
         <TextView
             android:id="@+id/questionTextView"
@@ -132,7 +120,7 @@
             android:textColor="@color/White"
             android:textSize="28sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/multipleChoiceOptions"
+            app:layout_constraintBottom_toTopOf="@+id/profmultipleChoiceOptions"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -144,7 +132,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:background="@color/themeColor"
-            app:layout_constraintBottom_toTopOf="@+id/submitButton"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
