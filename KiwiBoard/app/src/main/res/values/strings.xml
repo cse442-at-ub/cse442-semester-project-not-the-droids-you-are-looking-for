@@ -96,9 +96,7 @@
     <string name="question_label">#1</string>
     <string name="create_a_question">Create a question</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <!-- New Strings Appear Here-->
+    <string name="prof_showAnswer">Show Answer</string>
 
 
 </resources>

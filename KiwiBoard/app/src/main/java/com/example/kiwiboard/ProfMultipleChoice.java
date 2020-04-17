@@ -3,6 +3,7 @@ package com.example.kiwiboard;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -19,6 +20,7 @@ import java.util.Locale;
 public class ProfMultipleChoice extends AppCompatActivity {
     private long COUNTDOWN_IN_MILLIS = 60000;
     private ArrayList<Question> questions;
+    private int answer_index;
     ArrayList<String> choices;
     private Course currentCourse;
     private int courseIndex;
@@ -27,10 +29,18 @@ public class ProfMultipleChoice extends AppCompatActivity {
     private TextView txt_timerText;
     private TextView txt_questionNumber;
     private TextView txt_questionDescription;
+    private Button displayAnswer;
     private RadioGroup radioGroup;
+    private RadioButton rb1;
+    private RadioButton rb2;
+    private RadioButton rb3;
+    private RadioButton rb4;
     private CountDownTimer countDownTimer;
     private long timeLeftInMillis;
     private long backPressedTime;
+
+    //private ColorStateList textColorDefaultRb;      // to store original text color of radiobutton
+    //private ColorStateList textColor
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,14 +52,22 @@ public class ProfMultipleChoice extends AppCompatActivity {
 
         txt_questionNumber = findViewById(R.id.profQuestionNumber);
         txt_timerText = findViewById(R.id.prof_txt_countdown);
-        radioGroup = findViewById(R.id.profmultipleChoiceOptions);
         progressBar = findViewById(R.id.profProgressBar);
+        radioGroup = findViewById(R.id.profmultipleChoiceOptions);
+        rb1 = findViewById(R.id.profmultchoice1);
+        rb2 = findViewById(R.id.profmultchoice2);
+        rb3 = findViewById(R.id.profmultchoice3);
+        rb4 = findViewById(R.id.profmultchoice4);
+        displayAnswer = findViewById(R.id.showAnswerButton);
 
+        //textColorDefaultRb = rb1.getTextColors();
         courseIndex = ProfData.getCurrentcourse();
         currentCourse = ProfData.getCourses().get(courseIndex);
         questions = currentCourse.getQuestions();
         choices = questions.get(courseIndex).getChoices();
         progressBar.setVisibility(View.VISIBLE);
+        displayAnswer.setVisibility(View.INVISIBLE);    // set the button to invisible until timer runs out
+
         displayQuestion();
     }
 
@@ -57,6 +75,9 @@ public class ProfMultipleChoice extends AppCompatActivity {
         radioGroup.clearCheck();
 
         Question question = getQuestion();
+        answer_index = question.getMcanswer();
+        //question.get
+
         if(question == null)
             return;
 
@@ -69,20 +90,15 @@ public class ProfMultipleChoice extends AppCompatActivity {
 
         if(question.getChoices() != null) {
             // populate the choices into the radio button texts
-            RadioButton rb1 = findViewById(R.id.profmultchoice1);
-            RadioButton rb2 = findViewById(R.id.profmultchoice2);
-            RadioButton rb3 = findViewById(R.id.profmultchoice3);
-            RadioButton rb4 = findViewById(R.id.profmultchoice4);
-
             String choice1 = choices.get(0);
             String choice2 = choices.get(1);
             String choice3 = choices.get(2);
             String choice4 = choices.get(3);
 
-            rb1.setText(choice1);
-            rb2.setText(choice2);
-            rb3.setText(choice3);
-            rb4.setText(choice4);
+            rb1.setText(choice1);       // rb1 is choices [0]
+            rb2.setText(choice2);       // rb2 is choices [1]
+            rb3.setText(choice3);       // rb3 is choices [2]
+            rb4.setText(choice4);       // rb4 is choices [3]
         }
         startTimer(question);
     }
@@ -109,7 +125,7 @@ public class ProfMultipleChoice extends AppCompatActivity {
         return questions.get(this.questionIndex);
     }
 
-    private void startTimer(Question question) {
+    private void startTimer(final Question question) {
         countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -127,6 +143,27 @@ public class ProfMultipleChoice extends AppCompatActivity {
                 updateCountDownText();
                 countDownTimer.cancel();
                 progressBar.clearAnimation();
+                progressBar.setVisibility(View.INVISIBLE);
+                displayAnswer.setVisibility(View.VISIBLE);
+                displayAnswer.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Change the correct answer's text to Green
+                        // the index of the correct answer was stored in displayQuestion
+                        if(answer_index == 0) {
+                            rb1.setTextColor(Color.GREEN);
+                        }
+                        else if(answer_index == 1) {
+                            rb2.setTextColor(Color.GREEN);
+                        }
+                        else if(answer_index == 2) {
+                            rb3.setTextColor(Color.GREEN);
+                        }
+                        else if(answer_index == 3) {
+                            rb4.setTextColor(Color.GREEN);
+                        }
+                    }
+                });
                 // checkAnswer will lock in the answer selected when time runs out
                 // when coded cancel the countDownTimer inside of it
                 // checkAnswer();
