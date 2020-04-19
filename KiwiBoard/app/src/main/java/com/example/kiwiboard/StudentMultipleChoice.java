@@ -90,6 +90,7 @@ public class StudentMultipleChoice extends AppCompatActivity {
 
         if(question.getChoices() != null) {
             // populate the choices into the radio button texts
+            choices = questions.get(question.getQuestionnumber() - 1).getChoices();
             RadioButton rb1 = findViewById(R.id.multchoice1);
             RadioButton rb2 = findViewById(R.id.multchoice2);
             RadioButton rb3 = findViewById(R.id.multchoice3);

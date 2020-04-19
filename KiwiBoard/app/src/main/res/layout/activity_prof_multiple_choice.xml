@@ -23,7 +23,7 @@
         <TextView
             android:id="@+id/profQuestionNumber"
             android:layout_width="wrap_content"
-            android:layout_height="59dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center|top"
             android:layout_marginStart="16dp"
             android:layout_marginTop="25dp"
@@ -32,6 +32,7 @@
             android:textColor="@color/White"
             android:textSize="25sp"
             android:textStyle="bold"
+            android:paddingEnd="60dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imgLogo"
             app:layout_constraintHorizontal_bias="0.5"
@@ -45,47 +46,42 @@
             android:layout_marginStart="16dp"
             android:layoutDirection="rtl">
 
-            <RelativeLayout
+            <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginEnd="24dp"
-                android:layout_marginTop="15dp">
+                android:scaleType="fitCenter">
 
                 <ProgressBar
                     android:id="@+id/profProgressBar"
                     style="?android:progressBarStyleHorizontal"
-                    android:rotation="90"
-                    android:progressDrawable="@drawable/circularprogressbar"
-                    android:progress="0"
-                    android:layout_width="84dp"
+                    android:layout_width="82dp"
                     android:layout_height="match_parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/prof_txt_countdown" />
+                    android:progress="100"
+                    android:progressDrawable="@drawable/circularprogressbar"
+                    android:rotation="90"
+                    android:scaleType="fitCenter" />
 
                 <TextView
                     android:id="@+id/prof_txt_countdown"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="31dp"
+                    android:layout_marginStart="13dp"
                     android:gravity="center"
                     android:text="@string/prof_settimer_label"
                     android:textColor="@color/White"
-                    android:layout_centerInParent="true"
+                    android:scaleType="fitCenter"
                     android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    android:textStyle="bold" />
 
-            </RelativeLayout>
+            </FrameLayout>
 
             <ImageView
                 android:id="@+id/prof_imgLogo"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center"
                 android:contentDescription="@string/kiwi_logo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/progressBar"
@@ -130,7 +126,7 @@
             android:background="@color/themeColor"
             android:text="@string/questionbox_template"
             android:textColor="@color/White"
-            android:textSize="28sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/profmultipleChoiceOptions"
             app:layout_constraintEnd_toEndOf="parent"
@@ -156,7 +152,7 @@
                 android:layout_height="50dp"
                 android:text="@string/choice_A_label"
                 android:textColor="@color/White"
-                android:textSize="25sp" />
+                android:textSize="22sp" />
 
             <RadioButton
                 android:id="@+id/profmultchoice2"
@@ -164,7 +160,7 @@
                 android:layout_height="50dp"
                 android:text="@string/choice_B_label"
                 android:textColor="@color/White"
-                android:textSize="25sp" />
+                android:textSize="22sp" />
 
             <RadioButton
                 android:id="@+id/profmultchoice3"
@@ -172,7 +168,7 @@
                 android:layout_height="50dp"
                 android:text="@string/choice_C_label"
                 android:textColor="@color/White"
-                android:textSize="25sp" />
+                android:textSize="22sp" />
 
             <RadioButton
                 android:id="@+id/profmultchoice4"
@@ -180,7 +176,7 @@
                 android:layout_height="50dp"
                 android:text="@string/choice_D_label"
                 android:textColor="@color/White"
-                android:textSize="25sp" />
+                android:textSize="22sp" />
         </RadioGroup>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

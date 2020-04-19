@@ -68,33 +68,34 @@ public class StudentMCQuestionView extends AppCompatActivity {
 
         if(question.getChoices() != null) {
             // populate the choices into the radio button texts
-            choices = questions.get(questionIndex).getChoices();
+            choices = questions.get(question.getQuestionnumber() - 1).getChoices();
+            int answer_index = question.getMcanswer();
+
             RadioButton rb1 = findViewById(R.id.studentMC_multchoice1);
             RadioButton rb2 = findViewById(R.id.studentMC_multchoice2);
             RadioButton rb3 = findViewById(R.id.studentMC_multchoice3);
             RadioButton rb4 = findViewById(R.id.studentMC_multchoice4);
+
+            // populate the choices into the radio button texts
             String choice1 = choices.get(0);
             String choice2 = choices.get(1);
             String choice3 = choices.get(2);
             String choice4 = choices.get(3);
-            String answer = question.getTextanswer();
 
-            rb1.setText(choice1);
-            if(rb1.getText().equals(answer)) {
+            rb1.setText(choice1);       // rb1 is choices [0]
+            rb2.setText(choice2);       // rb2 is choices [1]
+            rb3.setText(choice3);       // rb3 is choices [2]
+            rb4.setText(choice4);       // rb4 is choices [3]
+
+            // display the correct answer to the student
+            if(answer_index == 0)
                 rb1.setTextColor(Color.GREEN);
-            }
-            rb2.setText(choice2);
-            if(rb2.getText().equals(answer)) {
+            else if(answer_index == 1)
                 rb2.setTextColor(Color.GREEN);
-            }
-            rb3.setText(choice3);
-            if(rb3.getText().equals(answer)) {
+            else if(answer_index == 2)
                 rb3.setTextColor(Color.GREEN);
-            }
-            rb4.setText(choice4);
-            if(rb4.getText().equals(answer)) {
+            else if(answer_index == 3)
                 rb4.setTextColor(Color.GREEN);
-            }
         }
     }
     @Override

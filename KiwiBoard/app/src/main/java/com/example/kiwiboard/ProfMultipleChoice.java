@@ -90,6 +90,7 @@ public class ProfMultipleChoice extends AppCompatActivity {
 
         if(question.getChoices() != null) {
             // populate the choices into the radio button texts
+            choices = questions.get(question.getQuestionnumber() - 1).getChoices();
             String choice1 = choices.get(0);
             String choice2 = choices.get(1);
             String choice3 = choices.get(2);
@@ -150,18 +151,14 @@ public class ProfMultipleChoice extends AppCompatActivity {
                     public void onClick(View v) {
                         // Change the correct answer's text to Green
                         // the index of the correct answer was stored in displayQuestion
-                        if(answer_index == 0) {
+                        if(answer_index == 0)
                             rb1.setTextColor(Color.GREEN);
-                        }
-                        else if(answer_index == 1) {
+                        else if(answer_index == 1)
                             rb2.setTextColor(Color.GREEN);
-                        }
-                        else if(answer_index == 2) {
+                        else if(answer_index == 2)
                             rb3.setTextColor(Color.GREEN);
-                        }
-                        else if(answer_index == 3) {
+                        else if(answer_index == 3)
                             rb4.setTextColor(Color.GREEN);
-                        }
                     }
                 });
                 // checkAnswer will lock in the answer selected when time runs out

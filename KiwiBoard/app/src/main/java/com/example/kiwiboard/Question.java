@@ -28,7 +28,7 @@ class Question {
     // Answers
     private int mcanswer;                        // Field for mc, and T/F answers
     private double numericanswer;                // Field for numeric answers
-    private String textanswer;                      // Field for textual answers
+    private String textanswer;                   // Field for textual answers
     private ArrayList<Integer> multipleanswers;  // Fields for multiple answers
 
     // Answer submissions from student
