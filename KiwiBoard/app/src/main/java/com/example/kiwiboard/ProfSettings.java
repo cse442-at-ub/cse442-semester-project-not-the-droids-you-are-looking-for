@@ -13,7 +13,7 @@ public class ProfSettings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prof_settings);
 
-        toolbar = (Toolbar) findViewById(R.id.prof_settings_toolbar);
+        toolbar = (Toolbar) findViewById(R.id.professor_settings_toolbar);
         toolbar.setTitle("Settings");
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_back));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -24,4 +24,6 @@ public class ProfSettings extends AppCompatActivity {
             }
         });
     }
+
+
 }

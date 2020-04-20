@@ -8,21 +8,24 @@
         <item android:id="@+id/nav_professor_home"
             android:icon="@drawable/ic_home"
             android:title="@string/home"/>
+        <item android:id="@+id/nav_professor_course_resources"
+            android:icon="@drawable/ic_attach"
+            android:title="Course Resources"/>
         <item android:id="@+id/nav_professor_grades"
             android:icon="@drawable/ic_grades"
             android:title="@string/professor_report"/>
-        <item android:id="@+id/nav_professor_classes"
-            android:icon="@drawable/ic_school"
-            android:title="@string/choose_class"/>
-        <item android:id="@+id/nav_professor_create_class"
-            android:icon="@drawable/ic_add"
-            android:title="@string/create_class"/>
         <item android:id="@+id/nav_professor_question_log"
             android:icon="@drawable/ic_log"
             android:title="@string/question_log"/>
         <item android:id="@+id/nav_professor_roster"
             android:icon="@drawable/ic_roster"
             android:title="@string/roster"/>
+        <item android:id="@+id/nav_professor_classes"
+            android:icon="@drawable/ic_school"
+            android:title="@string/choose_class"/>
+        <item android:id="@+id/nav_professor_create_class"
+            android:icon="@drawable/ic_add"
+            android:title="@string/create_class"/>
     </group>
 
     <!-- These items only trigger an action-->

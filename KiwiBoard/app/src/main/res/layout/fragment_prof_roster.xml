@@ -5,16 +5,17 @@
     android:layout_height="match_parent"
     android:background="@color/themeColor"
     android:orientation="vertical"
+    android:id="@+id/linear_prof_roster"
     tools:context=".ProfRosterFragment">
 
 
     <TextView
-        android:id="@+id/txtRosterlbl"
+        android:id="@+id/txtpRosterlbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:text="Student Roster"
+        android:text="Professor Roster"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -22,7 +23,7 @@
         tools:layout_editor_absoluteY="38dp" />
 
     <LinearLayout
-        android:id="@+id/stuTotalContainer"
+        android:id="@+id/profTotalContainer"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_gravity="center"
@@ -32,7 +33,7 @@
         tools:layout_editor_absoluteY="116dp">
 
         <TextView
-            android:id="@+id/txtStudentTotal"
+            android:id="@+id/txtpStudentTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
@@ -42,7 +43,7 @@
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/txtStuTotal"
+            android:id="@+id/txtpStuTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="12dp"
@@ -53,7 +54,7 @@
     </LinearLayout>
 
     <ListView
-        android:id="@+id/lststudent_roster"
+        android:id="@+id/lstprof_roster"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="8dp"

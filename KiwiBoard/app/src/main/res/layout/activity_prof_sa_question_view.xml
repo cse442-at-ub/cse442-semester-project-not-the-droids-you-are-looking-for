@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/multChoiceBackground"
+    android:textAlignment="center"
+    android:orientation="vertical"
+    tools:context=".ProfSAQuestionView">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/Prof_SA_Quest_Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/design_default_color_secondary_variant"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:titleTextColor="@color/White"
+        app:navigationIcon="@drawable/ic_back" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+
+        <ImageView
+            android:id="@+id/Prof_SA_Quest_Logo"
+            android:layout_width="151dp"
+            android:layout_height="107dp"
+            android:background="@drawable/ic_rounded_corners"
+            android:paddingTop="10dp"
+
+
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/Prof_SA_Quest_Title"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/professor" />
+
+        <TextView
+            android:id="@+id/Prof_SA_Quest_Title"
+            android:layout_width="147dp"
+            android:layout_height="93dp"
+            android:text="Question View"
+            android:textAlignment="center"
+            android:textColor="@color/White"
+            android:textSize="28sp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout10"
+            app:layout_constraintEnd_toStartOf="@+id/Prof_SA_Quest_Logo"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.574" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout10"
+            android:layout_width="375dp"
+            android:layout_height="475dp"
+            android:orientation="vertical"
+            android:padding="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.47"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Prof_SA_Quest_Logo">
+
+            <TextView
+
+                android:id="@+id/Prof_SA_Quest_View_Desp"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:text="Question Description"
+                android:textAlignment="center"
+                android:textColor="@color/White"
+                android:textSize="28sp" />
+
+            <TextView
+                android:id="@+id/Prof_SA_Quest_View_Desp_TXT"
+                android:layout_width="match_parent"
+                android:layout_height="104dp"
+                android:autoSizeTextType="uniform"
+                android:background="@drawable/shape_rounded_white_rect"
+                android:padding="20dp"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textColor="@color/Black"
+                android:textSize="24sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <TextView
+                android:id="@+id/Prof_SA_Quest_View_Answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="Answer"
+                android:textAlignment="center"
+                android:textColor="@color/White"
+                android:textSize="28sp" />
+
+            <TextView
+                android:id="@+id/Prof_SA_Quest_View_Answer_TXT"
+                android:layout_width="334dp"
+                android:layout_height="196dp"
+                android:background="@drawable/shape_rounded_white_rect"
+                android:padding="25sp"
+                android:text="Android"
+                android:textAlignment="center"
+                android:textColor="@color/Black"
+                android:textSize="25dp" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -21,6 +21,7 @@
     <EditText
         android:id="@+id/editText4"
         style="@style/TextField"
+        android:textAlignment="textStart"
         android:layout_width="168dp"
         android:layout_height="33dp"
         android:layout_marginEnd="45dp"
@@ -30,6 +31,7 @@
     <EditText
         android:id="@+id/editText5"
         style="@style/TextField"
+        android:textAlignment="textStart"
         android:layout_width="89dp"
         android:layout_height="33dp"
         app:layout_constraintStart_toEndOf="@+id/textView4"
@@ -39,6 +41,7 @@
     <EditText
         android:id="@+id/editText6"
         style="@style/TextField"
+        android:textAlignment="textStart"
         android:layout_width="129dp"
         android:layout_height="30dp"
         app:layout_constraintStart_toStartOf="@+id/editText4"
@@ -117,6 +120,7 @@
     <EditText
         android:id="@+id/editText3"
         style="@style/TextField"
+        android:textAlignment="textStart"
         android:layout_width="353dp"
         android:layout_height="236dp"
         app:layout_constraintBottom_toTopOf="@+id/button"

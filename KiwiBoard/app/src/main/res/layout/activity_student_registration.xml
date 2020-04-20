@@ -82,6 +82,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:backgroundTint="@color/themeColor"
+                        android:drawableRight="@drawable/ic_person_icon_small"
                         android:hint="@string/text_name_hint"
                         android:inputType="textPersonName"
                         android:maxLines="1"
@@ -102,6 +103,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:backgroundTint="@color/themeColor"
+                        android:drawableRight="@drawable/ic_email_icon"
                         android:hint="@string/text_email_address_hint"
                         android:inputType="textEmailAddress"
                         android:maxLines="1"
@@ -122,6 +124,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:backgroundTint="@color/themeColor"
+                        android:drawableRight="@drawable/ic_password_key"
                         android:hint="@string/text_password"
                         android:inputType="textPassword"
                         android:maxLines="1"
@@ -166,7 +169,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/txt_profLogin"
+                    android:id="@+id/txt_profRegistration"
                     style="@style/parent"
                     android:layout_marginTop="@dimen/loginViewsMargin"
                     android:clickable="true"

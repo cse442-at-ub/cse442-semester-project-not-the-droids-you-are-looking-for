@@ -9,6 +9,7 @@ public class ProfData {
     private static String password;             // Professor's password
     private static int currentcourse = -1;           // Professor's current course
     private static int lastclickedquestion = -1;     // The most recently selected question index
+    private static int lastclickedstudent = -1;     // The most recently selected student index
     private static boolean professormode = false;      // Flag to track when professor mode is entered
     private static ArrayList<Course> courses;   // Professor's currently selected course
     private static String university;
@@ -81,6 +82,14 @@ public class ProfData {
         ProfData.lastclickedquestion = lastclickedquestion;
     }
 
+    public static int getLastclickedstudent() {
+        return lastclickedstudent;
+    }
+
+    public static void setLastclickedstudent(int lastclickedstudent) {
+        ProfData.lastclickedstudent = lastclickedstudent;
+    }
+
     public static int getCurrentcourse() {
         return currentcourse;
     }
@@ -98,22 +107,32 @@ public class ProfData {
     }
 
     // Adds a new course from an existing Course object
-    public void addCourse(Course course){
+    public static void addCourse(Course course){
         courses.add(course);
     }
 
     // Adds a new course using Course's default constructor with parameters
-    public void addNewCourse(String courseName, String instructorname, int classKey, ArrayList<Question> questions, ArrayList<Student> students){
+    public static void addNewCourse(String courseName, String instructorname, int classKey, ArrayList<Question> questions, ArrayList<Student> students){
         courses.add(new Course(courseName, instructorname, classKey, questions, students));
     }
 
+    // Set the course at the index given
+    public static void setCourse(int index, Course course){
+        courses.set(index, course);
+    }
+
+    // Set the course at the index given
+    public static Course getCourse(int index){
+        return courses.get(index);
+    }
+
     // Removes the course at the index. Indices start at 0.
-    public void removeCourse(int index){
+    public static void removeCourse(int index){
         courses.remove(index);
     }
 
     // Clears all professor data
-    public void clearAllData(){
+    public static void clearAllData(){
         name = "";
         email = "";
         password = "";
@@ -123,7 +142,7 @@ public class ProfData {
         courses = new ArrayList<Course>();
     }
 
-    public void loadSampleData(){
+    public static void loadSampleData(){
 
     }
 

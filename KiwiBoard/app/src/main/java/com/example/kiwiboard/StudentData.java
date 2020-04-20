@@ -90,17 +90,27 @@ public class StudentData {
     }
 
     // Adds a new course from an existing Course object
-    public void addCourse(Course course){
+    public static void addCourse(Course course){
         courses.add(course);
     }
 
     // Adds a new course using Course's default constructor
-    public void addNewCourse(String courseName, String instructorname, int classKey, ArrayList<Question> questions, ArrayList<Student> students){
+    public static void addNewCourse(String courseName, String instructorname, int classKey, ArrayList<Question> questions, ArrayList<Student> students){
         courses.add(new Course(courseName, instructorname, classKey, questions, students));
     }
 
+    // Set the course at the index given
+    public static void setCourse(int index, Course course){
+        courses.set(index, course);
+    }
+
+    // Set the course at the index given
+    public static Course getCourse(int index){
+        return courses.get(index);
+    }
+
     // Removes the course at the index. Indices start at 0.
-    public void removeCourse(int index){
+    public static void removeCourse(int index){
         courses.remove(index);
     }
 
@@ -113,5 +123,6 @@ public class StudentData {
         currentcourse = -1;
         lastclickedquestion = -1;
         courses = new ArrayList<Course>();
+
     }
 }

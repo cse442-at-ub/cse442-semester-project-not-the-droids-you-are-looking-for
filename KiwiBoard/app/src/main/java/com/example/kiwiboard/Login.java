@@ -21,17 +21,14 @@ public class Login extends AppCompatActivity {
     }
 
     public void forgotPW(View view){
-        this.finish();
         startActivity(new Intent(Login.this, ForgotPassword.class));
     }
 
     public void StudentRegistration(View view){
-        this.finish();
         startActivity(new Intent(Login.this, StudentRegistration.class));
     }
 
     public void ProfessorRegistration(View view){
-        this.finish();
         startActivity(new Intent(Login.this, ProfRegistration.class));
     }
 

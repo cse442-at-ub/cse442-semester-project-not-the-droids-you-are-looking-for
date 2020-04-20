@@ -32,6 +32,7 @@
     <string name="text_register">Register</string>
     <string name="text_login_prompt">Already have an account?</string>
     <string name="text_prof_login_prompt">Click here to register as a professor</string>
+    <string name="text_student_login_prompt">Click here to register as a student</string>
 
     <!-- Home -->
     <string name="active_questions">Active Questions</string>
@@ -51,7 +52,7 @@
 
     <string name="prof_multchoice_questionbox">Enter the question:</string>
     <string name="prof_multchoice_questionLabel">Enter question #:</string>
-    <string name="prof_settimer_label">Set timer (00:00):</string>
+    <string name="prof_settimer_label">01:00</string>
 
     <string name="select_multiple_answers">Select all that apply?</string>
     <string name="multchoice_total_points">Enter total points:</string>
@@ -92,8 +93,11 @@
     <string name="choice_B_label">Brandon Clarke</string>
     <string name="choice_C_label">Zach Congi</string>
     <string name="choice_D_label">Jewan Jeffries</string>
-    <string name="question_label">Question #1</string>
+    <string name="question_label">#1</string>
     <string name="create_a_question">Create a question</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- New Strings Appear Here-->
 
 
