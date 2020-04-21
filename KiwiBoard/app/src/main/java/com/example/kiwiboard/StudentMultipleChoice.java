@@ -189,6 +189,10 @@ public class StudentMultipleChoice extends AppCompatActivity {
     private void showAnswer() {
         submitButton.setClickable(false);   // don't accept anymore submissions after answer is displayed
 
+        Question question = getQuestion();
+        if(question != null) {
+            question.setActive(false);      // question is no longer active
+        }
         // student never hit submit
         // Check if any radio buttons were checked so they can still get credit if they had right answer selected
         if(submission_index == 0) {

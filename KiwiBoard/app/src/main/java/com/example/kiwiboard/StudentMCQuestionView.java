@@ -32,7 +32,6 @@ public class StudentMCQuestionView extends AppCompatActivity {
         txt_questionDescription = findViewById(R.id.studentMC_questionTextView);
         radioGroup = findViewById(R.id.studentMC_choices);
 
-
         courseIndex = StudentData.getCurrentcourse();
         currentCourse = StudentData.getCourses().get(courseIndex);
         questions = currentCourse.getQuestions();
