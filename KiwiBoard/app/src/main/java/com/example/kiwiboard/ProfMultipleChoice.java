@@ -14,6 +14,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -25,6 +26,7 @@ public class ProfMultipleChoice extends AppCompatActivity {
     private Course currentCourse;
     private int courseIndex;
     private int questionIndex;
+    private Question question;
     private ProgressBar progressBar;
     private TextView txt_timerText;
     private TextView txt_questionNumber;
@@ -36,11 +38,7 @@ public class ProfMultipleChoice extends AppCompatActivity {
     private RadioButton rb3;
     private RadioButton rb4;
     private CountDownTimer countDownTimer;
-    private long timeLeftInMillis;
-    private long backPressedTime;
-
-    //private ColorStateList textColorDefaultRb;      // to store original text color of radiobutton
-    //private ColorStateList textColor
+    private long timeLeftInMillis= 60000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +58,6 @@ public class ProfMultipleChoice extends AppCompatActivity {
         rb4 = findViewById(R.id.profmultchoice4);
         displayAnswer = findViewById(R.id.showAnswerButton);
 
-        //textColorDefaultRb = rb1.getTextColors();
         courseIndex = ProfData.getCurrentcourse();
         currentCourse = ProfData.getCourses().get(courseIndex);
         questions = currentCourse.getQuestions();
@@ -74,15 +71,21 @@ public class ProfMultipleChoice extends AppCompatActivity {
     private void displayQuestion() {
         radioGroup.clearCheck();
 
-        Question question = getQuestion();
-        answer_index = question.getMcanswer();
-        //question.get
-
+        question = getQuestion();
         if(question == null)
             return;
 
-        COUNTDOWN_IN_MILLIS = question.getTimelimit() * 1000;   // get the time limit stored in questions data
-        timeLeftInMillis = COUNTDOWN_IN_MILLIS;                 // set the timeLeft in millis
+        answer_index = question.getMcanswer();
+
+        COUNTDOWN_IN_MILLIS = question.getTimelimit() * 1000;   // get the time limit in millis
+
+        // compare the current time to time it was posted
+        // if the time difference is less than the timeLimit then there is still time Left
+        long timeDifference = System.currentTimeMillis() - question.getTimelaunched();
+        if(timeDifference > COUNTDOWN_IN_MILLIS)
+            timeLeftInMillis = 0;
+        else
+            timeLeftInMillis = COUNTDOWN_IN_MILLIS - (System.currentTimeMillis() - question.getTimelaunched());
 
         txt_questionDescription = findViewById(R.id.questionTextView);
         txt_questionDescription.setText(question.getDescription());     // set text for question description
@@ -127,47 +130,66 @@ public class ProfMultipleChoice extends AppCompatActivity {
     }
 
     private void startTimer(final Question question) {
-        countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                timeLeftInMillis = millisUntilFinished;
-                updateCountDownText();
-                // need to set the percentage for the progress bar
-                // 1. Progress Bar only had 100 different settings. 0-100 integers
-                int progress = (int) (100 * timeLeftInMillis / COUNTDOWN_IN_MILLIS);
-                progressBar.setProgress(progress);
-
-            }
-            @Override
-            public void onFinish() {
-                timeLeftInMillis = 0;
-                updateCountDownText();
-                countDownTimer.cancel();
-                progressBar.clearAnimation();
-                progressBar.setVisibility(View.INVISIBLE);
-                displayAnswer.setVisibility(View.VISIBLE);
-                displayAnswer.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // Change the correct answer's text to Green
-                        // the index of the correct answer was stored in displayQuestion
-                        if(answer_index == 0)
-                            rb1.setTextColor(Color.GREEN);
-                        else if(answer_index == 1)
-                            rb2.setTextColor(Color.GREEN);
-                        else if(answer_index == 2)
-                            rb3.setTextColor(Color.GREEN);
-                        else if(answer_index == 3)
-                            rb4.setTextColor(Color.GREEN);
+        if(timeLeftInMillis > 0) {
+            countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    if(timeLeftInMillis != 0) {
+                        timeLeftInMillis = millisUntilFinished;
+                        updateCountDownText();
+                        // need to set the percentage for the progress bar
+                        // 1. Progress Bar only had 100 different settings. 0-100 integers
+                        int progress = (int) (100 * timeLeftInMillis / COUNTDOWN_IN_MILLIS);
+                        progressBar.setProgress(progress);
                     }
-                });
-                // checkAnswer will lock in the answer selected when time runs out
-                // when coded cancel the countDownTimer inside of it
-                // checkAnswer();
-            }
-        }.start();
+                }
+                @Override
+                public void onFinish() {
+                    timeLeftInMillis = 0;
+                    updateCountDownText();
+                    countDownTimer.cancel();
+                    question.setActive(false);
+                    progressBar.clearAnimation();
+                    progressBar.setVisibility(View.INVISIBLE);
+                    displayAnswer.setVisibility(View.VISIBLE);
+                    displayAnswer.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            showAnswer();
+                        }
+                    });
+                }
+            }.start();
+        }
+        else {                          // timeLeftInMillis == 0;
+            int progress = 0;
+            updateCountDownText();
+            progressBar.setProgress(progress);
+            progressBar.setVisibility(View.INVISIBLE);
+            displayAnswer.setVisibility(View.VISIBLE);
+            displayAnswer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showAnswer();
+                }
+            });
+        }
     }
 
+    // display the correct answer to the students
+    private void showAnswer() {
+        if(answer_index == 0)
+            rb1.setTextColor(Color.GREEN);
+        else if(answer_index == 1)
+            rb2.setTextColor(Color.GREEN);
+        else if(answer_index == 2)
+            rb3.setTextColor(Color.GREEN);
+        else if(answer_index == 3)
+            rb4.setTextColor(Color.GREEN);
+
+    }
+
+    // update the countdown text for the timer
     private void updateCountDownText() {
         int minutes = (int) (timeLeftInMillis / 1000) / 60;
         int seconds = (int) (timeLeftInMillis / 1000) % 60; // only get remaining after dividing by 60

@@ -1,6 +1,7 @@
 package com.example.kiwiboard;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -35,9 +36,11 @@ public class StudentMultipleChoice extends AppCompatActivity {
     // Timer Variables
     private static final long COUNTDOWN_IN_MILLIS = 20000;
     private CountDownTimer countDownTimer;
-    private long timeLeftInMillis;
+    private long timeLeftInMillis;           // how much time is left
+    private long endTime;                    // what time does the timer run out
+    private boolean timerRunning;            // is the timer running
+    private Question question;               // the question that is clicked
     private long backPressedTime;
-    //private boolean timerRunning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,11 +65,35 @@ public class StudentMultipleChoice extends AppCompatActivity {
         choices = questions.get(courseIndex).getChoices();
         progressBar.setVisibility(View.VISIBLE);
         displayQuestion();
+
+        // if the student has already entered a submission
+        if(question.getSubmissionEntered()) {
+            // click the answer they submitted
+            int submission_id = question.getMcresponse();
+            if(submission_id == 1) {
+                rb1.setChecked(true);
+            }
+            else if(submission_id == 2) {
+                rb2.setChecked(true);
+            }
+            else if(submission_id == 3) {
+                rb3.setChecked(true);
+            }
+            else if(submission_id == 4) {
+                rb4.setChecked(true);
+            }
+        }
+
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(rb1.isChecked()||rb2.isChecked()||rb3.isChecked()||rb4.isChecked()) {
+                    question.setSubmissionEntered(true);
                     submission_index = storeSubmission();
+                    question = getQuestion();
+                    if(question != null) {
+                        question.setMcresponse(submission_index);         // the students mcresponse is their submission index
+                    }
                     Toast.makeText(getApplicationContext(), "Submitted Choice " + submission_index,
                             Toast.LENGTH_SHORT).show();
                 }
@@ -102,7 +129,8 @@ public class StudentMultipleChoice extends AppCompatActivity {
     private void displayQuestion() {
         radioGroup.clearCheck();
 
-        Question question = getQuestion();
+        //question.setActive(true);
+        question = getQuestion();
         answer_index = question.getMcanswer();
         if(question == null) {
             return;
@@ -131,6 +159,7 @@ public class StudentMultipleChoice extends AppCompatActivity {
     }
 
     private void startTimer() {
+        //endTime = System.currentTimeMillis() + timeLeftInMillis;
         countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -143,6 +172,7 @@ public class StudentMultipleChoice extends AppCompatActivity {
             }
             @Override
             public void onFinish() {
+                //timerRunning = false;
                 timeLeftInMillis = 0;
                 updateCountDownText();
                 countDownTimer.cancel();
@@ -152,7 +182,10 @@ public class StudentMultipleChoice extends AppCompatActivity {
                 // if student clicked a different one make the text
                 showAnswer();
             }
+
         }.start();
+
+        timerRunning = true;
     }
 
     private void updateCountDownText() {
@@ -167,9 +200,8 @@ public class StudentMultipleChoice extends AppCompatActivity {
         }
     }
 
+    // return the id of the clicked radio button.
     private int storeSubmission() {
-        // one of them was clicked;
-        // return the id of the clicked radio button.
         int radioID = 0;
         if(rb1.isChecked()) {
             radioID = 1;
@@ -187,9 +219,19 @@ public class StudentMultipleChoice extends AppCompatActivity {
     }
 
     private void showAnswer() {
-        submitButton.setClickable(false);   // don't accept anymore submissions after answer is displayed
-
-        Question question = getQuestion();
+        // don't accept anymore submissions after answer is displayed
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(submission_index == 0) {
+                    Toast.makeText(getApplicationContext(), "Time's up! Submit before timer runs out!",
+                            Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    submitButton.setClickable(false);
+                }
+            }
+        });
         if(question != null) {
             question.setActive(false);      // question is no longer active
         }

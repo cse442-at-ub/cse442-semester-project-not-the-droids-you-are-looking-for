@@ -1,6 +1,7 @@
 package com.example.kiwiboard;
 
 import java.lang.invoke.MutableCallSite;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -19,7 +20,8 @@ class Question {
     private int questionnumber;                 // The index of the question
     private boolean inQueue = false;            // Whether the question is in the queue
     private boolean isActive = false;           // Whether the question is active
-    private int timelaunched = 0;               // Exact time when the question was launched
+    private boolean submissionEntered = false;  // Did the student enter a submission for the question yet
+    private long timelaunched = 0;               // Exact time when the question was launched
     private int timelimit = 0;                  // Amount of time the question lasts
 
     private double pointsreceived;               // Points received by student. Null for professors.
@@ -138,6 +140,12 @@ class Question {
         isActive = active;
     }
 
+    // was a submission entered for the question
+    public boolean getSubmissionEntered() { return submissionEntered; }
+
+    // set submission entered to true or false
+    public void setSubmissionEntered(boolean submitted) { submissionEntered = submitted; }
+
     // Get the number of points received by the student
     public double getPointsreceived() {
         return pointsreceived;
@@ -236,11 +244,13 @@ class Question {
         this.multipleresponses = multipleresponses;
     }
 
-    public int getTimelaunched() {
+    // get the time it was launched in millis
+    public long getTimelaunched() {
         return timelaunched;
     }
 
-    public void setTimelaunched(int timelaunched) {
+    // set the time it was launched in millis (System.currentTimeinMillis)
+    public void setTimelaunched(long timelaunched) {
         this.timelaunched = timelaunched;
     }
 
