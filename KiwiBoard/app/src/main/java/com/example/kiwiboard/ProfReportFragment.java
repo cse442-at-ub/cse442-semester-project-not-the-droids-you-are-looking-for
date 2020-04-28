@@ -15,6 +15,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class ProfReportFragment extends Fragment {
@@ -39,7 +40,8 @@ public class ProfReportFragment extends Fragment {
         // Class Average
         TextView avgTotal=(TextView)rootView.findViewById(R.id.txtProfClassavg);
         double Classaverage=currentcourse.calculateClassAverage();
-        avgTotal.setText(Classaverage+"%");
+        DecimalFormat dec = new DecimalFormat("#0.00");
+        avgTotal.setText(dec.format(Classaverage) + " % ");
         ProgressBar avgProgress=(ProgressBar) rootView.findViewById(R.id.prgProfClassavg);
         avgProgress.setProgress((int)Classaverage);
 
