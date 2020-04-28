@@ -7,144 +7,116 @@
     android:background="#2F4F4F"
     tools:context=".AddCourseFragment">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="95dp"
-        android:layout_height="52dp"
-        android:background="@drawable/ic_rectangle"
-        android:text="Enroll"
-        android:textSize="18sp"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview_addCourse"
+        android:layout_width="393dp"
+        android:layout_height="219dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="131dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="343dp"
+        android:translationY="20dp"
+        app:cardBackgroundColor="@color/White"
+        app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
-
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="385dp"
-        android:layout_height="554dp"
-        android:onClick="switch_to_main"
-        android:padding="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
+        app:layout_constraintTop_toBottomOf="@+id/AddClass">
 
         <LinearLayout
+            android:id="@+id/card_linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="177dp"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:textAlignment="center">
 
-            android:orientation="vertical">
-
-            <Switch
-                android:id="@+id/list_switch1"
+            <TextView
+                android:id="@+id/askCode"
                 android:layout_width="match_parent"
-                android:layout_height="79dp"
-                android:background="@drawable/ic_rounded_corners"
-                android:text="CSE 489:Modern Networking"
-
+                android:layout_height="43dp"
+                android:text="Please enter your class' 4 digit Course Code"
                 android:textAlignment="center"
-                android:textSize="24dp" />
+                android:textColor="@color/Black"
+                android:textSize="15sp" />
 
-            <Switch
-                android:id="@+id/list_switch2"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txt_nameInput"
+                style="@style/parent" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txt_emailAddress"
+                style="@style/parent" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txt_password"
+                style="@style/parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edit_txt_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@color/themeColor"
+                    android:drawableRight="@drawable/ic_password_key"
+                    android:hint="Code"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.503"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.413" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <RelativeLayout
+                android:id="@+id/addClassRelativeLayout"
                 android:layout_width="match_parent"
-                android:layout_height="79dp"
-                android:background="@drawable/ic_rounded_corners"
-                android:text="EAS 360:STEM Commucation"
-                android:textAlignment="center"
-                android:textSize="24dp" />
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/loginViewsMargin"
+                android:background="@color/White"
+                android:paddingTop="0dp">
 
-            <Switch
-                android:id="@+id/list_switch3"
-                android:layout_width="match_parent"
-                android:layout_height="79dp"
-                android:background="@drawable/ic_rounded_corners"
-                android:text="STA 301:Intro to Probability"
-                android:textAlignment="center"
-                android:textSize="24dp" />
+                <Button
+                    android:id="@+id/enroll_button"
+                    android:layout_width="143dp"
+                    android:layout_height="37dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/rounded_button"
+                    android:text="Enroll"
+                    android:textColor="@color/White"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
 
-            <Switch
-                android:id="@+id/list_switch4"
-                android:layout_width="match_parent"
-                android:layout_height="79dp"
-                android:background="@drawable/ic_rounded_corners"
-                android:text="CSE 442: Software Enginnering"
-                android:textAlignment="center"
-                android:textSize="24dp" />
-
-            <Switch
-                android:id="@+id/list_switch5"
-                android:layout_width="match_parent"
-                android:layout_height="79dp"
-                android:background="@drawable/ic_rounded_corners"
-                android:text="CSE 379: Intro to Mircoprocessors"
-                android:textAlignment="center"
-                android:textSize="24dp" />
-
-            <Switch
-                android:id="@+id/list_switch6"
-                android:layout_width="match_parent"
-                android:layout_height="79dp"
-                android:background="@drawable/ic_rounded_corners"
-                android:text="CSE 473:Computer Vision"
-                android:textAlignment="center"
-                android:textSize="24dp" />
-
-            <Switch
-                android:id="@+id/list_switch7"
-                android:layout_width="match_parent"
-                android:layout_height="79dp"
-                android:background="@drawable/ic_rounded_corners"
-                android:text="CSE 421: Operating Systems"
-                android:textAlignment="center"
-                android:textSize="24dp" />
-
-            <Switch
-                android:id="@+id/list_switch8"
-                android:layout_width="match_parent"
-                android:layout_height="79dp"
-                android:background="@drawable/ic_rounded_corners"
-                android:text="CSE 331: Intro Algorithms design"
-                android:textAlignment="center"
-                android:textSize="24dp" />
-
-            <Switch
-                android:id="@+id/list_switch9"
-                android:layout_width="match_parent"
-                android:layout_height="79dp"
-                android:background="@drawable/ic_rounded_corners"
-                android:text="CSE 220:Systems Programming"
-                android:textAlignment="center"
-                android:textSize="24dp" />
-
+            </RelativeLayout>
 
         </LinearLayout>
-    </ScrollView>
+    </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="227dp"
-        android:layout_height="107dp"
-        android:background="@drawable/ic_rounded_corners"
-        android:text="Available Courses"
-        android:textAlignment="center"
+        android:id="@+id/AddClass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="162dp"
+        android:fontFamily="sans-serif-medium"
         android:padding="10dp"
-        android:textColor="#2F4F4F"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        android:text="Add Class"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:textSize="42sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="left"
-        tools:layout_editor_absoluteX="432dp" />
+    <!--    <androidx.constraintlayout.widget.Barrier-->
+    <!--        android:id="@+id/barrier"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:barrierDirection="left"-->
+    <!--        tools:layout_editor_absoluteX="432dp" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
