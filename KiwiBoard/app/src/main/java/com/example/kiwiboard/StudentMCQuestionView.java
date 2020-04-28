@@ -81,7 +81,7 @@ public class StudentMCQuestionView extends AppCompatActivity {
             // populate the choices into the radio button texts
             for (i = 0; i < 4; i++){
 
-                if(i == answer_index) {
+                if(i == question.getMcresponse()) {
                     rblist[i].setTextColor(Color.GREEN);
                     rblist[i].setChecked(true);
                 }
@@ -90,6 +90,7 @@ public class StudentMCQuestionView extends AppCompatActivity {
              else
                  rblist[i].setVisibility(View.GONE);
             }
+            ((TextView) findViewById(R.id.studentMC_correctTXT)).setText(question.getChoices().get(answer_index));
 //            rb1.setText(choice1);       // rb1 is choices [0]
 //            rb2.setText(choice2);       // rb2 is choices [1]
 //            rb3.setText(choice3);       // rb3 is choices [2]
