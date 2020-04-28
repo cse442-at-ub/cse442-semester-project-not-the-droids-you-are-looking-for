@@ -14,6 +14,7 @@ public class StudentSAQuestionView extends AppCompatActivity {
     private TextView description;
     private Question question;
     private Toolbar toolbar;
+    private TextView getAnswer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +40,8 @@ public class StudentSAQuestionView extends AppCompatActivity {
 
         description = (TextView) findViewById(R.id.Stud_SA_Quest_View_Desp_TXT);
         description.setText(question.getDescription());
+        getAnswer = (TextView) findViewById(R.id.stud_SA_Quest_View_Answer_CorrectTXT);
+        getAnswer.setText( question.getTextanswer());
     }
     private Question getQuestion(){
         int courseindex = StudentData.getCurrentcourse();
