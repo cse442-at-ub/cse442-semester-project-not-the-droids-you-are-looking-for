@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -83,6 +84,10 @@ public class CreateMultipleChoice extends AppCompatActivity {
     public void submit(View view) {
         String description = txtDesc.getText().toString();
         String textpoints = txtpts.getText().toString();
+        if (description.equals("")){
+            Toast.makeText(this, "Enter a description", Toast.LENGTH_SHORT).show();
+            return;
+        }
         double points;
         if (isDouble(textpoints)){
             points = Double.parseDouble(textpoints);
@@ -118,6 +123,8 @@ public class CreateMultipleChoice extends AppCompatActivity {
         question.setInQueue(true);
 
         course.addQueueQuestion(question);
+        ProfData.setCourse(cindex, course);
+
         Toast.makeText(this, "Question added to queue", Toast.LENGTH_SHORT).show();
         finish();
     }
@@ -146,18 +153,29 @@ public class CreateMultipleChoice extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        View decorView = getWindow().getDecorView();
-        // Hide the status bar.
-        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
-        decorView.setSystemUiVisibility(uiOptions);
+    public int getStatusBarHeight() {
+        int result = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
 
+    private void setMargins (View view, int left, int top, int right, int bottom) {
+        if (view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            p.setMargins(left, top, right, bottom);
+            view.requestLayout();
+        }
     }
 
     public void setToolbar(String title){
         Toolbar toolbar = (Toolbar) findViewById(R.id.profMultChoice_toolbar);
+
+        ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) toolbar.getLayoutParams();
+        params.topMargin = getStatusBarHeight();
+
         toolbar.setTitle(title);
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_back));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {

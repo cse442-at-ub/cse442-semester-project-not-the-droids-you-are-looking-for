@@ -11,6 +11,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -192,7 +193,8 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
     public void launchQuestion(int minutes, int seconds) {
         int cindex = ProfData.getCurrentcourse();          // Get the current course index
         Course course = ProfData.getCourse(cindex);        // Get the current course
-        int qindex = ProfData.getLastclickedquestion();    // Get the last clicked question index
+        int qindex = ProfData.getLastclickedquestion();    // Get the last clicked question index\
+        Log.i("QUESTION", "Launching Q" + qindex + " from queue");
         Question question = course.getQueueQuestion(qindex);    // Get the last clicked question
 
         course.removeQueueQuestion(qindex);   // Remove the question from the queue

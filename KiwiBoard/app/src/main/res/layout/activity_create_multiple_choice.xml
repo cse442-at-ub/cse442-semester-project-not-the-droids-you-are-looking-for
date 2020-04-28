@@ -26,7 +26,7 @@
 
         <LinearLayout
             android:id="@+id/linearLayout20"
-            android:layout_width="390dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             tools:layout_editor_absoluteX="1dp"
@@ -34,8 +34,8 @@
 
             <TextView
                 android:id="@+id/profQuestionBoxLabel"
-                android:layout_width="88dp"
-                android:layout_height="35dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="@color/themeColor"
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="@string/question_box_label"
@@ -50,7 +50,8 @@
                 android:ems="10"
                 android:gravity="start|top"
                 android:hint="@string/prof_multchoice_questionbox"
-                android:inputType="textMultiLine" />
+                android:inputType="textMultiLine"
+                android:padding="2dp" />
 
             <LinearLayout
                 android:id="@+id/linearLayout8"
@@ -60,9 +61,11 @@
 
                 <TextView
                     android:id="@+id/totalPointsLabel"
-                    android:layout_width="61dp"
-                    android:layout_height="37dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
                     android:fontFamily="sans-serif-condensed-medium"
                     android:gravity="center"
                     android:text="@string/points_label"
@@ -75,6 +78,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
                     android:background="@color/White"
                     android:hint="Total"
                     android:inputType="numberDecimal"
@@ -191,9 +196,9 @@
 
             <Button
                 android:id="@+id/btnaddchoice"
-                android:layout_width="match_parent"
+                android:layout_width="188dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
+                android:layout_gravity="bottom|center"
                 android:layout_marginTop="3dp"
                 android:background="@android:drawable/edit_text"
                 android:onClick="newChoice"
