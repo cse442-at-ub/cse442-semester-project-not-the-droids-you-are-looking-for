@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
@@ -84,40 +85,82 @@
 
             <RadioButton
                 android:id="@+id/studentMC_multchoice1"
-                android:clickable="false"
                 android:layout_width="fill_parent"
                 android:layout_height="50dp"
+                android:clickable="false"
                 android:text="@string/choice_A_label"
                 android:textColor="@color/White"
                 android:textSize="22sp" />
 
             <RadioButton
                 android:id="@+id/studentMC_multchoice2"
-                android:clickable="false"
                 android:layout_width="fill_parent"
                 android:layout_height="50dp"
+                android:clickable="false"
                 android:text="@string/choice_B_label"
                 android:textColor="@color/White"
                 android:textSize="22sp" />
 
             <RadioButton
                 android:id="@+id/studentMC_multchoice3"
-                android:clickable="false"
                 android:layout_width="fill_parent"
                 android:layout_height="50dp"
+                android:clickable="false"
                 android:text="@string/choice_C_label"
                 android:textColor="@color/White"
                 android:textSize="22sp" />
 
             <RadioButton
                 android:id="@+id/studentMC_multchoice4"
-                android:clickable="false"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:clickable="false"
                 android:text="@string/choice_D_label"
                 android:textColor="@color/White"
                 android:textSize="22sp" />
         </RadioGroup>
+
+        <LinearLayout
+            android:id="@+id/linearLayout9"
+            android:layout_width="381dp"
+            android:layout_height="188dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/studentMC_choices">
+
+            <TextView
+                android:id="@+id/studentMC_correct"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:text="Corrent Answer"
+                android:textAlignment="center"
+                android:textColor="@color/White"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/studentMC_correctTXT"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/ic_check_white_24dp"
+                android:text="@string/choice_C_label"
+
+                android:textColor="@color/White"
+                android:textSize="25sp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="409dp"
+            android:layout_height="12dp"
+            android:background="@color/White"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/studentMC_choices" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

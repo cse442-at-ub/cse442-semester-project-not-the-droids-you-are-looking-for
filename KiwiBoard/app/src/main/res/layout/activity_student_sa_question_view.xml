@@ -27,37 +27,21 @@
 
         <ImageView
             android:id="@+id/Stud_SA_Quest_Logo"
-            android:layout_width="204dp"
-            android:layout_height="107dp"
+            android:layout_width="231dp"
+            android:layout_height="137dp"
+
 
             android:paddingTop="10dp"
-
-
             app:layout_constraintBottom_toTopOf="@+id/linearLayout10"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/Stud_SA_Quest_Title"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/kiwi_rectangular" />
 
-        <TextView
-            android:id="@+id/Stud_SA_Quest_Title"
-            android:layout_width="196dp"
-            android:layout_height="76dp"
-            android:text="Question View"
-            android:textAlignment="center"
-            android:textColor="@color/White"
-            android:textSize="28sp"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout10"
-            app:layout_constraintEnd_toStartOf="@+id/Stud_SA_Quest_Logo"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.712" />
-
         <LinearLayout
             android:id="@+id/linearLayout10"
-            android:layout_width="399dp"
+            android:layout_width="match_parent"
             android:layout_height="459dp"
             android:orientation="vertical"
             android:padding="20dp"
@@ -104,8 +88,8 @@
 
             <TextView
                 android:id="@+id/Stud_SA_Quest_View_Answer_TXT"
-                android:layout_width="361dp"
-                android:layout_height="158dp"
+                android:layout_width="match_parent"
+                android:layout_height="176dp"
                 android:background="@drawable/shape_rounded_white_rect"
                 android:padding="25sp"
                 android:text="Android"
