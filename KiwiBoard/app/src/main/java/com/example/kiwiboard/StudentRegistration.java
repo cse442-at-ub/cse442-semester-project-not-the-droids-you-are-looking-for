@@ -100,5 +100,6 @@ public class StudentRegistration extends AppCompatActivity {
         StudentData.setName(name);
         StudentData.setEmail(email);
         StudentData.setPassword(password);
+        Server.createUser(name, email, password);
     }
 }
