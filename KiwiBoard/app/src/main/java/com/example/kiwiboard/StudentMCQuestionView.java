@@ -15,9 +15,14 @@ public class StudentMCQuestionView extends AppCompatActivity {
     private Course currentCourse;
     private int courseIndex;
     private int questionIndex;
+    private Question question;
     private TextView txt_questionNumber;
     private TextView txt_questionDescription;
     private RadioGroup radioGroup;
+    private RadioButton rb1;
+    private RadioButton rb2;
+    private RadioButton rb3;
+    private RadioButton rb4;
     private ArrayList<String> choices;
 
     @Override
@@ -31,12 +36,34 @@ public class StudentMCQuestionView extends AppCompatActivity {
         txt_questionNumber = findViewById(R.id.studentMC_questionNumber);
         txt_questionDescription = findViewById(R.id.studentMC_questionTextView);
         radioGroup = findViewById(R.id.studentMC_choices);
+        rb1 = findViewById(R.id.studentMC_multchoice1);
+        rb2 = findViewById(R.id.studentMC_multchoice2);
+        rb3 = findViewById(R.id.studentMC_multchoice3);
+        rb4 = findViewById(R.id.studentMC_multchoice4);
 
         courseIndex = StudentData.getCurrentcourse();
         currentCourse = StudentData.getCourses().get(courseIndex);
         questions = currentCourse.getQuestions();
         choices = questions.get(courseIndex).getChoices();
         displayQuestion();
+
+        if(question.getSubmissionEntered()) {
+            int submission_id = question.getMcresponse();
+            if(submission_id != question.getMcanswer()) {
+                if(submission_id == 1) {
+                    rb1.setTextColor(Color.RED);
+                }
+                else if(submission_id == 2) {
+                    rb2.setTextColor(Color.RED);
+                }
+                else if(submission_id == 3) {
+                    rb3.setTextColor(Color.RED);
+                }
+                else if(submission_id == 4) {
+                    rb4.setTextColor(Color.RED);
+                }
+            }
+        }
     }
 
 
@@ -57,7 +84,7 @@ public class StudentMCQuestionView extends AppCompatActivity {
     private void displayQuestion() {
         radioGroup.clearCheck();
 
-        Question question = getQuestion();
+        question = getQuestion();
         if(question == null) {
             return;
         }
