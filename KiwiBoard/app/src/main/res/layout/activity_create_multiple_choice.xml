@@ -45,7 +45,7 @@
             <EditText
                 android:id="@+id/txtprofQuestionInputBox"
                 android:layout_width="match_parent"
-                android:layout_height="209dp"
+                android:layout_height="190dp"
                 android:background="@color/White"
                 android:ems="10"
                 android:gravity="start|top"
@@ -94,6 +94,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -151,60 +152,157 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layoutDirection="rtl"
+                    android:orientation="horizontal">
 
-                    <EditText
-                        android:id="@+id/txtChoice1"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginEnd="5dp"
-                        android:ems="10"
-                        android:inputType="textPersonName" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-                    <EditText
-                        android:id="@+id/txtChoice2"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginEnd="5dp"
-                        android:ems="10"
-                        android:inputType="textPersonName" />
+                        <ImageButton
+                            android:id="@+id/btnremovechoice1"
+                            android:layout_width="40dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginEnd="0dp"
+                            android:layout_marginBottom="8dp"
+                            android:background="@drawable/close_cut_corners"
+                            android:fitsSystemWindows="false"
+                            android:onClick="deleteChoice1"
+                            android:padding="4dp"
+                            android:scaleType="centerInside"
+                            app:srcCompat="@drawable/trash" />
 
-                    <EditText
-                        android:id="@+id/txtChoice3"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginEnd="5dp"
-                        android:ems="10"
-                        android:inputType="textPersonName" />
+                        <ImageButton
+                            android:id="@+id/btnremovechoice2"
+                            android:layout_width="40dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginBottom="8dp"
+                            android:background="@drawable/close_cut_corners"
+                            android:fitsSystemWindows="false"
+                            android:onClick="deleteChoice2"
+                            android:padding="4dp"
+                            android:scaleType="centerInside"
+                            app:srcCompat="@drawable/trash" />
 
-                    <EditText
-                        android:id="@+id/txtChoice4"
+                        <ImageButton
+                            android:id="@+id/btnremovechoice3"
+                            android:layout_width="40dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginBottom="8dp"
+                            android:background="@drawable/close_cut_corners"
+                            android:fitsSystemWindows="false"
+                            android:onClick="deleteChoice3"
+                            android:padding="4dp"
+                            android:scaleType="centerInside"
+                            app:srcCompat="@drawable/trash" />
+
+                        <ImageButton
+                            android:id="@+id/btnremovechoice4"
+                            android:layout_width="40dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginBottom="8dp"
+                            android:background="@drawable/close_cut_corners"
+                            android:fitsSystemWindows="false"
+                            android:onClick="deleteChoice4"
+                            android:padding="4dp"
+                            android:scaleType="centerInside"
+                            app:srcCompat="@drawable/trash" />
+
+                        <ImageButton
+                            android:id="@+id/btnremovechoice5"
+                            android:layout_width="40dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginBottom="8dp"
+                            android:background="@drawable/close_cut_corners"
+                            android:fitsSystemWindows="false"
+                            android:onClick="deleteChoice5"
+                            android:padding="4dp"
+                            android:scaleType="centerInside"
+                            app:srcCompat="@drawable/trash" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginEnd="5dp"
-                        android:ems="10"
-                        android:inputType="textPersonName" />
-                    <EditText
-                        android:id="@+id/txtChoice5"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginEnd="5dp"
-                        android:ems="10"
-                        android:inputType="textPersonName" />
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/txtChoice1"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:ems="10"
+                            android:inputType="textPersonName"
+                            android:layoutDirection="ltr"
+                            android:textDirection="ltr" />
+
+                        <EditText
+                            android:id="@+id/txtChoice2"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:ems="10"
+                            android:inputType="textPersonName"
+                            android:layoutDirection="ltr"
+                            android:textDirection="ltr" />
+
+                        <EditText
+                            android:id="@+id/txtChoice3"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:ems="10"
+                            android:inputType="textPersonName"
+                            android:layoutDirection="ltr"
+                            android:textDirection="ltr" />
+
+                        <EditText
+                            android:id="@+id/txtChoice4"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:ems="10"
+                            android:inputType="textPersonName"
+                            android:layoutDirection="ltr"
+                            android:textDirection="ltr" />
+
+                        <EditText
+                            android:id="@+id/txtChoice5"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:ems="10"
+                            android:inputType="textPersonName"
+                            android:layoutDirection="ltr"
+                            android:textDirection="ltr" />
+                    </LinearLayout>
+
                 </LinearLayout>
+
             </LinearLayout>
 
-            <Button
-                android:id="@+id/btnaddchoice"
-                android:layout_width="188dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center"
-                android:layout_marginTop="3dp"
-                android:background="@android:drawable/edit_text"
-                android:onClick="newChoice"
-                android:text="New choice"
-                android:textColor="@color/Black"
-                tools:layout_editor_absoluteX="304dp" />
+            <LinearLayout
+                android:id="@+id/oldbtnaddchoice"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnaddchoice"
+                    android:layout_width="190dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginBottom="7dp"
+                    android:background="@drawable/close_cut_corners"
+                    android:fitsSystemWindows="false"
+                    android:onClick="newChoice"
+                    android:padding="4dp"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/plus" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
 
@@ -225,6 +323,7 @@
                 android:textColor="@color/Black"
                 tools:layout_editor_absoluteX="304dp"
                 tools:layout_editor_absoluteY="708dp" />
+
         </FrameLayout>
 
     </LinearLayout>

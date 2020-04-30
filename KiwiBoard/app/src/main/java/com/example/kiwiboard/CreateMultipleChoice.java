@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -17,7 +18,8 @@ public class CreateMultipleChoice extends AppCompatActivity {
 
     private int choicenum = 2;
     private RadioButton[] rb;
-    private Button addButton;
+    private ImageButton addButton;
+    private ImageButton[] del;
     private EditText[] mc;
     private EditText txtDesc, txtpts;
 
@@ -48,7 +50,14 @@ public class CreateMultipleChoice extends AppCompatActivity {
         mc[3] = (EditText) findViewById(R.id.txtChoice4);
         mc[4] = (EditText) findViewById(R.id.txtChoice5);
 
-        addButton = (Button) findViewById(R.id.btnaddchoice);
+        addButton = (ImageButton) findViewById(R.id.btnaddchoice);
+
+        del = new ImageButton[5];
+        del[0] = (ImageButton) findViewById(R.id.btnremovechoice1);
+        del[1] = (ImageButton) findViewById(R.id.btnremovechoice2);
+        del[2] = (ImageButton) findViewById(R.id.btnremovechoice3);
+        del[3] = (ImageButton) findViewById(R.id.btnremovechoice4);
+        del[4] = (ImageButton) findViewById(R.id.btnremovechoice5);
 
         // Hide rbs 3 through 5 by default
         updateVisibilities();
@@ -61,11 +70,23 @@ public class CreateMultipleChoice extends AppCompatActivity {
       // Show 1 - choicenum
         for (int i = 0; i < choicenum; i++){
             rb[i].setVisibility(View.VISIBLE);
+            mc[i].setVisibility(View.VISIBLE);
+            if (choicenum > 2)
+                del[i].setVisibility(View.VISIBLE);
+        }
+
+
+        if (choicenum < 3){
+            del[0].setVisibility(View.GONE);
+        del[1].setVisibility(View.GONE);
         }
 
       // Hide choicenum+1 - 5
         for (int i = choicenum; i < 5; i++){
             rb[i].setVisibility(View.GONE);
+            mc[i].setVisibility(View.GONE);
+            if (choicenum < 3)
+                del[i].setVisibility(View.GONE);
         }
 
         if (choicenum < 5){
@@ -77,8 +98,95 @@ public class CreateMultipleChoice extends AppCompatActivity {
     }
 
     public void newChoice(View view) {
-        choicenum += 1;
-        updateVisibilities();
+        boolean filled = true;
+        for (int i = 0; i < choicenum; i++){
+            if (mc[i].getText().toString().equals("")){
+                filled = false;
+            }
+        }
+        if (!filled){
+            Toast.makeText(this, "Fill out existing choices first", Toast.LENGTH_SHORT).show();
+        } else {
+            choicenum += 1;
+            updateVisibilities();
+        }
+    }
+
+    public void deleteChoice1(View view) {
+        if (choicenum > 2){
+            for(int i = 1; i < choicenum; i++){
+                rb[i - 1].setChecked(rb[i].isChecked());
+                mc[i - 1].setText(mc[i].getText().toString());
+            }
+                mc[choicenum - 1].setText("");
+                if(rb[choicenum - 1].isChecked()){
+                    rb[choicenum - 1].setChecked(false);
+                }
+                choicenum -= 1;
+                updateVisibilities();
+        } else{
+            Toast.makeText(this, "You must have at least 2 choices", Toast.LENGTH_SHORT).show();
+        }
+    }
+    public void deleteChoice2(View view) {
+        if (choicenum > 2){
+            for(int i = 2; i < choicenum; i++){
+                rb[i - 1].setChecked(rb[i].isChecked());
+                mc[i - 1].setText(mc[i].getText().toString());
+            }
+                mc[choicenum - 1].setText("");
+                if(rb[choicenum - 1].isChecked()){
+                    rb[choicenum - 1].setChecked(false);
+                }
+                choicenum -= 1;
+                updateVisibilities();
+        } else{
+            Toast.makeText(this, "You must have at least 2 choices", Toast.LENGTH_SHORT).show();
+        }
+    }
+    public void deleteChoice3(View view) {
+        if (choicenum > 2){
+            for(int i = 3; i < choicenum; i++){
+                rb[i - 1].setChecked(rb[i].isChecked());
+                mc[i - 1].setText(mc[i].getText().toString());
+            }
+                mc[choicenum - 1].setText("");
+                if(rb[choicenum - 1].isChecked()){
+                    rb[choicenum - 1].setChecked(false);
+                }
+                choicenum -= 1;
+                updateVisibilities();
+        } else{
+            Toast.makeText(this, "You must have at least 2 choices", Toast.LENGTH_SHORT).show();
+        }
+    }
+    public void deleteChoice4(View view) {
+        if (choicenum > 2){
+            for(int i = 4; i < choicenum; i++) {
+                rb[i - 1].setChecked(rb[i].isChecked());
+                mc[i - 1].setText(mc[i].getText().toString());
+            }
+                mc[choicenum - 1].setText("");
+                if(rb[choicenum - 1].isChecked()){
+                    rb[choicenum - 1].setChecked(false);
+                }
+                choicenum -= 1;
+                updateVisibilities();
+        } else{
+            Toast.makeText(this, "You must have at least 2 choices", Toast.LENGTH_SHORT).show();
+        }
+    }
+    public void deleteChoice5(View view) {
+        if (choicenum > 2){
+                mc[choicenum - 1].setText("");
+                if(rb[choicenum - 1].isChecked()){
+                    rb[choicenum - 1].setChecked(false);
+                }
+                choicenum -= 1;
+                updateVisibilities();
+        } else{
+            Toast.makeText(this, "You must have at least 2 choices", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void submit(View view) {
@@ -109,6 +217,18 @@ public class CreateMultipleChoice extends AppCompatActivity {
             Toast.makeText(this, "Select an answer", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        boolean filled = true;
+        for (int i = 0; i < choicenum; i++){
+            if (mc[i].getText().toString().equals("")){
+                filled = false;
+            }
+        }
+        if (!filled){
+            Toast.makeText(this, "The answer field is empty", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if (cindex < 0){
             Toast.makeText(this, "You must first select a course!", Toast.LENGTH_SHORT).show();
             return;
