@@ -9,10 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".IndividualGrades"></activity>
+        <activity android:name=".StudentSAQuestionView"></activity>
+        <activity android:name=".IndividualGrades" />
         <activity android:name=".ProfMCQuestionView" />
-        <activity android:name=".ProfSAQuestionView"></activity>
-        <activity android:name=".StudentMCQuestionView"></activity>
+        <activity android:name=".ProfSAQuestionView" />
+        <activity android:name=".StudentMCQuestionView" />
         <activity android:name=".ProfMultipleChoice" />
         <activity android:name=".StudentRegistration" />
         <activity android:name=".ResetPassword" />

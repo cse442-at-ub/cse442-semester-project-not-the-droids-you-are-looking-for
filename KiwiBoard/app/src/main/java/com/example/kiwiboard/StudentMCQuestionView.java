@@ -71,31 +71,40 @@ public class StudentMCQuestionView extends AppCompatActivity {
             choices = questions.get(question.getQuestionnumber() - 1).getChoices();
             int answer_index = question.getMcanswer();
 
-            RadioButton rb1 = findViewById(R.id.studentMC_multchoice1);
-            RadioButton rb2 = findViewById(R.id.studentMC_multchoice2);
-            RadioButton rb3 = findViewById(R.id.studentMC_multchoice3);
-            RadioButton rb4 = findViewById(R.id.studentMC_multchoice4);
+            RadioButton rblist[] = new RadioButton[4];
+            rblist[0] = findViewById(R.id.studentMC_multchoice1);
+            rblist[1] = findViewById(R.id.studentMC_multchoice2);
+            rblist[2] = findViewById(R.id.studentMC_multchoice3);
+            rblist[3] = findViewById(R.id.studentMC_multchoice4);
 
+            int i = 0;
             // populate the choices into the radio button texts
-            String choice1 = choices.get(0);
-            String choice2 = choices.get(1);
-            String choice3 = choices.get(2);
-            String choice4 = choices.get(3);
+            for (i = 0; i < 4; i++){
 
-            rb1.setText(choice1);       // rb1 is choices [0]
-            rb2.setText(choice2);       // rb2 is choices [1]
-            rb3.setText(choice3);       // rb3 is choices [2]
-            rb4.setText(choice4);       // rb4 is choices [3]
-
-            // display the correct answer to the student
-            if(answer_index == 0)
-                rb1.setTextColor(Color.GREEN);
-            else if(answer_index == 1)
-                rb2.setTextColor(Color.GREEN);
-            else if(answer_index == 2)
-                rb3.setTextColor(Color.GREEN);
-            else if(answer_index == 3)
-                rb4.setTextColor(Color.GREEN);
+                if(i == question.getMcresponse()) {
+                    rblist[i].setTextColor(Color.GREEN);
+                    rblist[i].setChecked(true);
+                }
+              if(i < choices.size())
+                rblist[i].setText(choices.get(i));
+             else
+                 rblist[i].setVisibility(View.GONE);
+            }
+            ((TextView) findViewById(R.id.studentMC_correctTXT)).setText(question.getChoices().get(answer_index));
+//            rb1.setText(choice1);       // rb1 is choices [0]
+//            rb2.setText(choice2);       // rb2 is choices [1]
+//            rb3.setText(choice3);       // rb3 is choices [2]
+//            rb4.setText(choice4);       // rb4 is choices [3]
+//
+//            // display the correct answer to the student
+//            if(answer_index == 0)
+//                rb1.setTextColor(Color.GREEN);
+//            else if(answer_index == 1)
+//                rb2.setTextColor(Color.GREEN);
+//            else if(answer_index == 2)
+//                rb3.setTextColor(Color.GREEN);
+//            else if(answer_index == 3)
+//                rb4.setTextColor(Color.GREEN);
         }
     }
     @Override
