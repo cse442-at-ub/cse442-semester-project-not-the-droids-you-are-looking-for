@@ -66,8 +66,7 @@ public class StudentMain extends AppCompatActivity implements NavigationView.OnN
 
         setDrawerCourse(coursetext);
 
-        TextView navsublbl = hview.findViewById(R.id.txtNavSublbl);
-        navsublbl.setText(StudentData.getEmail());
+        setEmailText(StudentData.getEmail());
 
         setToolbarText(coursetext);
 
@@ -80,6 +79,12 @@ public class StudentMain extends AppCompatActivity implements NavigationView.OnN
 
     public void setToolbarText(String text){
         Objects.requireNonNull(getSupportActionBar()).setTitle(text);
+    }
+
+    public  void setEmailText(String email){
+        View hview = navigationView.getHeaderView(0);
+        TextView navsublbl = hview.findViewById(R.id.txtNavSublbl);
+        navsublbl.setText(email);
     }
 
     public void setDrawerCourse(String text){
@@ -122,7 +127,8 @@ public class StudentMain extends AppCompatActivity implements NavigationView.OnN
                 startActivity(new Intent(StudentMain.this, Login.class));
                 break;
             case R.id.nav_student_settings:
-                startActivity(new Intent(StudentMain.this, StudentSettings.class));
+                //startActivity(new Intent(StudentMain.this, StudentSettings.class));
+                StudentSettings.LoadContext(this);
                 break;
         }
 

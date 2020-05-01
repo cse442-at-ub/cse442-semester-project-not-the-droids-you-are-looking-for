@@ -143,9 +143,9 @@ class Course {
         for(int i=0;i<numQuestions;i++)
         {
             sum+=averages.get(i);
-            maxSum=questions.get(i).getMaxpoints();
+            maxSum+=questions.get(i).getMaxpoints();
         }
-        return sum/maxSum*100;
+        return (sum/maxSum)*1000;
     }
 
     void setUrls(ArrayList<String> urls){ this.urls = urls;}
