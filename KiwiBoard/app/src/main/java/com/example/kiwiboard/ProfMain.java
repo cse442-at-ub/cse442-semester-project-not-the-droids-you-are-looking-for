@@ -190,17 +190,18 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
     // Gets the time info from the launcher dialog and completes the question launch process
     @Override
     public void launchQuestion(int minutes, int seconds) {
-        int cindex = ProfData.getCurrentcourse();          // Get the current course index
-        Course course = ProfData.getCourse(cindex);        // Get the current course
-        int qindex = ProfData.getLastclickedquestion();    // Get the last clicked question index
+        int cindex = ProfData.getCurrentcourse();               // Get the current course index
+        Course course = ProfData.getCourse(cindex);             // Get the current course
+        int qindex = ProfData.getLastclickedquestion();         // Get the last clicked question index
         Question question = course.getQueueQuestion(qindex);    // Get the last clicked question
 
-        course.removeQueueQuestion(qindex);   // Remove the question from the queue
-        question.setTimelimit(60*minutes + seconds);   // Set the question time limit in seconds
-        question.setInQueue(false);           // The question is no longer in the queue
-        question.setActive(true);             // The question is now active
-        course.addQuestion(question);         // Add the question into the question list
-        ProfData.setCourse(cindex, course);   // Update ProfData with the new course info
+        course.removeQueueQuestion(qindex);                      // Remove the question from the queue
+        question.setTimelimit(60*minutes + seconds);             // Set the question time limit in seconds
+        question.setInQueue(false);                              // The question is no longer in the queue
+        question.setActive(true);                                // The question is now active
+        question.setTimelaunched(System.currentTimeMillis());    // time that the question was launched
+        course.addQuestion(question);                            // Add the question into the question list
+        ProfData.setCourse(cindex, course);                      // Update ProfData with the new course info
         refreshHome();
     }
 
