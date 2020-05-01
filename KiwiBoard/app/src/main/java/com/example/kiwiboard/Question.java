@@ -58,6 +58,11 @@ class Question {
         this.numericresponse = numericresponse;
     }
 
+    public Question(QuestionType type, String description) {
+        this.type = type;
+        this.description = description;
+    }
+
     // Clear all question data
     public void clearQuestion(){
         this.type = null;

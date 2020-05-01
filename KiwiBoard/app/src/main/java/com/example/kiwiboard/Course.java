@@ -69,6 +69,8 @@ class Course {
         } else {
             question.setQuestionnumber(queue.size());
         }
+        question.setInQueue(true);
+        question.setActive(false);
         queue.add(question);
     }
     // Get the queue question at the index given
@@ -83,7 +85,15 @@ class Course {
 
     // Adds a new question using Question's default constructor with parameters
     public void addNewQueueQuestion(Question.QuestionType type, String description, ArrayList<String> choices, int questionnumber, double pointsreceived, int maxpoints, int mcanswer, double numericanswer, String textanswer, ArrayList<Integer> multipleanswers, int mcresponse, ArrayList<Integer> multipleresponses, String textresponse, double numericresponse){
-        queue.add(new Question(type, description, choices, questionnumber, pointsreceived, maxpoints, mcanswer, numericanswer, textanswer, multipleanswers, mcresponse, multipleresponses, textresponse, numericresponse));
+        Question question = new Question(type, description, choices, questionnumber, pointsreceived, maxpoints, mcanswer, numericanswer, textanswer, multipleanswers, mcresponse, multipleresponses, textresponse, numericresponse);
+        question.setInQueue(true);
+        question.setActive(false);
+        if (queue.isEmpty()){
+            question.setQuestionnumber(0);
+        } else {
+            question.setQuestionnumber(queue.size());
+        }
+        queue.add(question);
     }
 
     // Removes a question at a particular index. Indices start at 0
