@@ -46,7 +46,7 @@
                 android:id="@+id/txtprofQuestionInputBox"
                 android:layout_width="match_parent"
                 android:layout_height="190dp"
-                android:background="@color/White"
+                android:background="@drawable/close_cut_corners"
                 android:ems="10"
                 android:gravity="start|top"
                 android:hint="@string/prof_multchoice_questionbox"

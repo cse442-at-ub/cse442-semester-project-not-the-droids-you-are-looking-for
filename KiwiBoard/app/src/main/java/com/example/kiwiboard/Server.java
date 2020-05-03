@@ -1,7 +1,9 @@
 package com.example.kiwiboard;
 
+import android.content.Context;
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.DataOutputStream;
@@ -57,6 +59,20 @@ public class Server {
             }
         });
         thread.start();
+        //try {
+        //    thread.join();
+        //} catch (InterruptedException e) {
+        //    e.printStackTrace();
+        //}
+    }
+/*
+    public static JSONObject get(String script, JSONObject json){
+        new ASynchPing(basePath + script, json).execute();
+
     }
 
+    public static JSONArray getArray(String script, JSONObject json){
+
+    }
+*/
 }
