@@ -1,20 +1,19 @@
 package com.example.kiwiboard;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import java.util.ArrayList;
 
-public class CreateMultipleChoice extends AppCompatActivity {
+public class EditMultipleChoice extends AppCompatActivity {
 
     private int choicenum = 2;
     private RadioButton[] rb;
@@ -30,7 +29,7 @@ public class CreateMultipleChoice extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_multiple_choice);
-        setToolbar("Create Question");
+        setToolbar("Edit Question");
 
         // Find all views from the xml
         txtDesc = (EditText) findViewById(R.id.txtprofQuestionInputBox);
@@ -59,8 +58,35 @@ public class CreateMultipleChoice extends AppCompatActivity {
         del[3] = (ImageButton) findViewById(R.id.btnremovechoice4);
         del[4] = (ImageButton) findViewById(R.id.btnremovechoice5);
 
-        // Hide rbs 3 through 5 by default
+
+        int cindex = ProfData.getCurrentcourse();
+        if (cindex < 0) {
+            return;
+        }
+        Course course = ProfData.getCourse(cindex);
+        int qindex = ProfData.getLastclickedquestion();
+        Question question = course.getQueueQuestion(qindex);
+
+        String description = question.getDescription();
+        ArrayList<String> choices = question.getChoices();
+        int mcanswer = question.getMcanswer();
+        double points = question.getMaxpoints();
+
+        txtDesc.setText(description);
+        txtpts.setText("".concat(""+points));
+
+        choicenum = choices.size();
+        for (int choice = 0; choice < choices.size(); choice++){
+            mc[choice].setText(choices.get(choice));
+            if(choice == mcanswer){
+                rb[choice].setChecked(true);
+            }
+        }
+
+        // Hide unused RBs
         updateVisibilities();
+
+
 
     }
 

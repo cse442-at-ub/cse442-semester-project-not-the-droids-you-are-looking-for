@@ -207,8 +207,16 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
     }
 
     public void editQueueQuestion(){
-        // Open the edit page here
-
+        int cindex = ProfData.getCurrentcourse();               // Get the current course index
+        Course course = ProfData.getCourse(cindex);             // Get the current course
+        int qindex = ProfData.getLastclickedquestion();         // Get the last clicked question index
+        Question question = course.getQueueQuestion(qindex);    // Get the last clicked question
+        if(question.getType() == Question.QuestionType.MULTIPLECHOICE || question.getType() == Question.QuestionType.TRUEFALSE) {
+            startActivity(new Intent(this, EditMultipleChoice.class));
+        }
+        if(question.getType() == Question.QuestionType.SHORTANSWER || question.getType() == Question.QuestionType.FILLINBLANK) {
+            //startActivity(new Intent(this, EditShortAnswer.class));
+        }
     }
 
     public void deleteQueueQuestion(){

@@ -37,6 +37,7 @@
         <activity android:name=".ProfQuestionLogFragment" />
         <activity android:name=".ProfReportFragment" />
         <activity android:name=".CreateMultipleChoice" />
+        <activity android:name=".EditMultipleChoice" />
         <activity android:name=".CreateCourseFragment" />
         <activity android:name=".CreateShortAnswer" />
         <activity android:name=".StudentShortAnswer" />

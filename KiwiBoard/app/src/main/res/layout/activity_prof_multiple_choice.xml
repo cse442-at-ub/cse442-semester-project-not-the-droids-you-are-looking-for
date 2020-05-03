@@ -177,6 +177,13 @@
                 android:text="@string/choice_D_label"
                 android:textColor="@color/White"
                 android:textSize="22sp" />
+            <RadioButton
+                android:id="@+id/profmultchoice5"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="@string/choice_E_label"
+                android:textColor="@color/White"
+                android:textSize="22sp" />
         </RadioGroup>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
