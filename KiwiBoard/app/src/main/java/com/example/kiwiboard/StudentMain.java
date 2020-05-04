@@ -31,11 +31,7 @@ public class StudentMain extends AppCompatActivity implements NavigationView.OnN
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_main);
 
-        // Load in sample courses for the student
-        SampleData loader = new SampleData();
-        loader.loadStudentCourses();
-        if (StudentData.getEmail() == null || StudentData.getEmail().equals(""))
-            loader.loadStudentInfo();
+
 
         Toolbar toolbar = findViewById(R.id.student_toolbar);
         setSupportActionBar(toolbar);
@@ -56,6 +52,9 @@ public class StudentMain extends AppCompatActivity implements NavigationView.OnN
         navImage.getLayoutParams().height = 200;
         navImage.getLayoutParams().width = 200;
 
+        if (StudentData.getCourses() != null && StudentData.getCourses().size() > 0)
+            StudentData.setCurrentcourse(0);
+
         String coursetext;
         int currentcourse = StudentData.getCurrentcourse();
         if (currentcourse >= 0){
@@ -71,9 +70,15 @@ public class StudentMain extends AppCompatActivity implements NavigationView.OnN
         setToolbarText(coursetext);
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
-                    new StudentHomeFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_student_home);
+            if (StudentData.getCourses() == null){
+                getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
+                        new AddCourseFragment()).commit();
+                navigationView.setCheckedItem(R.id.nav_student_addclass);
+            } else {
+                getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
+                        new StudentHomeFragment()).commit();
+                navigationView.setCheckedItem(R.id.nav_student_home);
+            }
         }
     }
 

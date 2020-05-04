@@ -34,7 +34,6 @@ public class StudentHomeFragment extends Fragment {
         activeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recentRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        StudentData.setCurrentcourse(0);
         int courseindex = StudentData.getCurrentcourse();
         if (courseindex < 0){
             return studentView;
@@ -66,6 +65,12 @@ public class StudentHomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
+        int courseindex = StudentData.getCurrentcourse();
+        if (courseindex < 0){
+            return;
+        }
+
         generateActiveQuestionList();
         generateRecentQuestionList();
 
@@ -74,19 +79,29 @@ public class StudentHomeFragment extends Fragment {
     }
 
     private void generateActiveQuestionList() {
-        activeQuestions.clear();
-        // Get the current active question(s)
-        for (Question question : questions){
-            if (question.isActive())
-                activeQuestions.add(question);
+        if (activeQuestions != null)
+            activeQuestions.clear();
+
+        if (questions != null) {
+            // Get the current active question(s)
+            for (Question question : questions) {
+                if (question.isActive())
+                    activeQuestions.add(question);
+            }
         }
     }
 
     private void generateRecentQuestionList() {
         // Get the current recent question(s)
-        recentQuestions.clear();
+        if (activeQuestions != null)
+            recentQuestions.clear();
         int maxrecents = 7; // the maximum number of recent questions diplayed
-        int numQuestions = questions.size();
+        int numQuestions;
+        if (questions == null){
+            numQuestions = 0;
+        } else {
+            numQuestions = questions.size();
+        }
         int numRecentQuestions = 0;
         Question question;
         for(int q = numQuestions - 1; q >= 0; q--){

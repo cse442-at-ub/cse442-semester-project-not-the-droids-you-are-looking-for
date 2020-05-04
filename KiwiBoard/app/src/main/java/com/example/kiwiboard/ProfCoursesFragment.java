@@ -30,6 +30,9 @@ public class ProfCoursesFragment extends Fragment {
 
         // Get professors active courses logged
         courses = ProfData.getCourses();
+        if (courses == null){
+            return profView;
+        }
         numCourses = courses.size();
 
         // Fill course names to display

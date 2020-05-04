@@ -1,7 +1,8 @@
 package com.example.kiwiboard;
 
-import android.app.Activity;
-import android.content.Intent;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,42 +10,51 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.appcompat.widget.Toolbar;
-
 import java.util.ArrayList;
 
-public class CreateShortAnswer extends Activity {
-
+public class EditShortAnswer extends AppCompatActivity {
     private EditText txtDesc, txtpts, txtAnswer;
     private ArrayList<Course> courses = ProfData.getCourses();
     private int cindex;                 // course index
+    private int qindex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_short_answer);
-        setToolbar("Create Question");
+        setContentView(R.layout.activity_edit_short_answer);
+        setToolbar("Edit Question");
 
         // find the textboxes from the XML
-        txtDesc = findViewById(R.id.SAQuestionInputBox);
-        txtpts = findViewById(R.id.SA_totalPoints);
-        txtAnswer = findViewById(R.id.SA_profAnswerBox);
+        txtDesc = findViewById(R.id.txtprofQuestionInputBox);
+        txtpts = findViewById(R.id.txt_SAtotalPoints);
+        txtAnswer = findViewById(R.id.txtprofAnswerBox);
 
         cindex = ProfData.getCurrentcourse();
         if (cindex < 0) {
             return;
         }
         Course course = ProfData.getCourse(cindex);
-        Button submitButton = findViewById(R.id.createSA_submitButton);
-        submitButton.setOnClickListener(new View.OnClickListener() {
+        qindex = ProfData.getLastclickedquestion();
+        Question question = course.getQueueQuestion(qindex);
+
+        String description = question.getDescription();
+        String answer = question.getTextanswer();
+        double points = question.getMaxpoints();
+
+        txtDesc.setText(description);
+        txtpts.setText("".concat(""+points));
+        txtAnswer.setText(answer);
+        Button button = findViewById(R.id.profeditSASubmitButton);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createSA(v);
+                submit(v);
             }
         });
+
     }
 
-    public void createSA(View view) {
+    public void submit(View view) {
         String description = txtDesc.getText().toString();
         String textpoints = txtpts.getText().toString();
         String answer = txtAnswer.getText().toString();
@@ -77,10 +87,10 @@ public class CreateShortAnswer extends Activity {
         question.setActive(false);
         question.setInQueue(true);
 
-        course.addQueueQuestion(question);
+        course.setQueueQuestion(qindex, question);
         ProfData.setCourse(cindex, course);
 
-        Toast.makeText(this, "Question added to queue", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Question Edit Completed", Toast.LENGTH_SHORT).show();
         finish();
     }
 
@@ -107,7 +117,7 @@ public class CreateShortAnswer extends Activity {
     }
 
     public void setToolbar(String title){
-        Toolbar toolbar = (Toolbar) findViewById(R.id.profcreateSA_toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.profEditSA_toolbar);
 
         ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) toolbar.getLayoutParams();
         params.topMargin = getStatusBarHeight();

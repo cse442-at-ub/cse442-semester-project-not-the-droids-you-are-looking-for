@@ -118,7 +118,8 @@
             android:id="@+id/registerAsk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dont have an account? Register Now!"
+            android:layout_gravity="center_horizontal"
+            android:text="Register Now"
             android:textColor="@color/White"
             android:textSize="22sp" />
 

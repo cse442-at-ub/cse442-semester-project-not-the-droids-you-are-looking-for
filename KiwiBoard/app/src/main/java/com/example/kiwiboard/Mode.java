@@ -30,12 +30,38 @@ public class Mode extends AppCompatActivity {
     public void studentMode(View view){
         this.finish();
         StudentData.setStudentmode(true);
+
+        // Load in sample courses for the student
+        SampleData loader = new SampleData();
+        loader.loadStudentCourses();
+        if (StudentData.getEmail() == null || StudentData.getEmail().equals(""))
+            loader.loadStudentInfo();
+        // Set question 14 and 15 to active for students in course 0 (Geology)
+        Course course = StudentData.getCourse(0);
+        Question question = course.getQuestion(13);
+        question.setActive(true);
+        course.setQuestion(13, question);
+        question = course.getQuestion(14);
+        question.setActive(true);
+        course.setQuestion(14, question);
+        StudentData.setCourse(0, course);
+
+        StudentData.setCurrentcourse(0);
+
         startActivity(new Intent(Mode.this, StudentMain.class));
     }
 
     public void professorMode(View view){
         this.finish();
         ProfData.setProfessormode(true);
+
+        // Load in sample courses for the professor
+        SampleData loader = new SampleData();
+        loader.loadProfCourses();
+        if (ProfData.getEmail() == null || ProfData.getEmail().equals(""))
+            loader.loadProfInfo();
+        ProfData.setCurrentcourse(0);
+
         startActivity(new Intent(Mode.this, ProfMain.class));
     }
 }

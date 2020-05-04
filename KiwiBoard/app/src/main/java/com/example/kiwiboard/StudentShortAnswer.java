@@ -39,7 +39,7 @@ public class StudentShortAnswer extends AppCompatActivity {
         questionNumber = findViewById(R.id.SA_questionNumber);
         txtCountdownText = findViewById(R.id.SA_txt_countdown);
         progressBar = findViewById(R.id.SA_progressBar);
-        answer = findViewById(R.id.SA_txt_answer);
+        answer = (EditText) findViewById(R.id.SA_txt_answer);
         submitButton = findViewById(R.id.SA_submitButton);
         questionDescription = findViewById(R.id.SA_questionTextView);
 
@@ -114,6 +114,9 @@ public class StudentShortAnswer extends AppCompatActivity {
                 updateCountDownText();
                 countDownTimer.cancel();
                 progressBar.clearAnimation();
+                switch_to_main();
+
+
                 // checkAnswer will lock in the answer selected when time runs out
                 // when coded cancel the countDownTimer inside of it
                 // checkAnswer();
@@ -161,28 +164,37 @@ public class StudentShortAnswer extends AppCompatActivity {
 
     //public void set_description(){ txt_box.setText(question.getDescription()); }
     /*
-    *   public void switch_to_main(View view)
-    *   This function will be used switch from the short Activity and store the current students
-    *   answer in a question object
-    *
+     *   public void switch_to_main(View view)
+     *   This function will be used switch from the short Activity and store the current students
+     *   answer in a question object
+     *
      */
 
-    /*
-    public void switch_to_main(View view){
-        String answer = collect_answer();
 
-        Toast toast = Toast.makeText(getApplicationContext(),"Submitting Answer!",Toast.LENGTH_SHORT);
-        toast.show();
+    public void switch_to_main(){
+        String result = collect_answer();
+        int index_c = StudentData.getCurrentcourse(), index_q = StudentData.getLastclickedquestion();
 
-        System.out.println("Answer Collected:\t" + answer);
-        startActivity(new Intent(this, ProfMain.class));
+        if(result.compareTo("") == 0){
+            Toast.makeText(getApplicationContext(),"Please fill in an answer.",Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        question.setTextresponse(collect_answer());
+        Toast.makeText(getApplicationContext(),"Submitting Answer!",Toast.LENGTH_SHORT).show();
+
+        Course course = StudentData.getCourse(index_c);
+        Question question = course.getQuestion(index_q);
+        question.setTextresponse(result);
+
+        course.setQuestion(index_q,question);
+        StudentData.setCourse(index_c,course);
 
         this.finish();
-        startActivity(new Intent(StudentShortAnswer.this, StudentMain.class));
     }
-    */
+
+    public void cover_switch_to_main(View view){
+        switch_to_main();
+    }
 
     /*
      *  public void clear_txt_anwser(View view)
@@ -191,11 +203,9 @@ public class StudentShortAnswer extends AppCompatActivity {
      *  Credit: https://stackoverflow.com/questions/5308200/clear-text-in-edittext-when-entered
      *  used to derive line 26
 
-   // public void clear_txt_answer(View view) { try { answer_view.getText().clear(); } catch (Exception e){} }
-
+    public void clear_txt_answer(View view) { try { answer_view.getText().clear(); } catch (Exception e){} }
+*/
     // collect the text stored in txt_answer as a string
-    public String collect_answer() {
-        return answer.getText().toString();
-    }
-    */
+    public String collect_answer() { return answer.getText().toString();}
+
 }

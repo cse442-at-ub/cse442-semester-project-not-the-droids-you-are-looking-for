@@ -34,9 +34,18 @@ public class ProfMCQuestionView extends AppCompatActivity {
         });
         ((TextView) findViewById(R.id.Prof_Quest_View_Answers_TextView)).setText(question.getDescription());
 
+
         if(question.getChoices() != null) {
+
+            String[] choices = new String[question.getChoices().size()];
+            int i = 0;
+            for(String choice : question.getChoices()){
+                choices[i] = choice;
+                i++;
+            }
+
             ListView devin = (ListView) findViewById(R.id.Prof_Quest_View_List);
-            ArrayAdapter bag = new ArrayAdapter(this, android.R.layout.simple_list_item_1, question.getChoices());
+            ArrayAdapter bag = new ArrayAdapter(this, android.R.layout.simple_list_item_1, choices);
             devin.setAdapter(bag);
         }
     }

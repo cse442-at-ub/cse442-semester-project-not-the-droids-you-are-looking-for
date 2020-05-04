@@ -96,6 +96,9 @@
     <string name="choice_E_label">Edvin Liang</string>
     <string name="question_label">#1</string>
     <string name="create_a_question">Create a question</string>
+    <string name="prof_answer_label">Answer</string>
+    <string name="prof_SA_answer_questionbox">Enter the answer:</string>
+
 
     <string name="prof_showAnswer">Show Answer</string>
 

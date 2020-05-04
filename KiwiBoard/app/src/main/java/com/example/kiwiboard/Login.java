@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class Login extends AppCompatActivity {
 
@@ -19,7 +20,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void loginPassthrough(View view){
-        this.finish();
+        finish();
         startActivity(new Intent(Login.this, Mode.class));
     }
 
@@ -31,8 +32,7 @@ public class Login extends AppCompatActivity {
         email = txtemail.getText().toString();
         password = txtpassword.getText().toString();
 
-        String source = "Login";
-        Server.login(this, source, email, password);
+        Server.login(this, email, password);
     }
 
     public void launchStudent(){
@@ -43,6 +43,10 @@ public class Login extends AppCompatActivity {
     public void launchProfessor(){
         finish();
         startActivity(new Intent(this, ProfMain.class));
+    }
+
+    public void loginFailed(){
+        Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show();
     }
 
     public void forgotPW(View view){

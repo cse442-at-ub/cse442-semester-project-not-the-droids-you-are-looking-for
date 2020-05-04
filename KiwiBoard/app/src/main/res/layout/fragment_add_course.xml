@@ -35,7 +35,7 @@
                 android:id="@+id/askCode"
                 android:layout_width="match_parent"
                 android:layout_height="43dp"
-                android:text="Please enter your class' 4 digit Course Code"
+                android:text="Please enter your 8 character course key"
                 android:textAlignment="center"
                 android:textColor="@color/Black"
                 android:textSize="15sp" />

@@ -1,8 +1,11 @@
 package com.example.kiwiboard;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Handler;
 import android.util.JsonReader;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -24,38 +27,19 @@ import java.sql.Struct;
 public class Server {
 
     public enum ParseMethod{
-        login, registerStudent, registerProfessor, launchStudent, launchProfessor, NUMERIC, TRUEFALSE; // Parse Methods
+        login, register, loadUserData, none; // Parse Methods
     }
 
     private static String basePath = "https://www-student.cse.buffalo.edu/CSE442-542/2020-spring/cse-442p/";
+    private static Handler loginHandler, registrationHandler;
 
-    // Student registration process
-    public static void registerStudent(Context context, String name, String email, String password, String mode){
-        // Package input JSON object
-        JSONObject json = new JSONObject();
-        try {
-        json.put("action", "insert");
-        json.put("email", email);
-        json.put("name", name);
-        json.put("password", password);
-        json.put("mode", mode);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        String source = "StudentRegistration";
-        get("authentication.php", json, ParseMethod.registerStudent, source,  context);
-    }
-    public static void parseRegisterStudent(Context context, String source, String email, String password, String json){
-        Gson gson = new Gson();
-        Parser gsonObj = gson.fromJson(json, Parser.class);
-        Log.i("STATUS",gsonObj.getStatus());
-        Log.i("ID",gsonObj.getId());
-
-        login(context, source, email, password);
-    }
-
-    // Professor registration process
-    public static void registerProfessor(Context context, String name, String email, String password, String mode){
+    // Registration process
+    public static void register(Context context, String name, String email, String password){
+        String mode = "";
+        if (context instanceof ProfRegistration)
+            mode = "p";
+        if (context instanceof StudentRegistration)
+            mode = "s";
         // Package input JSON object
         JSONObject json = new JSONObject();
         try {
@@ -67,19 +51,20 @@ public class Server {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String source = "ProfRegistration";
-        get("authentication.php", json, ParseMethod.registerProfessor, source, context);
+        registrationHandler = new Handler(); // Precedes worker thread start
+        Log.i("SCRIPT", "authentication.php");
+        get("authentication.php", json, ParseMethod.register, context);
     }
-    public static void parseRegisterProfessor(Context context, String source, String email, String password, String json){
+    public static void parseRegister(Context context, String email, String password, String json){
         Gson gson = new Gson();
-        Parser gsonObj = gson.fromJson(json, Parser.class);
-        Log.i("STATUS",gsonObj.getStatus());
-        Log.i("ID",gsonObj.getId());
+        Parser container = gson.fromJson(json, Parser.class);
+        Log.i("STATUS", container.getStatus());
+        Log.i("ID", container.getId());
 
-        login(context, source, email, password);
+        login(context, email, password);
     }
 
-    public static void login(Context context, String source, String email, String password){
+    public static void login(Context context, String email, String password){
         JSONObject json = new JSONObject();
         try {
             json.put("action", "login");
@@ -88,92 +73,160 @@ public class Server {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        get("authentication.php", json, ParseMethod.login, source, context);
+        // Checks if the function was called from the Login activity and not a worker thread
+        if ( context instanceof Login ) {
+            loginHandler = new Handler(); // Precedes worker thread start
+        }
+        Log.i("SCRIPT", "authentication.php");
+        get("authentication.php", json, ParseMethod.login, context);
     }
-    public static void parseLogin(Context context, String source, String json) {
+    public static void parseLogin(Context context, String json, String email) {
 
             Gson gson = new Gson();
-            Parser gsonObj = gson.fromJson(json, Parser.class);
-            Log.i("STATUS",gsonObj.getStatus());
-            Log.i("ID",gsonObj.getId());
-            Log.i("MODE", gsonObj.getMode());
+            Parser container = gson.fromJson(json, Parser.class);
+            Log.i("STATUS", container.getStatus());
 
-            String mode = gsonObj.getMode();
-            if(mode.equals("p")){
-                ProfData.setID(gsonObj.getId());
-                launchProfessor(context, source, gsonObj.getId());
-            } else if(mode.equals("s")) {
-                StudentData.setID(gsonObj.getId());
-                launchStudent(context, source, gsonObj.getId());
+            // If no ID is returned, the login failed
+            if (container.getId() == null){
+                if ( context instanceof Login ) {
+                    final Context mcontext = context;
+                    loginHandler.post(new Runnable(){
+                        public void run() {
+                            Toast.makeText(mcontext, "Login failed", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+            } else{
+                String ID = container.getId();
+                Log.i("ID", ID); // Display the fetched ID to the console log
+
+                // Must check whether a student or professor logged in
+                String mode = container.getMode();
+                //String mode = "p"; /////////  FIX !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                Log.i("MODE", mode);
+                if(mode.equals("p")){
+                    ProfData.setProfessormode(true);
+                    ProfData.setID(ID);
+                    ProfData.setEmail(email);
+                } else if(mode.equals("s")) {
+                    StudentData.setStudentmode(true);
+                    StudentData.setID(ID);
+                    StudentData.setEmail(email);
+                }
+                loadUserData(context, ID, mode);
             }
     }
 
-    public static void launchProfessor(Context context, String source, String ID){
+    public static void loadUserData(Context context, String ID, String mode){
         JSONObject json = new JSONObject();
         try {
             json.put("action", "get");
-            json.put("ID", ID);
+            json.put("mode", mode);
+            json.put("id", ID);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        get("authentication.php", json, ParseMethod.launchProfessor, source, context);
+        Log.i("SCRIPT", "course.php");
+        get("course.php", json, ParseMethod.loadUserData, context);
     }
-    public static void parseProfessor(Context context, String source, String json) {
+    public static void parseUserData(Context context, String json, String mode) {
 
         Gson gson = new Gson();
-        Parser gsonObj = gson.fromJson(json, Parser.class);
-        Log.i("NAME",gsonObj.getStatus());
-        Log.i("EMAIL",gsonObj.getEmail());
-        Log.i("PASSWORD",gsonObj.getPassword());
-        Log.i("ID",gsonObj.getId());
-        Log.i("TYPE",gsonObj.getMode());
+        Parser container = gson.fromJson(json, Parser.class);
+        Log.i("NAME", container.getStatus());
+        Log.i("EMAIL", container.getEmail());
+        Log.i("ID", container.getId());
+        Log.i("MODE", container.getMode());
 
-        ProfData.setProfessormode(true);
-        ProfData.setName(gsonObj.getName());
-        ProfData.setEmail(gsonObj.getEmail());
-        ProfData.setPassword(gsonObj.getPassword());
-        if (source.equals("Login")) {
-            Login login = (Login) context;
-            login.launchProfessor();
-        } else if (source.equals("ProfRegistration")){
-            ProfRegistration profRegistration  = (ProfRegistration) context;
-            profRegistration.launchProfessor();
+        final Context mcontext = context;
+        if (context instanceof Login) {
+            loginHandler.post(new Runnable(){
+                public void run() {
+                    if(ProfData.isProfessormode())
+                        mcontext.startActivity(new Intent(mcontext, ProfMain.class));
+                    if(StudentData.isStudentmode())
+                        mcontext.startActivity(new Intent(mcontext, StudentMain.class));
+                    Login login = (Login) mcontext;
+                    login.finish();
+                }
+            });
+        } else if (context instanceof ProfRegistration){
+            registrationHandler.post(new Runnable(){
+                public void run() {
+                    mcontext.startActivity(new Intent(mcontext, ProfMain.class));
+                    ProfRegistration profRegistration = (ProfRegistration) mcontext;
+                    profRegistration.finish();
+                }
+            });
+        } else if (context instanceof StudentRegistration){
+            registrationHandler.post(new Runnable(){
+                public void run() {
+                    mcontext.startActivity(new Intent(mcontext, StudentMain.class));
+                    StudentRegistration studentRegistration = (StudentRegistration) mcontext;
+                    studentRegistration.finish();
+                }
+            });
         }
 
     }
 
-    public static void launchStudent(Context context, String source, String ID){
-        JSONObject json = new JSONObject();
-        try {
-            json.put("action", "get");
-            json.put("ID", ID);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        get("authentication.php", json, ParseMethod.launchStudent, source, context);
-    }
-    public static void parseStudent(Context context, String source, String json) {
+    public static void get(final String script, final JSONObject inputJson, final ParseMethod parseMethod, final Context context){
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                StringBuilder result = new StringBuilder();
+                try {
 
-        Gson gson = new Gson();
-        Parser gsonObj = gson.fromJson(json, Parser.class);
-        Log.i("NAME",gsonObj.getStatus());
-        Log.i("EMAIL",gsonObj.getEmail());
-        Log.i("PASSWORD",gsonObj.getPassword());
-        Log.i("ID",gsonObj.getId());
-        Log.i("TYPE",gsonObj.getMode());
+                    URL url = new URL(basePath.concat(script));
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("POST");
+                    conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+                    conn.setRequestProperty("Accept","application/json");
+                    conn.setDoOutput(true);
+                    conn.setDoInput(true);
 
-        StudentData.setStudentmode(true);
-        StudentData.setName(gsonObj.getName());
-        StudentData.setEmail(gsonObj.getEmail());
-        StudentData.setPassword(gsonObj.getPassword());
-        if (source.equals("Login")) {
-            Login login = (Login) context;
-            login.launchStudent();
-        } else if (source.equals("StudentRegistration")){
-            StudentRegistration studentRegistration = (StudentRegistration) context;
-            studentRegistration.launchStudent();
-        }
+                    Log.i("INPUT JSON", inputJson.toString());
+                    DataOutputStream os = new DataOutputStream(conn.getOutputStream());
+                    os.writeBytes(inputJson.toString());
+
+                    os.flush();
+                    os.close();
+
+                    Log.i("STATUS", String.valueOf(conn.getResponseCode()));
+                    Log.i("MSG" , conn.getResponseMessage());
+
+                    InputStream in = new BufferedInputStream(conn.getInputStream());
+
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        result.append(line);
+                    }
+
+                    String jsonresult = result.toString();
+                    Log.i("RESULT JSON" , jsonresult);
+
+                    switch (parseMethod){
+                        case login:
+                            parseLogin(context,  jsonresult, inputJson.getString("email"));
+                            break;
+                        case register:
+                            parseRegister(context, inputJson.getString("email"), inputJson.getString("password"), jsonresult);
+                            break;
+                        case loadUserData:
+                            parseUserData(context, jsonresult, inputJson.getString("mode"));
+                            break;
+                        default:
+                    }
+
+                    conn.disconnect();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
     }
 
     public static void post(String script, JSONObject json){
@@ -216,93 +269,4 @@ public class Server {
         //}
     }
 
-    public static void get(String script, final JSONObject json, final ParseMethod parseMethod, String source, Context context){
-        final String scriptname = script;
-        final JSONObject jsonParam = json;
-        final Context mcontext = context;
-        final String msource = source;
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                StringBuilder result = new StringBuilder();
-                try {
-
-                    URL url = new URL(basePath.concat(scriptname));
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    conn.setRequestMethod("POST");
-                    conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
-                    conn.setRequestProperty("Accept","application/json");
-                    conn.setDoOutput(true);
-                    conn.setDoInput(true);
-
-                    Log.i("JSON", jsonParam.toString());
-                    DataOutputStream os = new DataOutputStream(conn.getOutputStream());
-                    os.writeBytes(jsonParam.toString());
-
-                    os.flush();
-                    os.close();
-
-                    Log.i("STATUS", String.valueOf(conn.getResponseCode()));
-                    Log.i("MSG" , conn.getResponseMessage());
-
-                    InputStream in = new BufferedInputStream(conn.getInputStream());
-
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        result.append(line);
-                    }
-
-                    String jsonresult = result.toString();
-                    jsonresult = jsonresult.substring(jsonresult.indexOf("{"));
-                    jsonresult.trim();
-                    Log.i("RESULT" , jsonresult);
-
-                    switch (parseMethod){
-                        case login:
-                            parseLogin(mcontext, msource, jsonresult);
-                            break;
-                        case registerStudent:
-                            parseRegisterStudent(mcontext, msource, jsonParam.getString("email"), jsonParam.getString("password"), jsonresult);
-                            break;
-                        case registerProfessor:
-                            parseRegisterProfessor(mcontext, msource, jsonParam.getString("email"), jsonParam.getString("password"), jsonresult);
-                            break;
-                        case launchProfessor:
-                            parseProfessor(mcontext, msource, jsonresult);
-                            break;
-                        case launchStudent:
-                            parseStudent(mcontext, msource, jsonresult);
-                            break;
-                        default:
-                    }
-
-                    conn.disconnect();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        thread.start();
-        //try {
-        //    thread.join();
-        //} catch (InterruptedException e) {
-        //    e.printStackTrace();
-        //}
-    }
-
-
-
-
-/*
-    public static JSONObject getjson(String script, JSONObject json){
-        new ASynchPing(basePath + script, json).execute();
-
-    }
-
-    public static JSONArray getjsonArray(String script, JSONObject json){
-
-    }
-*/
 }

@@ -6,10 +6,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/themeColor"
-    tools:context=".CreateShortAnswer">
+    tools:context=".EditShortAnswer">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/profcreateSA_toolbar"
+        android:id="@+id/profEditSA_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/design_default_color_secondary_variant"
@@ -33,7 +33,7 @@
             tools:layout_editor_absoluteY="199dp">
 
             <TextView
-                android:id="@+id/SAQuestionBoxLabel"
+                android:id="@+id/profQuestionBoxLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/themeColor"
@@ -43,7 +43,7 @@
                 android:textSize="24sp" />
 
             <EditText
-                android:id="@+id/SAQuestionInputBox"
+                android:id="@+id/txtprofQuestionInputBox"
                 android:layout_width="match_parent"
                 android:layout_height="190dp"
                 android:background="@drawable/close_cut_corners"
@@ -60,7 +60,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/SAtotalPointsLabel"
+                    android:id="@+id/totalPointsLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -73,7 +73,7 @@
                     android:textSize="18sp" />
 
                 <EditText
-                    android:id="@+id/SA_totalPoints"
+                    android:id="@+id/txt_SAtotalPoints"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -90,7 +90,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/profSAanswerLabel"
+                android:id="@+id/profAnswerLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/themeColor"
@@ -102,7 +102,7 @@
 
 
             <EditText
-                android:id="@+id/SA_profAnswerBox"
+                android:id="@+id/txtprofAnswerBox"
                 android:layout_width="match_parent"
                 android:layout_height="190dp"
                 android:background="@drawable/close_cut_corners"
@@ -120,7 +120,7 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/createSA_submitButton"
+                android:id="@+id/profeditSASubmitButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
@@ -129,8 +129,7 @@
                 android:text="@string/submit_label"
                 android:textColor="@color/Black"
                 tools:layout_editor_absoluteX="304dp"
-                tools:layout_editor_absoluteY="708dp"
-                />
+                tools:layout_editor_absoluteY="708dp" />
 
         </FrameLayout>
 

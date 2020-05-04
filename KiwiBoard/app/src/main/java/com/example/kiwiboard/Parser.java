@@ -18,14 +18,14 @@ public class Parser {
     @SerializedName("mode")
     private String mode = "";
 
+    @SerializedName("type")
+    private String type = "";
+
     @SerializedName("status")
     private String status = "";
 
-    @SerializedName("success")
-    private String success = "";
-
-    @SerializedName("failed")
-    private String failed = "";
+    @SerializedName("amount")
+    private String amount = "";
 
     public String getId() {
         return id;
@@ -63,20 +63,12 @@ public class Parser {
         this.mode = mode;
     }
 
-    public String getSuccess() {
-        return success;
+    public String getType() {
+        return type;
     }
 
-    public void setSuccess(String success) {
-        this.success = success;
-    }
-
-    public String getFailed() {
-        return failed;
-    }
-
-    public void setFailed(String failed) {
-        this.failed = failed;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public void setId(String action) {

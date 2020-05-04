@@ -31,12 +31,11 @@ public class ProfQuestionLogFragment extends Fragment {
 
         // Get the current course and declare variables
         final int courseindex = ProfData.getCurrentcourse();
-        /*
         if(courseindex < 0) {
-            noCourseSelected(rosterview); // if no course was selected, display message to user to join a course
+            //noCourseSelected(rosterview); // if no course was selected, display message to user to join a course
             return rosterview;
         }
-        */
+
 
         final Course currentcourse = ProfData.getCourses().get(courseindex);
         questions = currentcourse.getQuestions();

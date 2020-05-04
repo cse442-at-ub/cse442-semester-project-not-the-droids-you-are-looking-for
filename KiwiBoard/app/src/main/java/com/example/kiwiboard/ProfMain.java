@@ -35,13 +35,6 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prof_main);
 
-        // Load in sample courses for the professor
-        SampleData loader = new SampleData();
-        loader.loadProfCourses();
-        if (ProfData.getEmail() == null || ProfData.getEmail().equals(""))
-            loader.loadProfInfo();
-        ProfData.setCurrentcourse(0);
-
         Toolbar toolbar = findViewById(R.id.professor_toolbar);
         setSupportActionBar(toolbar);
 
@@ -63,6 +56,9 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
         navImage.getLayoutParams().height = 200;
         navImage.getLayoutParams().width = 200;
 
+        if (ProfData.getCourses() != null && ProfData.getCourses().size() > 0)
+            ProfData.setCurrentcourse(0);
+
         String coursetext;
         int currentcourse = ProfData.getCurrentcourse();
         if (currentcourse != -1){
@@ -77,9 +73,15 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
         navsublbl.setText(ProfData.getEmail());
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.professor_fragment_container,
-                    new ProfHomeFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_professor_home);
+            if (ProfData.getCourses() == null){
+                getSupportFragmentManager().beginTransaction().replace(R.id.professor_fragment_container,
+                        new CreateCourseFragment()).commit();
+                navigationView.setCheckedItem(R.id.nav_professor_create_class);
+            } else{
+                getSupportFragmentManager().beginTransaction().replace(R.id.professor_fragment_container,
+                        new ProfHomeFragment()).commit();
+                navigationView.setCheckedItem(R.id.nav_professor_home);
+            }
         }
     }
 
@@ -215,7 +217,7 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
             startActivity(new Intent(this, EditMultipleChoice.class));
         }
         if(question.getType() == Question.QuestionType.SHORTANSWER || question.getType() == Question.QuestionType.FILLINBLANK) {
-            //startActivity(new Intent(this, EditShortAnswer.class));
+            startActivity(new Intent(this, EditShortAnswer.class));
         }
     }
 

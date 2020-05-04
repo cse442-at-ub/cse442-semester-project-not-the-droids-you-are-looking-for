@@ -66,8 +66,8 @@ public class ProfRegistration extends AppCompatActivity {
                 // create the user only if all the textfields are not null
                 if(!name.equals("") && !email.equals("") && !password.equals("") && !university.equals("")) {
                     createUser();
-                    ProfData.setProfessormode(true); // Activate professor mode
-                    startActivity(new Intent(ProfRegistration.this, ProfMain.class));
+                    //ProfData.setProfessormode(true); // Activate professor mode
+                    //startActivity(new Intent(ProfRegistration.this, ProfMain.class));
                 }
                 // make background red to indicate error to user.
                 else {
@@ -116,7 +116,7 @@ public class ProfRegistration extends AppCompatActivity {
         ProfData.setEmail(email);
         ProfData.setPassword(password);
         ProfData.setUniversity(university);
-        Server.registerProfessor(this, name, email, password, "p");
+        Server.register(this, name, email, password);
     }
 
     public void launchProfessor(){
