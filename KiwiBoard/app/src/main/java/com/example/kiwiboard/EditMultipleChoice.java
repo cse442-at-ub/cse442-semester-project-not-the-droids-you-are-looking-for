@@ -24,6 +24,7 @@ public class EditMultipleChoice extends AppCompatActivity {
 
     private ArrayList<Course> courses = ProfData.getCourses();
     private int cindex = ProfData.getCurrentcourse();
+    private int qindex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +65,7 @@ public class EditMultipleChoice extends AppCompatActivity {
             return;
         }
         Course course = ProfData.getCourse(cindex);
-        int qindex = ProfData.getLastclickedquestion();
+        qindex = ProfData.getLastclickedquestion();
         Question question = course.getQueueQuestion(qindex);
 
         String description = question.getDescription();
@@ -265,7 +266,7 @@ public class EditMultipleChoice extends AppCompatActivity {
         question.setActive(false);
         question.setInQueue(true);
 
-        course.addQueueQuestion(question);
+        course.setQueueQuestion(qindex, question);
         ProfData.setCourse(cindex, course);
 
         Toast.makeText(this, "Question added to queue", Toast.LENGTH_SHORT).show();

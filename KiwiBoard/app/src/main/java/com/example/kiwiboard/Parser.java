@@ -15,8 +15,8 @@ public class Parser {
     @SerializedName("password")
     private String password = "";
 
-    @SerializedName("type")
-    private String type = "";
+    @SerializedName("mode")
+    private String mode = "";
 
     @SerializedName("status")
     private String status = "";
@@ -55,12 +55,12 @@ public class Parser {
         this.password = password;
     }
 
-    public String getType() {
-        return type;
+    public String getMode() {
+        return mode;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setMode(String mode) {
+        this.mode = mode;
     }
 
     public String getSuccess() {

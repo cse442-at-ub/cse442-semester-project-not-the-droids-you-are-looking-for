@@ -116,5 +116,11 @@ public class ProfRegistration extends AppCompatActivity {
         ProfData.setEmail(email);
         ProfData.setPassword(password);
         ProfData.setUniversity(university);
+        Server.registerProfessor(this, name, email, password, "p");
+    }
+
+    public void launchProfessor(){
+        finish();
+        startActivity(new Intent(this, ProfMain.class));
     }
 }

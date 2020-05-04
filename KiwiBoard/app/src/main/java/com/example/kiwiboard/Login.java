@@ -31,12 +31,18 @@ public class Login extends AppCompatActivity {
         email = txtemail.getText().toString();
         password = txtpassword.getText().toString();
 
-        Server.login(this, email, password);
+        String source = "Login";
+        Server.login(this, source, email, password);
     }
 
     public void launchStudent(){
         finish();
         startActivity(new Intent(this, StudentMain.class));
+    }
+
+    public void launchProfessor(){
+        finish();
+        startActivity(new Intent(this, ProfMain.class));
     }
 
     public void forgotPW(View view){

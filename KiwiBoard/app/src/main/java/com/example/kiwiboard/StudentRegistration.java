@@ -100,6 +100,11 @@ public class StudentRegistration extends AppCompatActivity {
         StudentData.setName(name);
         StudentData.setEmail(email);
         StudentData.setPassword(password);
-        Server.createUser(name, email, password);
+        Server.registerStudent(this, name, email, password, "s");
+    }
+
+    public void launchStudent(){
+        finish();
+        startActivity(new Intent(this, StudentMain.class));
     }
 }

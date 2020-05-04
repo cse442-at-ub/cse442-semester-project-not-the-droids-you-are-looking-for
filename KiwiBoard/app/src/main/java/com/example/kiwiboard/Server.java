@@ -24,25 +24,62 @@ import java.sql.Struct;
 public class Server {
 
     public enum ParseMethod{
-        login, getStudent, FILLINBLANK, SELECTALL, NUMERIC, TRUEFALSE; // Question Types
+        login, registerStudent, registerProfessor, launchStudent, launchProfessor, NUMERIC, TRUEFALSE; // Parse Methods
     }
 
     private static String basePath = "https://www-student.cse.buffalo.edu/CSE442-542/2020-spring/cse-442p/";
 
-    public static void createUser(String name, String email, String password){
+    // Student registration process
+    public static void registerStudent(Context context, String name, String email, String password, String mode){
+        // Package input JSON object
         JSONObject json = new JSONObject();
         try {
         json.put("action", "insert");
         json.put("email", email);
         json.put("name", name);
         json.put("password", password);
+        json.put("mode", mode);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        post("authentication.php", json);
+        String source = "StudentRegistration";
+        get("authentication.php", json, ParseMethod.registerStudent, source,  context);
+    }
+    public static void parseRegisterStudent(Context context, String source, String email, String password, String json){
+        Gson gson = new Gson();
+        Parser gsonObj = gson.fromJson(json, Parser.class);
+        Log.i("STATUS",gsonObj.getStatus());
+        Log.i("ID",gsonObj.getId());
+
+        login(context, source, email, password);
     }
 
-    public static void login(Context context, String email, String password){
+    // Professor registration process
+    public static void registerProfessor(Context context, String name, String email, String password, String mode){
+        // Package input JSON object
+        JSONObject json = new JSONObject();
+        try {
+            json.put("action", "insert");
+            json.put("email", email);
+            json.put("name", name);
+            json.put("password", password);
+            json.put("mode", mode);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String source = "ProfRegistration";
+        get("authentication.php", json, ParseMethod.registerProfessor, source, context);
+    }
+    public static void parseRegisterProfessor(Context context, String source, String email, String password, String json){
+        Gson gson = new Gson();
+        Parser gsonObj = gson.fromJson(json, Parser.class);
+        Log.i("STATUS",gsonObj.getStatus());
+        Log.i("ID",gsonObj.getId());
+
+        login(context, source, email, password);
+    }
+
+    public static void login(Context context, String source, String email, String password){
         JSONObject json = new JSONObject();
         try {
             json.put("action", "login");
@@ -51,20 +88,28 @@ public class Server {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        get("authentication.php", json, ParseMethod.login, context);
+
+        get("authentication.php", json, ParseMethod.login, source, context);
     }
-    public static void parseLogin(Context context, String json) {
+    public static void parseLogin(Context context, String source, String json) {
 
             Gson gson = new Gson();
             Parser gsonObj = gson.fromJson(json, Parser.class);
             Log.i("STATUS",gsonObj.getStatus());
             Log.i("ID",gsonObj.getId());
+            Log.i("MODE", gsonObj.getMode());
 
-            StudentData.setID(gsonObj.getId());
-            getStudent(context, gsonObj.getId());
+            String mode = gsonObj.getMode();
+            if(mode.equals("p")){
+                ProfData.setID(gsonObj.getId());
+                launchProfessor(context, source, gsonObj.getId());
+            } else if(mode.equals("s")) {
+                StudentData.setID(gsonObj.getId());
+                launchStudent(context, source, gsonObj.getId());
+            }
     }
 
-    public static void getStudent(Context context, String ID){
+    public static void launchProfessor(Context context, String source, String ID){
         JSONObject json = new JSONObject();
         try {
             json.put("action", "get");
@@ -72,9 +117,9 @@ public class Server {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        get("authentication.php", json, ParseMethod.getStudent, context);
+        get("authentication.php", json, ParseMethod.launchProfessor, source, context);
     }
-    public static void parseStudent(Context context, String json) {
+    public static void parseProfessor(Context context, String source, String json) {
 
         Gson gson = new Gson();
         Parser gsonObj = gson.fromJson(json, Parser.class);
@@ -82,14 +127,53 @@ public class Server {
         Log.i("EMAIL",gsonObj.getEmail());
         Log.i("PASSWORD",gsonObj.getPassword());
         Log.i("ID",gsonObj.getId());
-        Log.i("TYPE",gsonObj.getType());
+        Log.i("TYPE",gsonObj.getMode());
+
+        ProfData.setProfessormode(true);
+        ProfData.setName(gsonObj.getName());
+        ProfData.setEmail(gsonObj.getEmail());
+        ProfData.setPassword(gsonObj.getPassword());
+        if (source.equals("Login")) {
+            Login login = (Login) context;
+            login.launchProfessor();
+        } else if (source.equals("ProfRegistration")){
+            ProfRegistration profRegistration  = (ProfRegistration) context;
+            profRegistration.launchProfessor();
+        }
+
+    }
+
+    public static void launchStudent(Context context, String source, String ID){
+        JSONObject json = new JSONObject();
+        try {
+            json.put("action", "get");
+            json.put("ID", ID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        get("authentication.php", json, ParseMethod.launchStudent, source, context);
+    }
+    public static void parseStudent(Context context, String source, String json) {
+
+        Gson gson = new Gson();
+        Parser gsonObj = gson.fromJson(json, Parser.class);
+        Log.i("NAME",gsonObj.getStatus());
+        Log.i("EMAIL",gsonObj.getEmail());
+        Log.i("PASSWORD",gsonObj.getPassword());
+        Log.i("ID",gsonObj.getId());
+        Log.i("TYPE",gsonObj.getMode());
 
         StudentData.setStudentmode(true);
         StudentData.setName(gsonObj.getName());
         StudentData.setEmail(gsonObj.getEmail());
         StudentData.setPassword(gsonObj.getPassword());
-        Login login = (Login) context;
-        login.launchStudent();
+        if (source.equals("Login")) {
+            Login login = (Login) context;
+            login.launchStudent();
+        } else if (source.equals("StudentRegistration")){
+            StudentRegistration studentRegistration = (StudentRegistration) context;
+            studentRegistration.launchStudent();
+        }
     }
 
     public static void post(String script, JSONObject json){
@@ -132,10 +216,11 @@ public class Server {
         //}
     }
 
-    public static void get(String script, final JSONObject json, final ParseMethod parseMethod, Context context){
+    public static void get(String script, final JSONObject json, final ParseMethod parseMethod, String source, Context context){
         final String scriptname = script;
         final JSONObject jsonParam = json;
         final Context mcontext = context;
+        final String msource = source;
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -153,9 +238,6 @@ public class Server {
                     Log.i("JSON", jsonParam.toString());
                     DataOutputStream os = new DataOutputStream(conn.getOutputStream());
                     os.writeBytes(jsonParam.toString());
-
-
-
 
                     os.flush();
                     os.close();
@@ -179,10 +261,19 @@ public class Server {
 
                     switch (parseMethod){
                         case login:
-                            parseLogin(mcontext, jsonresult);
+                            parseLogin(mcontext, msource, jsonresult);
                             break;
-                        case getStudent:
-                            parseStudent(mcontext, jsonresult);
+                        case registerStudent:
+                            parseRegisterStudent(mcontext, msource, jsonParam.getString("email"), jsonParam.getString("password"), jsonresult);
+                            break;
+                        case registerProfessor:
+                            parseRegisterProfessor(mcontext, msource, jsonParam.getString("email"), jsonParam.getString("password"), jsonresult);
+                            break;
+                        case launchProfessor:
+                            parseProfessor(mcontext, msource, jsonresult);
+                            break;
+                        case launchStudent:
+                            parseStudent(mcontext, msource, jsonresult);
                             break;
                         default:
                     }
@@ -200,7 +291,6 @@ public class Server {
         //    e.printStackTrace();
         //}
     }
-
 
 
 
