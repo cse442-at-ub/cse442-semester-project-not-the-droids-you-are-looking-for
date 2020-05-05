@@ -185,6 +185,12 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
         navigationView.setCheckedItem(R.id.nav_professor_home);
     }
 
+    public void createQuestionMenu(View view) {
+        PopupMenu popup = new PopupMenu(this, view);
+        popup.setOnMenuItemClickListener(this);
+        popup.inflate(R.menu.question_creation_menu);
+        popup.show();
+    }
 
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
