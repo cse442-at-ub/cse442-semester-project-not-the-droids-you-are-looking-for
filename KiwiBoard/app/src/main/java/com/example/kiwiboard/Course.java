@@ -5,6 +5,7 @@ import java.util.ArrayList;
 class Course {
     private String courseName;                  // Name of course
     private String instructorname;              // Name of instructor
+    private String ID;                          // ID of course
     private int classKey;                       // Class key
     private String description;                 // Class description
     private ArrayList<Question> questions;      // Question list
@@ -22,7 +23,19 @@ class Course {
         this.description = "";
         this.questions = questions;
         this.queue = new ArrayList<>();
-        this.students = students;
+        this.students = new ArrayList<>();
+        this.urls = new ArrayList<>();
+        this.sitenames = new ArrayList<>();
+    }
+
+    // Secondary constructor
+    public Course(String courseName, String instructorname, String description) {
+        this.courseName = courseName;
+        this.instructorname = instructorname;
+        this.description = description;
+        this.questions = new ArrayList<>();;
+        this.queue = new ArrayList<>();
+        this.students = new ArrayList<>();
         this.urls = new ArrayList<>();
         this.sitenames = new ArrayList<>();
     }
@@ -202,6 +215,14 @@ class Course {
 
     public void setInstructorname(String instructorname) {
         this.instructorname = instructorname;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
     public int getClassKey() {

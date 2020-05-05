@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class ProfData {
 
-    private static String name;                 // Professor's name
+    private static String name = "";                 // Professor's name
     private static String ID;                 // Professor's ID
     private static String email;                // Professor's email
     private static String password;             // Professor's password

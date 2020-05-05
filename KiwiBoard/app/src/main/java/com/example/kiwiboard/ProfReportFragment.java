@@ -34,7 +34,7 @@ public class ProfReportFragment extends Fragment {
         ArrayList<Question> questions = currentcourse.getQuestions();
         Question question;
         double pointsreceived, percentage;
-        int maxpoints;
+        double maxpoints;
         ArrayList<Double>averages=currentcourse.calculateAverages();
 
         // Class Average

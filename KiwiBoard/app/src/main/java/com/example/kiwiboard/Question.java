@@ -12,6 +12,7 @@ class Question {
     }
 
     // Question attributes
+    private String ID = "";                     // Question ID
     private QuestionType type;                  // Question type
     private String description;                 // Question description
     private final int MAXCHOICES = 5;           // Max amount of MC and Select All choices
@@ -20,12 +21,12 @@ class Question {
     private int questionnumber;                 // The index of the question
     private boolean inQueue = false;            // Whether the question is in the queue
     private boolean isActive = false;           // Whether the question is active
-    private boolean submissionEntered = false;  // Did the student enter a submission for the question yet
-    private long timelaunched = 0;               // Exact time when the question was launched
+    private boolean submissionEntered = false;  // Whether the student has entered an answer
+    private long timelaunched = 0;              // Exact time when the question was launched
     private int timelimit = 0;                  // Amount of time the question lasts
 
     private double pointsreceived;               // Points received by student. Null for professors.
-    private int maxpoints;                       // Max points possible
+    private double maxpoints;                       // Max points possible
 
     // Answers
     private int mcanswer;                        // Field for mc, and T/F answers
@@ -42,6 +43,7 @@ class Question {
 
     // Constructor with parameters
     public Question(QuestionType type, String description, ArrayList<String> choices, int questionnumber, double pointsreceived, int maxpoints, int mcanswer, double numericanswer, String textanswer, ArrayList<Integer> multipleanswers, int mcresponse, ArrayList<Integer> multipleresponses, String textresponse, double numericresponse) {
+        this.ID = "";
         this.type = type;
         this.description = description;
         this.choices = choices;
@@ -78,6 +80,14 @@ class Question {
         this.multipleresponses = new ArrayList<Integer>();
         this.textresponse = null;
         this.numericresponse = 0;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
     // Get the question type
@@ -161,11 +171,11 @@ class Question {
         this.pointsreceived = pointsreceived;
     }
 
-    public int getMaxpoints() {
+    public double getMaxpoints() {
         return maxpoints;
     }
 
-    public void setMaxpoints(int maxpoints) {
+    public void setMaxpoints(double maxpoints) {
         this.maxpoints = maxpoints;
     }
 
@@ -297,7 +307,7 @@ class Question {
                     }
                 }
                 if (correct - incorrect > 0) {
-                    return (correct - incorrect) / multipleanswers.size() * maxpoints;
+                    return (double)(correct - incorrect) / multipleanswers.size() * maxpoints;
                 }else{
                     return 0;
                 }

@@ -235,12 +235,13 @@ public class CreateMultipleChoice extends AppCompatActivity {
         Question question = new Question(Question.QuestionType.MULTIPLECHOICE, description);
         question.setChoices(choices);
         question.setMcanswer(mcanswer);
-        question.setPointsreceived(points);
+        question.setMaxpoints(points);
         question.setActive(false);
         question.setInQueue(true);
 
         course.addQueueQuestion(question);
         ProfData.setCourse(cindex, course);
+        Server.createQueueQuestion(this, question);
 
         Toast.makeText(this, "Question added to queue", Toast.LENGTH_SHORT).show();
         finish();

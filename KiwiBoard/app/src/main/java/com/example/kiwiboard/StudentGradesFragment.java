@@ -37,7 +37,7 @@ public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup c
         ArrayList<Question> questions = currentcourse.getQuestions();
         Question question;
         double pointsreceived, percentage;
-        int maxpoints;
+        double maxpoints;
         ArrayList<Double> averages = currentcourse.calculateAverages();
 
         // Class Average

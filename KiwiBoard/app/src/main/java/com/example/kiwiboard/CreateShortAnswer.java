@@ -79,6 +79,7 @@ public class CreateShortAnswer extends Activity {
 
         course.addQueueQuestion(question);
         ProfData.setCourse(cindex, course);
+        Server.createQueueQuestion(this, question);
 
         Toast.makeText(this, "Question added to queue", Toast.LENGTH_SHORT).show();
         finish();

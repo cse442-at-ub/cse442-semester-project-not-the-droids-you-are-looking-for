@@ -27,6 +27,17 @@ public class Parser {
     @SerializedName("amount")
     private String amount = "";
 
+    @SerializedName("results")
+    private String results = "";
+
+    @SerializedName("course_name")
+    private String course_name = "";
+
+    @SerializedName("course_description")
+    private String course_description = "";
+
+
+
     public String getId() {
         return id;
     }
@@ -81,5 +92,39 @@ public class Parser {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    // Course keys
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
+    public String getResults() {
+        return results;
+    }
+
+    public void setResults(String results) {
+        this.results = results;
+    }
+
+    public String getCourse_name() {
+        return course_name;
+    }
+
+    public void setCourse_name(String course_name) {
+        this.course_name = course_name;
+    }
+
+    public String getCourse_description() {
+        return course_description;
+    }
+
+    public void setCourse_description(String course_description) {
+        this.course_description = course_description;
     }
 }

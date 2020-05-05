@@ -73,11 +73,11 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
         navsublbl.setText(ProfData.getEmail());
 
         if (savedInstanceState == null) {
-            if (ProfData.getCourses() == null){
+            if (ProfData.getCourses() == null || ProfData.getCourses().size() == 0){
                 getSupportFragmentManager().beginTransaction().replace(R.id.professor_fragment_container,
                         new CreateCourseFragment()).commit();
                 navigationView.setCheckedItem(R.id.nav_professor_create_class);
-            } else{
+           } else{
                 getSupportFragmentManager().beginTransaction().replace(R.id.professor_fragment_container,
                         new ProfHomeFragment()).commit();
                 navigationView.setCheckedItem(R.id.nav_professor_home);
@@ -153,12 +153,18 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
 
     // Buttons for fragments
 
+    public void switchToHome(){
+        getSupportFragmentManager().beginTransaction().replace(R.id.professor_fragment_container,
+                new ProfHomeFragment()).commit();
+    }
+
     public void createQuestionMenu(View view) {
         PopupMenu popup = new PopupMenu(this, view);
         popup.setOnMenuItemClickListener(this);
         popup.inflate(R.menu.question_creation_menu);
         popup.show();
     }
+
 
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {

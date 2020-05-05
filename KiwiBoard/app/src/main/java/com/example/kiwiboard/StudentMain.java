@@ -70,7 +70,7 @@ public class StudentMain extends AppCompatActivity implements NavigationView.OnN
         setToolbarText(coursetext);
 
         if (savedInstanceState == null) {
-            if (StudentData.getCourses() == null){
+            if (StudentData.getCourses() == null || StudentData.getCourses().size() == 0){
                 getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
                         new AddCourseFragment()).commit();
                 navigationView.setCheckedItem(R.id.nav_student_addclass);
