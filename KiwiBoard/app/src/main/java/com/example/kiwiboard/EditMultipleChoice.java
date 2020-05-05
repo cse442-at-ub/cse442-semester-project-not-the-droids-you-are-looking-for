@@ -285,18 +285,6 @@ public class EditMultipleChoice extends AppCompatActivity {
         return true;
     }
 
-    public static boolean isInteger(String string) {
-        if (string == null) {
-            return false;
-        }
-        try {
-            int num = Integer.parseInt(string);
-        } catch (NumberFormatException nfe) {
-            return false;
-        }
-        return true;
-    }
-
     public int getStatusBarHeight() {
         int result = 0;
         int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
@@ -304,14 +292,6 @@ public class EditMultipleChoice extends AppCompatActivity {
             result = getResources().getDimensionPixelSize(resourceId);
         }
         return result;
-    }
-
-    private void setMargins (View view, int left, int top, int right, int bottom) {
-        if (view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
-            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
-            p.setMargins(left, top, right, bottom);
-            view.requestLayout();
-        }
     }
 
     public void setToolbar(String title){

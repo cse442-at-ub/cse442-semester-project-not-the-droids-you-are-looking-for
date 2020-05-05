@@ -190,15 +190,6 @@ public class StudentShortAnswer extends AppCompatActivity {
     }
 
 
-    //public void set_description(){ txt_box.setText(question.getDescription()); }
-    /*
-     *   public void switch_to_main(View view)
-     *   This function will be used switch from the short Activity and store the current students
-     *   answer in a question object
-     *
-     */
-
-
     public void switch_to_main(){
         String result = collect_answer();
         int index_c = StudentData.getCurrentcourse(), index_q = StudentData.getLastclickedquestion();
