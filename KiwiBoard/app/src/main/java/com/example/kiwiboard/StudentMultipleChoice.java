@@ -92,7 +92,7 @@ public class StudentMultipleChoice extends AppCompatActivity {
                         submission_index = storeSubmission();
                         question = getQuestion();
                         if(question != null) {
-                            question.setMcresponse(submission_index);         // the students mcresponse is their submission index
+                            question.setMcresponse(submission_index - 1);         // the students mcresponse is their submission index
                         }
                         Toast.makeText(getApplicationContext(), "Submitted Choice " + submission_index,
                                 Toast.LENGTH_SHORT).show();

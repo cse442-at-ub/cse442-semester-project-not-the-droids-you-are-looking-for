@@ -47,23 +47,7 @@ public class StudentMCQuestionView extends AppCompatActivity {
         choices = questions.get(courseIndex).getChoices();
         displayQuestion();
 
-        if(question.getSubmissionEntered()) {
-            int submission_id = question.getMcresponse();
-            if(submission_id != question.getMcanswer()) {
-                if(submission_id == 1) {
-                    rb1.setTextColor(Color.RED);
-                }
-                else if(submission_id == 2) {
-                    rb2.setTextColor(Color.RED);
-                }
-                else if(submission_id == 3) {
-                    rb3.setTextColor(Color.RED);
-                }
-                else if(submission_id == 4) {
-                    rb4.setTextColor(Color.RED);
-                }
-            }
-        }
+
     }
 
 
@@ -105,18 +89,37 @@ public class StudentMCQuestionView extends AppCompatActivity {
 
             int i = 0;
             // populate the choices into the radio button texts
+
             for (i = 0; i < 4; i++){
 
-                if(i == question.getMcresponse()) {
+                if(i == question.getMcresponse() ) {
+                    rblist[i].setTextColor(Color.RED);
+
+                }
+                if(i == answer_index ){
                     rblist[i].setTextColor(Color.GREEN);
                     rblist[i].setChecked(true);
                 }
-              if(i < choices.size())
-                rblist[i].setText(choices.get(i));
-             else
-                 rblist[i].setVisibility(View.GONE);
+                if(i < choices.size())
+                    rblist[i].setText(choices.get(i));
+                else
+                    rblist[i].setVisibility(View.GONE);
             }
-            ((TextView) findViewById(R.id.studentMC_correctTXT)).setText(question.getChoices().get(answer_index));
+
+//            rb1.setText(choice1);       // rb1 is choices [0]
+//            rb2.setText(choice2);       // rb2 is choices [1]
+//            rb3.setText(choice3);       // rb3 is choices [2]
+//            rb4.setText(choice4);       // rb4 is choices [3]
+//
+//            // display the correct answer to the student
+//            if(answer_index == 0)
+//                rb1.setTextColor(Color.GREEN);
+//            else if(answer_index == 1)
+//                rb2.setTextColor(Color.GREEN);
+//            else if(answer_index == 2)
+//                rb3.setTextColor(Color.GREEN);
+//            else if(answer_index == 3)
+//                rb4.setTextColor(Color.GREEN);
         }
     }
     @Override
