@@ -50,6 +50,12 @@ public class CreateCourseFragment extends Fragment {
                     Course course = new Course(courseName, instructorName, description);
                     ProfData.addCourse(course);
                     Server.createCourse(getActivity(), ProfData.getID(), "p", description, courseName);
+                    ProfMain profmain = (ProfMain) getActivity();
+                    assert profmain != null;
+                    ProfData.setCurrentcourse(ProfData.getCourses().size() - 1);
+                    profmain.setToolbarText(courseName);
+                    profmain.setDrawerCourse(courseName);
+                    profmain.switchToHome();
                 }
                 //ProfMain profmain = (ProfMain) getActivity();
                 //assert profmain != null;
