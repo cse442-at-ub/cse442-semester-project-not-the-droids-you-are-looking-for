@@ -15,6 +15,7 @@ import java.util.Locale;
 
 public class StudentShortAnswer extends AppCompatActivity {
     private ArrayList<Question> questions;
+    private Question question;
     private Course currentCourse;
     private ProgressBar progressBar;
     private TextView txtCountdownText;
@@ -86,42 +87,69 @@ public class StudentShortAnswer extends AppCompatActivity {
 
 
     private void displayQuestion() {
-        Question question = getQuestion();
+        question = getQuestion();
         if(question == null) {
             return;
         }
         questionDescription.setText(question.getDescription());     // set text for question description
         questionNumber.setText("#" + question.getQuestionnumber());     // set text for question number
         timeLeftInMillis = COUNTDOWN_IN_MILLIS;
+
+
+        if(question.isLaunched()) {
+            // compare the current time to time it was posted
+            // if the time difference is less than the timeLimit then there is still time Left
+            long timeDifference = System.currentTimeMillis() - question.getTimelaunched();
+            if(timeDifference > COUNTDOWN_IN_MILLIS)
+                timeLeftInMillis = 0;
+            else
+                timeLeftInMillis = COUNTDOWN_IN_MILLIS - (System.currentTimeMillis() - question.getTimelaunched());
+            answer.setText(question.getTextresponse());
+        }
+        else {
+            question.setLaunched(true);
+            question.setTimelaunched(System.currentTimeMillis());
+            timeLeftInMillis = COUNTDOWN_IN_MILLIS;
+        }
         startTimer();
     }
 
     private void startTimer() {
-        countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                timeLeftInMillis = millisUntilFinished;
-                updateCountDownText();
-                // need to set the percentage for the progress bar
-                // 1. Progress Bar only had 100 different settings. 0-100 integers
-                int progress = (int) (100 * timeLeftInMillis / COUNTDOWN_IN_MILLIS);
-                progressBar.setProgress(progress);
+        if(timeLeftInMillis > 0) {
+            countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    timeLeftInMillis = millisUntilFinished;
+                    updateCountDownText();
+                    // need to set the percentage for the progress bar
+                    // 1. Progress Bar only had 100 different settings. 0-100 integers
+                    int progress = (int) (100 * timeLeftInMillis / COUNTDOWN_IN_MILLIS);
+                    progressBar.setProgress(progress);
 
-            }
-            @Override
-            public void onFinish() {
-                timeLeftInMillis = 0;
-                updateCountDownText();
-                countDownTimer.cancel();
-                progressBar.clearAnimation();
-                switch_to_main();
+                }
+                @Override
+                public void onFinish() {
+                    timeLeftInMillis = 0;
+                    question.setActive(false);
+                    updateCountDownText();
+                    countDownTimer.cancel();
+                    progressBar.clearAnimation();
+                    switch_to_main();
 
 
-                // checkAnswer will lock in the answer selected when time runs out
-                // when coded cancel the countDownTimer inside of it
-                // checkAnswer();
-            }
-        }.start();
+                    // checkAnswer will lock in the answer selected when time runs out
+                    // when coded cancel the countDownTimer inside of it
+                    // checkAnswer();
+                }
+            }.start();
+        }
+        else {
+            int progress = 0;
+            timeLeftInMillis = 0;
+            updateCountDownText();
+            progressBar.setProgress(progress);
+            progressBar.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void updateCountDownText() {

@@ -42,7 +42,12 @@ public class QuestionHolder extends RecyclerView.ViewHolder {
                             activityContext.startActivity(new Intent(activityContext, StudentMCQuestionView.class));
                         }
                     } else if (type == Question.QuestionType.SHORTANSWER) {
-                        activityContext.startActivity(new Intent(activityContext, StudentShortAnswer.class));
+                        if(question.isActive()) {
+                            activityContext.startActivity(new Intent(activityContext, StudentShortAnswer.class));
+                        }
+                        else {
+                            activityContext.startActivity(new Intent(activityContext, StudentSAQuestionView.class));
+                        }
                     }
                 }
                 if (ProfData.isProfessormode()){

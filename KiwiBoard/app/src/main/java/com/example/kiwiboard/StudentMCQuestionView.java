@@ -117,20 +117,6 @@ public class StudentMCQuestionView extends AppCompatActivity {
                  rblist[i].setVisibility(View.GONE);
             }
             ((TextView) findViewById(R.id.studentMC_correctTXT)).setText(question.getChoices().get(answer_index));
-//            rb1.setText(choice1);       // rb1 is choices [0]
-//            rb2.setText(choice2);       // rb2 is choices [1]
-//            rb3.setText(choice3);       // rb3 is choices [2]
-//            rb4.setText(choice4);       // rb4 is choices [3]
-//
-//            // display the correct answer to the student
-//            if(answer_index == 0)
-//                rb1.setTextColor(Color.GREEN);
-//            else if(answer_index == 1)
-//                rb2.setTextColor(Color.GREEN);
-//            else if(answer_index == 2)
-//                rb3.setTextColor(Color.GREEN);
-//            else if(answer_index == 3)
-//                rb4.setTextColor(Color.GREEN);
         }
     }
     @Override
@@ -140,10 +126,6 @@ public class StudentMCQuestionView extends AppCompatActivity {
         // Hide the status bar.
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
-        // Remember that you should never show the action bar if the
-        // status bar is hidden, so hide that too if necessary.
-        //ActionBar actionBar = getActionBar();
-        //actionBar.hide();
     }
 
 

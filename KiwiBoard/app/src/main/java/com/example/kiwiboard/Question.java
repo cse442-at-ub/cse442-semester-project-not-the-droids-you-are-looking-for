@@ -21,8 +21,9 @@ class Question {
     private int questionnumber;                 // The index of the question
     private boolean inQueue = false;            // Whether the question is in the queue
     private boolean isActive = false;           // Whether the question is active
-    private boolean submissionEntered = false;  // Whether the student has entered an answer
-    private long timelaunched = 0;              // Exact time when the question was launched
+    private boolean submissionEntered = false;  // Did the student enter a submission for the question yet
+    private boolean isLaunched = false;                 // TEMPORARY: For Asynchronous Student Timer for Sprint 4.
+    private long timelaunched = 0;               // Exact time when the question was launched
     private int timelimit = 0;                  // Amount of time the question lasts
 
     private double pointsreceived;               // Points received by student. Null for professors.
@@ -153,6 +154,16 @@ class Question {
     // Set whether the question is active
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    // Check if the question is has been clicked by student already.
+    public boolean isLaunched() {
+        return isLaunched;
+    }
+
+    // Set whether the question has been opened already or not.
+    public void setLaunched(boolean launched) {
+        isLaunched = launched;
     }
 
     // was a submission entered for the question
