@@ -178,18 +178,11 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
     }
 
     // Buttons for fragments
-
     public void switchToHome(){
-        getSupportFragmentManager().beginTransaction().replace(R.id.professor_fragment_container,
+        getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.fade_in,
+                android.R.anim.fade_out).replace(R.id.professor_fragment_container,
                 new ProfHomeFragment()).commit();
         navigationView.setCheckedItem(R.id.nav_professor_home);
-    }
-
-    public void createQuestionMenu(View view) {
-        PopupMenu popup = new PopupMenu(this, view);
-        popup.setOnMenuItemClickListener(this);
-        popup.inflate(R.menu.question_creation_menu);
-        popup.show();
     }
 
 
