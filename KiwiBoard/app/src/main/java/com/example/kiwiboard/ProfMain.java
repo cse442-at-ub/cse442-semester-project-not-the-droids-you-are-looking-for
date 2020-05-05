@@ -78,9 +78,12 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
                         new CreateCourseFragment()).commit();
                 navigationView.setCheckedItem(R.id.nav_professor_create_class);
            } else{
+                //getSupportFragmentManager().beginTransaction().replace(R.id.professor_fragment_container,
+               //         new ProfHomeFragment()).commit();
+               // navigationView.setCheckedItem(R.id.nav_professor_home);
                 getSupportFragmentManager().beginTransaction().replace(R.id.professor_fragment_container,
-                        new ProfHomeFragment()).commit();
-                navigationView.setCheckedItem(R.id.nav_professor_home);
+                        new ProfCoursesFragment()).commit();
+                navigationView.setCheckedItem(R.id.nav_professor_classes);
             }
         }
     }
@@ -156,6 +159,7 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
     public void switchToHome(){
         getSupportFragmentManager().beginTransaction().replace(R.id.professor_fragment_container,
                 new ProfHomeFragment()).commit();
+        navigationView.setCheckedItem(R.id.nav_professor_home);
     }
 
     public void createQuestionMenu(View view) {

@@ -32,7 +32,7 @@ import java.util.List;
 public class Server {
 
     public enum ParseMethod{
-        login, register, loadUserData, createCourse, loadQuestions, createQueueQuestion, createQuestion; // Parse Methods
+        login, register, loadUserData, createCourse, loadQuestions, loadQueueQuestions, createQueueQuestion, createQuestion; // Parse Methods
     }
 
     private static String basePath = "https://www-student.cse.buffalo.edu/CSE442-542/2020-spring/cse-442p/";
@@ -143,36 +143,8 @@ public class Server {
     public static void parseUserData(Context context, String json, String mode) {
 
         if (!json.contains("results")){
-            Log.i("STATUS", "No results");
-            final Context mcontext = context;
-            if (context instanceof Login) {
-                loginHandler.post(new Runnable(){
-                    public void run() {
-                        if(ProfData.isProfessormode())
-                            mcontext.startActivity(new Intent(mcontext, ProfMain.class));
-                        if(StudentData.isStudentmode())
-                            mcontext.startActivity(new Intent(mcontext, StudentMain.class));
-                        Login login = (Login) mcontext;
-                        login.finish();
-                    }
-                });
-            } else if (context instanceof ProfRegistration){
-                registrationHandler.post(new Runnable(){
-                    public void run() {
-                        mcontext.startActivity(new Intent(mcontext, ProfMain.class));
-                        ProfRegistration profRegistration = (ProfRegistration) mcontext;
-                        profRegistration.finish();
-                    }
-                });
-            } else if (context instanceof StudentRegistration){
-                registrationHandler.post(new Runnable(){
-                    public void run() {
-                        mcontext.startActivity(new Intent(mcontext, StudentMain.class));
-                        StudentRegistration studentRegistration = (StudentRegistration) mcontext;
-                        studentRegistration.finish();
-                    }
-                });
-            }
+            Log.i("STATUS", "No courses");
+            exitAuthtoMain(context);
             return;
         }
 
@@ -227,8 +199,42 @@ public class Server {
             courseID = course.getID();
             loadQuestions(context, courseID);
         }
-
     }
+
+    public static void exitAuthtoMain (Context context){
+        final Context mcontext = context;
+        if (context instanceof Login) {
+            loginHandler.post(new Runnable(){
+                public void run() {
+                    if(ProfData.isProfessormode())
+                        mcontext.startActivity(new Intent(mcontext, ProfMain.class));
+                    if(StudentData.isStudentmode())
+                        mcontext.startActivity(new Intent(mcontext, StudentMain.class));
+                    Login login = (Login) mcontext;
+                    login.finish();
+                }
+            });
+        } else if (context instanceof ProfRegistration){
+            registrationHandler.post(new Runnable(){
+                public void run() {
+                    mcontext.startActivity(new Intent(mcontext, ProfMain.class));
+                    ProfRegistration profRegistration = (ProfRegistration) mcontext;
+                    profRegistration.finish();
+                }
+            });
+        } else if (context instanceof StudentRegistration){
+            registrationHandler.post(new Runnable(){
+                public void run() {
+                    mcontext.startActivity(new Intent(mcontext, StudentMain.class));
+                    StudentRegistration studentRegistration = (StudentRegistration) mcontext;
+                    studentRegistration.finish();
+                }
+            });
+        }
+        return;
+    }
+
+
     public static void createCourse(Context context, String userID, String mode, String description, String courseName){
         JSONObject json = new JSONObject();
         try {
@@ -270,40 +276,190 @@ public class Server {
         Log.i("SCRIPT", "questions.php");
         get("questions.php", json, ParseMethod.loadQuestions, context);
     }
+    public static Question.QuestionType stringToType(String type){
+        if (type.equals("SA"))
+            return Question.QuestionType.SHORTANSWER;
+        if (type.equals("MC"))
+            return Question.QuestionType.MULTIPLECHOICE;
+        return null;
+    }
     public static void parseQuestions(Context context, String json, String courseID){
 
-
-
-
-        final Context mcontext = context;
-        if (context instanceof Login) {
-            loginHandler.post(new Runnable(){
-                public void run() {
-                    if(ProfData.isProfessormode())
-                        mcontext.startActivity(new Intent(mcontext, ProfMain.class));
-                    if(StudentData.isStudentmode())
-                        mcontext.startActivity(new Intent(mcontext, StudentMain.class));
-                    Login login = (Login) mcontext;
-                    login.finish();
-                }
-            });
-        } else if (context instanceof ProfRegistration){
-            registrationHandler.post(new Runnable(){
-                public void run() {
-                    mcontext.startActivity(new Intent(mcontext, ProfMain.class));
-                    ProfRegistration profRegistration = (ProfRegistration) mcontext;
-                    profRegistration.finish();
-                }
-            });
-        } else if (context instanceof StudentRegistration){
-            registrationHandler.post(new Runnable(){
-                public void run() {
-                    mcontext.startActivity(new Intent(mcontext, StudentMain.class));
-                    StudentRegistration studentRegistration = (StudentRegistration) mcontext;
-                    studentRegistration.finish();
-                }
-            });
+        if (!json.contains("results")){
+            Log.i("STATUS", "No questions");
+            if (ProfData.isProfessormode()){
+                loadQueueQuestions(context, courseID);
+            } else{
+            exitAuthtoMain(context);
+            }
+            return;
         }
+
+        ArrayList<Question> questions = new ArrayList<>();
+        String results = "";
+        JSONObject jsonObject = null;
+        try {
+            jsonObject  = new JSONObject(json);
+            JSONArray jarray = jsonObject.getJSONArray("results");
+            results = jarray.toString();
+
+            ArrayList<String> choices = new ArrayList<>();
+            String name, desc, ident, profname;
+            Question.QuestionType type;
+            Question question;
+            Gson gson = new Gson();
+            Parser container;
+            for(int i = 0; i < jarray.length(); i++)
+            {
+                JSONObject object = jarray.getJSONObject(i);
+                container = gson.fromJson(object.toString(), Parser.class);
+                choices = new ArrayList<>();
+                if (!container.getmulti_choice1().equals(""))
+                    choices.add(container.getmulti_choice1());
+                if (!container.getmulti_choice2().equals(""))
+                    choices.add(container.getmulti_choice2());
+                if (!container.getmulti_choice3().equals(""))
+                    choices.add(container.getmulti_choice3());
+                if (!container.getmulti_choice4().equals(""))
+                    choices.add(container.getmulti_choice4());
+                if (!container.getmulti_choice5().equals(""))
+                    choices.add(container.getmulti_choice5());
+                ident = container.getId();
+                desc = container.getDescription();
+                type = stringToType(container.getType());
+                question = new Question(type, desc);
+                question.setID(ident);
+                question.setMaxpoints((double)container.getPoints());
+                question.setMcanswer(container.getMc_answer());
+                question.setTextanswer(container.getSa_answer());
+                question.setTimelimit(container.getTotal_time());
+                question.setTimelaunched(container.getLog_time());
+                question.setNumericanswer(container.getNum_answer());
+                question.setType(type);
+                question.setChoices(choices);
+                question.setInQueue(false);
+                questions.add(question);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Course course = null;
+        int cindex;
+        // Store courses into data structures
+        if (ProfData.isProfessormode()){
+            cindex = ProfData.getCurrentcourse();
+            course = ProfData.getCourse(cindex);
+            course.setQuestions(questions);
+            ProfData.setCourse(cindex, course);
+            Log.i("CURRENT COURSE", course.getCourseName());
+        }
+        if (StudentData.isStudentmode()){
+            cindex = StudentData.getCurrentcourse();
+            course = StudentData.getCourse(cindex);
+            course.setQuestions(questions);
+            StudentData.setCourse(cindex, course);
+            Log.i("CURRENT COURSE", course.getCourseName());
+        }
+
+        if (ProfData.isProfessormode()){
+            loadQueueQuestions(context, courseID);
+            return;
+        }
+        exitAuthtoMain(context);
+    }
+
+    public static void loadQueueQuestions(Context context, String courseID){
+        JSONObject json = new JSONObject();
+        try {
+            json.put("action", "get_all");
+            json.put("course_id", courseID);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Log.i("SCRIPT", "questions.php");
+        get("draft_questions.php", json, ParseMethod.loadQueueQuestions, context);
+    }
+    public static void parseQueueQuestions(Context context, String json, String courseID){
+
+        if (!json.contains("results")){
+            Log.i("STATUS", "No queue questions");
+            exitAuthtoMain(context);
+            return;
+        }
+
+        ArrayList<Question> questions = new ArrayList<>();
+        String results = "";
+        JSONObject jsonObject = null;
+        try {
+            jsonObject  = new JSONObject(json);
+            JSONArray jarray = jsonObject.getJSONArray("results");
+            results = jarray.toString();
+
+            ArrayList<String> choices = new ArrayList<>();
+            String name, desc, ident, profname;
+            Question.QuestionType type;
+            Question question;
+            Gson gson = new Gson();
+            Parser container;
+            for(int i = 0; i < jarray.length(); i++)
+            {
+                JSONObject object = jarray.getJSONObject(i);
+                container = gson.fromJson(object.toString(), Parser.class);
+                choices = new ArrayList<>();
+                if (container.getmulti_choice1() != null && !container.getmulti_choice1().equals(""))
+                    choices.add(container.getmulti_choice1());
+                if (container.getmulti_choice2() != null && !container.getmulti_choice2().equals(""))
+                    choices.add(container.getmulti_choice2());
+                if (container.getmulti_choice3() != null && !container.getmulti_choice3().equals(""))
+                    choices.add(container.getmulti_choice3());
+                if (container.getmulti_choice4() != null && !container.getmulti_choice4().equals(""))
+                    choices.add(container.getmulti_choice4());
+                if (container.getmulti_choice5() != null && !container.getmulti_choice5().equals(""))
+                    choices.add(container.getmulti_choice5());
+                ident = container.getId();
+                desc = container.getDescription();
+                type = stringToType(container.getType());
+                question = new Question(type, desc);
+                question.setID(ident);
+                question.setMaxpoints((double)container.getPoints());
+                question.setMcanswer(container.getMc_answer());
+                question.setTextanswer(container.getSa_answer());
+                question.setNumericanswer(container.getNum_answer());
+                question.setChoices(choices);
+                question.setQuestionnumber(i + 1);
+                question.setInQueue(true);
+                question.setActive(false);
+                question.setType(type);
+                questions.add(question);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Course course = null;
+        int cindex;
+        // Store courses into data structures
+        if (ProfData.isProfessormode()){
+            cindex = ProfData.getCurrentcourse();
+            course = ProfData.getCourse(cindex);
+            course.setQueue(questions);
+            ProfData.setCourse(cindex, course);
+            Log.i("CURRENT COURSE", course.getCourseName());
+        }
+        if (StudentData.isStudentmode()){
+            cindex = StudentData.getCurrentcourse();
+            course = StudentData.getCourse(cindex);
+            course.setQueue(questions);
+            StudentData.setCourse(cindex, course);
+            Log.i("CURRENT COURSE", course.getCourseName());
+        }
+
+
+        exitAuthtoMain(context);
     }
 
     public static void createQuestion(Context context, Question newquestion){ // Create new question
@@ -498,6 +654,9 @@ public class Server {
                             break;
                         case loadQuestions:
                             parseQuestions(context, jsonresult, inputJson.getString("course_id"));
+                            break;
+                        case loadQueueQuestions:
+                            parseQueueQuestions(context, jsonresult, inputJson.getString("course_id"));
                             break;
                         case createCourse:
                             parseNewCourse(context, jsonresult, inputJson.getString("mode"));

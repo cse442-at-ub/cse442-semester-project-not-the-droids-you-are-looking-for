@@ -73,6 +73,7 @@ public class ProfCoursesFragment extends Fragment {
                 ProfMain profMain = (ProfMain) getActivity();
                 profMain.setToolbarText(coursetext);
                 profMain.setDrawerCourse(coursetext);
+                profMain.switchToHome();
             }
         });
 
