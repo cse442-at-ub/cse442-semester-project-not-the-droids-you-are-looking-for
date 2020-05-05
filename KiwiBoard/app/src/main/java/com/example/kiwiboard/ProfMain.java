@@ -69,8 +69,7 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
         TextView navheaderlbl = hview.findViewById(R.id.txtnavHeaderlbl);
         navheaderlbl.setText(coursetext);
 
-        TextView navsublbl = hview.findViewById(R.id.txtNavSublbl);
-        navsublbl.setText(ProfData.getEmail());
+        setEmailText(ProfData.getEmail());
 
         if (savedInstanceState == null) {
             if (ProfData.getCourses() == null){
@@ -83,6 +82,29 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
                 navigationView.setCheckedItem(R.id.nav_professor_home);
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        String coursetext;
+        int currentcourse = ProfData.getCurrentcourse();
+        if (currentcourse != -1){
+            coursetext = ProfData.getCourses().get(currentcourse).getCourseName();
+        } else {
+            coursetext = "No course selected";
+        }
+        setDrawerCourse(coursetext);
+
+        if(ProfData.getEmail() != null)
+            setEmailText(ProfData.getEmail());
+    }
+
+    public  void setEmailText(String email){
+        View hview = navigationView.getHeaderView(0);
+        TextView navsublbl = hview.findViewById(R.id.txtNavSublbl);
+        navsublbl.setText(email);
     }
 
     public void setToolbarText(String text){
@@ -134,7 +156,8 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
                 startActivity(new Intent(ProfMain.this, Login.class));
                 break;
             case R.id.nav_professor_settings:
-                startActivity(new Intent(ProfMain.this, ProfSettings.class));
+                //startActivity(new Intent(ProfMain.this, ProfSettings.class));
+                ProfSettings.LoadContext(this);
                 break;
         }
 

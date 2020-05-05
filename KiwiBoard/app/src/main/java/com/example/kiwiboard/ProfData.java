@@ -139,6 +139,9 @@ public class ProfData {
     // Removes the course at the index. Indices start at 0.
     public static void removeCourse(int index){
         courses.remove(index);
+        if(index == currentcourse){
+            currentcourse = -1;
+        }
     }
 
     // Clears all professor data

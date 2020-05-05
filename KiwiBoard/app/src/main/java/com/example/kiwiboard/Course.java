@@ -178,6 +178,11 @@ class Course {
         students.add(student);
     }
 
+    // Remove a new student from an existing Student object
+    public void removeStudent(int num){
+        students.remove(num);
+    }
+
     // Adds a new student using Student's default constructor with parameters
     public void addNewStudent(Question.QuestionType type, String description, ArrayList<String> choices, int questionnumber, double pointsreceived, int maxpoints, int mcanswer, double numericanswer, String textanswer, ArrayList<Integer> multipleanswers, int mcresponse, ArrayList<Integer> multipleresponses, String textresponse, double numericresponse){
         queue.add(new Question(type, description, choices, questionnumber, pointsreceived, maxpoints, mcanswer, numericanswer, textanswer, multipleanswers, mcresponse, multipleresponses, textresponse, numericresponse));
