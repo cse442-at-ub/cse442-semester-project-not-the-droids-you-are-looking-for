@@ -82,6 +82,23 @@ public class StudentMain extends AppCompatActivity implements NavigationView.OnN
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        String coursetext;
+        int currentcourse = ProfData.getCurrentcourse();
+        if (currentcourse != -1){
+            coursetext = ProfData.getCourses().get(currentcourse).getCourseName();
+        } else {
+            coursetext = "No course selected";
+        }
+        setDrawerCourse(coursetext);
+
+        if(StudentData.getEmail() != null)
+            setEmailText(StudentData.getEmail());
+    }
+
     public void setToolbarText(String text){
         Objects.requireNonNull(getSupportActionBar()).setTitle(text);
     }

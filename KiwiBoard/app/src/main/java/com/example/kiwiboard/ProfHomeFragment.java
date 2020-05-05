@@ -82,6 +82,15 @@ public class ProfHomeFragment extends Fragment {
 
         int courseindex = ProfData.getCurrentcourse();
         if (courseindex < 0){
+            activeQuestions = new ArrayList<>();
+            queueQuestions = new ArrayList<>();
+
+            activeAdapter = new QuestionAdapter(getActivity(), activeQuestions);
+            queueAdapter = new QuestionAdapter(getActivity(), queueQuestions);
+
+            activeRecyclerView.setAdapter(activeAdapter);
+            queueRecyclerView.setAdapter(queueAdapter);
+
             return;
         }
 

@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -72,7 +73,6 @@ public class StudentSettings extends AppCompatActivity {
         Button button1 = findViewById(R.id.btnRemoveClass);
         Button button2 = findViewById(R.id.btnChangeEmail);
         Button button3 = findViewById(R.id.btnChangePassword);
-        Button button4 = findViewById(R.id.btnClearData);
 
         //Click Listener
         button1.setOnClickListener(new View.OnClickListener(){
@@ -384,30 +384,6 @@ public class StudentSettings extends AppCompatActivity {
                 });
             }
         });
-
-        button4.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View V){
-                AlertDialog.Builder tBuilder = new AlertDialog.Builder(StudentSettings.this);
-                tBuilder.setTitle("Clear Data");
-                tBuilder.setMessage("Are You Sure You Want To All Your Clear?");
-                tBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        StudentData.clearAllData();
-                        Toast.makeText(StudentSettings.this, "All Data has all been cleared", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                tBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                tBuilder.show();
-            }
-        });
-
     }
 
     @Override
@@ -425,6 +401,8 @@ public class StudentSettings extends AppCompatActivity {
 
     public void setToolbar(String title){
         toolbar = (Toolbar) findViewById(R.id.settings_toolbar);
+        ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) toolbar.getLayoutParams();
+        params.topMargin = getStatusBarHeight();
         toolbar.setTitle(title);
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_back));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -434,6 +412,15 @@ public class StudentSettings extends AppCompatActivity {
                 onBackPressed();
             }
         });
+    }
+
+    public int getStatusBarHeight() {
+        int result = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
     }
 }
 
