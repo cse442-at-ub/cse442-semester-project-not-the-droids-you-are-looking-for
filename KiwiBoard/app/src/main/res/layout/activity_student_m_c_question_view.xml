@@ -122,37 +122,39 @@
 
         <LinearLayout
             android:id="@+id/linearLayout9"
-            android:layout_width="381dp"
-            android:layout_height="188dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/studentMC_choices">
+            app:layout_constraintTop_toBottomOf="@+id/whiteBar">
 
             <TextView
                 android:id="@+id/studentMC_correct"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:text="Corrent Answer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Correct Answer:"
                 android:textAlignment="center"
                 android:textColor="@color/White"
                 android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/studentMC_correctTXT"
-
-                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:drawableRight="@drawable/ic_check_white_24dp"
                 android:text="@string/choice_C_label"
-
+                android:layout_marginTop="20dp"
                 android:textColor="@color/White"
-                android:textSize="25sp" />
+                android:textSize="24sp" />
         </LinearLayout>
 
         <TextView
+            android:id="@+id/whiteBar"
             android:layout_width="409dp"
             android:layout_height="12dp"
             android:background="@color/White"

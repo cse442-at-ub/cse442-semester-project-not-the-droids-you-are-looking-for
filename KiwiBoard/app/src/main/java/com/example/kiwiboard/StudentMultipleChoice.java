@@ -1,7 +1,6 @@
 package com.example.kiwiboard;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -34,7 +33,7 @@ public class StudentMultipleChoice extends AppCompatActivity {
     RadioButton rb4;
     private Button submitButton;
     // Timer Variables
-    private static final long COUNTDOWN_IN_MILLIS = 20000;
+    private static final long COUNTDOWN_IN_MILLIS = 30000;
     private CountDownTimer countDownTimer;
     private long timeLeftInMillis;           // how much time is left
     private long endTime;                    // what time does the timer run out
@@ -87,18 +86,24 @@ public class StudentMultipleChoice extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(rb1.isChecked()||rb2.isChecked()||rb3.isChecked()||rb4.isChecked()) {
-                    question.setSubmissionEntered(true);
-                    submission_index = storeSubmission();
-                    question = getQuestion();
-                    if(question != null) {
-                        question.setMcresponse(submission_index);         // the students mcresponse is their submission index
+                if(question.isActive()) {
+                    if(rb1.isChecked()||rb2.isChecked()||rb3.isChecked()||rb4.isChecked()) {
+                        question.setSubmissionEntered(true);
+                        submission_index = storeSubmission();
+                        question = getQuestion();
+                        if(question != null) {
+                            question.setMcresponse(submission_index);         // the students mcresponse is their submission index
+                        }
+                        Toast.makeText(getApplicationContext(), "Submitted Choice " + submission_index,
+                                Toast.LENGTH_SHORT).show();
                     }
-                    Toast.makeText(getApplicationContext(), "Submitted Choice " + submission_index,
-                            Toast.LENGTH_SHORT).show();
+                    else {
+                        Toast.makeText(getApplicationContext(), "Must select an answer!",
+                                Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else {
-                    Toast.makeText(getApplicationContext(), "Must select an answer!",
+                    Toast.makeText(getApplicationContext(), "No time left!",
                             Toast.LENGTH_SHORT).show();
                 }
             }
@@ -154,38 +159,60 @@ public class StudentMultipleChoice extends AppCompatActivity {
             rb4.setText(choice4);
         }
 
-        timeLeftInMillis = COUNTDOWN_IN_MILLIS;
+        if(question.isLaunched()) {
+            // compare the current time to time it was posted
+            // if the time difference is less than the timeLimit then there is still time Left
+            long timeDifference = System.currentTimeMillis() - question.getTimelaunched();
+            if(timeDifference > COUNTDOWN_IN_MILLIS)
+                timeLeftInMillis = 0;
+            else
+                timeLeftInMillis = COUNTDOWN_IN_MILLIS - (System.currentTimeMillis() - question.getTimelaunched());
+        }
+        else {
+            question.setLaunched(true);
+            question.setTimelaunched(System.currentTimeMillis());
+            timeLeftInMillis = COUNTDOWN_IN_MILLIS;
+        }
         startTimer();
     }
 
     private void startTimer() {
-        //endTime = System.currentTimeMillis() + timeLeftInMillis;
-        countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                timeLeftInMillis = millisUntilFinished;
-                updateCountDownText();
-                // need to set the percentage for the progress bar
-                // 1. Progress Bar only had 100 different settings. 0-100 integers
-                 int progress = (int) (100 * timeLeftInMillis / COUNTDOWN_IN_MILLIS);
-                 progressBar.setProgress(progress);
-            }
-            @Override
-            public void onFinish() {
-                //timerRunning = false;
-                timeLeftInMillis = 0;
-                updateCountDownText();
-                countDownTimer.cancel();
-                progressBar.clearAnimation();
-                progressBar.setVisibility(View.INVISIBLE);
-                // need to show the student the correct answer
-                // if student clicked a different one make the text
-                showAnswer();
-            }
+        if(timeLeftInMillis > 0) {
+            countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    timeLeftInMillis = millisUntilFinished;
+                    updateCountDownText();
+                    // need to set the percentage for the progress bar
+                    // 1. Progress Bar only had 100 different settings. 0-100 integers
+                    int progress = (int) (100 * timeLeftInMillis / COUNTDOWN_IN_MILLIS);
+                    progressBar.setProgress(progress);
+                }
+                @Override
+                public void onFinish() {
+                    //timerRunning = false;
+                    timeLeftInMillis = 0;
+                    updateCountDownText();
+                    countDownTimer.cancel();
+                    progressBar.clearAnimation();
+                    progressBar.setVisibility(View.INVISIBLE);
+                    // need to show the student the correct answer
+                    // if student clicked a different one make the text
+                    showAnswer();
+                }
 
-        }.start();
-
-        timerRunning = true;
+            }.start();
+            timerRunning = true;
+        }
+        else {
+            timerRunning = false;
+            int progress = 0;
+            timeLeftInMillis = 0;
+            updateCountDownText();
+            progressBar.setProgress(progress);
+            progressBar.setVisibility(View.INVISIBLE);
+            showAnswer();
+        }
     }
 
     private void updateCountDownText() {
@@ -220,18 +247,10 @@ public class StudentMultipleChoice extends AppCompatActivity {
 
     private void showAnswer() {
         // don't accept anymore submissions after answer is displayed
-        submitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(submission_index == 0) {
-                    Toast.makeText(getApplicationContext(), "Time's up! Submit before timer runs out!",
-                            Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    submitButton.setClickable(false);
-                }
-            }
-        });
+        Toast.makeText(getApplicationContext(), "No time left!",
+                Toast.LENGTH_SHORT).show();
+        submitButton.setClickable(false);
+        submitButton.setVisibility(View.INVISIBLE);
         if(question != null) {
             question.setActive(false);      // question is no longer active
         }
