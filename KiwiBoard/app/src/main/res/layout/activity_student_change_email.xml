@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:id="@+id/profTotalContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_gravity="left"
+        android:layout_marginTop="2dp"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="115dp"
+        tools:layout_editor_absoluteY="116dp">
+
+        <TextView
+            android:id="@+id/txtCurrentEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:text=" Current Email: "
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/txtDisplayCurrentEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:text="Email"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="6dp"
+        android:textSize="14dp"
+        android:text="Please enter your new email address and your password."/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txt_newEmail"
+        style="@style/parent">
+
+    <EditText
+        android:id="@+id/editTxt_emailAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="New Email Address"
+        android:drawableRight="@drawable/ic_email_icon"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txt_confirmEmail"
+        style="@style/parent">
+
+    <EditText
+        android:id="@+id/editTxt_confirmEmailAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Confirm Email Address"
+        android:drawableRight="@drawable/ic_email_icon"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txt_pass"
+        style="@style/parent">
+
+    <EditText
+        android:id="@+id/editTxt_confirmEmailPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:hint="Password"
+        android:drawableRight="@drawable/ic_password_key"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>

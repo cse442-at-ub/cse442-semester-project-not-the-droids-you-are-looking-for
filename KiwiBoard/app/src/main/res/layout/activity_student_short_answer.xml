@@ -109,6 +109,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:background="@drawable/rounded_button"
+            android:onClick="cover_switch_to_main"
             android:text="@string/submit_button"
             android:textColor="@color/White"
             app:layout_constraintBottom_toBottomOf="parent"

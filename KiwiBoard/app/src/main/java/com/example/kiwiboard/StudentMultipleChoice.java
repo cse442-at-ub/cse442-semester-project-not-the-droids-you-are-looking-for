@@ -17,21 +17,29 @@ import java.util.Locale;
 public class StudentMultipleChoice extends AppCompatActivity {
     private ArrayList<Question> questions;
     ArrayList<String> choices;
+    private int answer_index;
+    private int submission_index;       // the index of the radio button that was clicked and submitted
     private Course currentCourse;
     private int courseIndex;
     private int questionIndex;
-    private ProgressBar progressBar;
+    private ProgressBar progressBar;    // the circular progress bar that will surround the countdown text
     private TextView txt_timerText;
     private TextView txt_questionNumber;
     private TextView txt_questionDescription;
     private RadioGroup radioGroup;
+    RadioButton rb1;
+    RadioButton rb2;
+    RadioButton rb3;
+    RadioButton rb4;
     private Button submitButton;
     // Timer Variables
-    private static final long COUNTDOWN_IN_MILLIS = 60000;
+    private static final long COUNTDOWN_IN_MILLIS = 30000;
     private CountDownTimer countDownTimer;
-    private long timeLeftInMillis;
+    private long timeLeftInMillis;           // how much time is left
+    private long endTime;                    // what time does the timer run out
+    private boolean timerRunning;            // is the timer running
+    private Question question;               // the question that is clicked
     private long backPressedTime;
-    //private boolean timerRunning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +51,10 @@ public class StudentMultipleChoice extends AppCompatActivity {
         txt_questionNumber = findViewById(R.id.questionNumber);
         txt_timerText = findViewById(R.id.txt_countdown);
         radioGroup = findViewById(R.id.multipleChoiceOptions);
+        rb1 = findViewById(R.id.multchoice1);
+        rb2 = findViewById(R.id.multchoice2);
+        rb3 = findViewById(R.id.multchoice3);
+        rb4 = findViewById(R.id.multchoice4);
         submitButton = findViewById(R.id.submitButton);
         progressBar = findViewById(R.id.progressBar);
 
@@ -52,6 +64,50 @@ public class StudentMultipleChoice extends AppCompatActivity {
         choices = questions.get(courseIndex).getChoices();
         progressBar.setVisibility(View.VISIBLE);
         displayQuestion();
+
+        // if the student has already entered a submission
+        if(question.getSubmissionEntered()) {
+            // click the answer they submitted
+            int submission_id = question.getMcresponse();
+            if(submission_id == 1) {
+                rb1.setChecked(true);
+            }
+            else if(submission_id == 2) {
+                rb2.setChecked(true);
+            }
+            else if(submission_id == 3) {
+                rb3.setChecked(true);
+            }
+            else if(submission_id == 4) {
+                rb4.setChecked(true);
+            }
+        }
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(question.isActive()) {
+                    if(rb1.isChecked()||rb2.isChecked()||rb3.isChecked()||rb4.isChecked()) {
+                        question.setSubmissionEntered(true);
+                        submission_index = storeSubmission();
+                        question = getQuestion();
+                        if(question != null) {
+                            question.setMcresponse(submission_index - 1);         // the students mcresponse is their submission index
+                        }
+                        Toast.makeText(getApplicationContext(), "Submitted Choice " + submission_index,
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), "Must select an answer!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "No time left!",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
@@ -68,18 +124,19 @@ public class StudentMultipleChoice extends AppCompatActivity {
         if(courseindex < 0) {
             return null;
         }
-        Course currentcourse = StudentData.getCourses().get(courseindex);
         this.questionIndex = StudentData.getLastclickedquestion();
         if (this.questionIndex < 0)
             return null;
-        ArrayList<Question> questions = currentcourse.getQuestions();
+        ArrayList<Question> questions = currentCourse.getQuestions();
         return questions.get(this.questionIndex);
     }
 
     private void displayQuestion() {
         radioGroup.clearCheck();
 
-        Question question = getQuestion();
+        //question.setActive(true);
+        question = getQuestion();
+        answer_index = question.getMcanswer();
         if(question == null) {
             return;
         }
@@ -90,10 +147,7 @@ public class StudentMultipleChoice extends AppCompatActivity {
 
         if(question.getChoices() != null) {
             // populate the choices into the radio button texts
-            RadioButton rb1 = findViewById(R.id.multchoice1);
-            RadioButton rb2 = findViewById(R.id.multchoice2);
-            RadioButton rb3 = findViewById(R.id.multchoice3);
-            RadioButton rb4 = findViewById(R.id.multchoice4);
+            choices = questions.get(question.getQuestionnumber() - 1).getChoices();
             String choice1 = choices.get(0);
             String choice2 = choices.get(1);
             String choice3 = choices.get(2);
@@ -105,33 +159,60 @@ public class StudentMultipleChoice extends AppCompatActivity {
             rb4.setText(choice4);
         }
 
-        timeLeftInMillis = COUNTDOWN_IN_MILLIS;
+        if(question.isLaunched()) {
+            // compare the current time to time it was posted
+            // if the time difference is less than the timeLimit then there is still time Left
+            long timeDifference = System.currentTimeMillis() - question.getTimelaunched();
+            if(timeDifference > COUNTDOWN_IN_MILLIS)
+                timeLeftInMillis = 0;
+            else
+                timeLeftInMillis = COUNTDOWN_IN_MILLIS - (System.currentTimeMillis() - question.getTimelaunched());
+        }
+        else {
+            question.setLaunched(true);
+            question.setTimelaunched(System.currentTimeMillis());
+            timeLeftInMillis = COUNTDOWN_IN_MILLIS;
+        }
         startTimer();
     }
 
     private void startTimer() {
-        countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                timeLeftInMillis = millisUntilFinished;
-                updateCountDownText();
-                // need to set the percentage for the progress bar
-                // 1. Progress Bar only had 100 different settings. 0-100 integers
-                 int progress = (int) (100 * timeLeftInMillis / COUNTDOWN_IN_MILLIS);
-                 progressBar.setProgress(progress);
+        if(timeLeftInMillis > 0) {
+            countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    timeLeftInMillis = millisUntilFinished;
+                    updateCountDownText();
+                    // need to set the percentage for the progress bar
+                    // 1. Progress Bar only had 100 different settings. 0-100 integers
+                    int progress = (int) (100 * timeLeftInMillis / COUNTDOWN_IN_MILLIS);
+                    progressBar.setProgress(progress);
+                }
+                @Override
+                public void onFinish() {
+                    //timerRunning = false;
+                    timeLeftInMillis = 0;
+                    updateCountDownText();
+                    countDownTimer.cancel();
+                    progressBar.clearAnimation();
+                    progressBar.setVisibility(View.INVISIBLE);
+                    // need to show the student the correct answer
+                    // if student clicked a different one make the text
+                    showAnswer();
+                }
 
-            }
-            @Override
-            public void onFinish() {
-                timeLeftInMillis = 0;
-                updateCountDownText();
-                countDownTimer.cancel();
-                progressBar.clearAnimation();
-                // checkAnswer will lock in the answer selected when time runs out
-                // when coded cancel the countDownTimer inside of it
-                // checkAnswer();
-            }
-        }.start();
+            }.start();
+            timerRunning = true;
+        }
+        else {
+            timerRunning = false;
+            int progress = 0;
+            timeLeftInMillis = 0;
+            updateCountDownText();
+            progressBar.setProgress(progress);
+            progressBar.setVisibility(View.INVISIBLE);
+            showAnswer();
+        }
     }
 
     private void updateCountDownText() {
@@ -146,10 +227,93 @@ public class StudentMultipleChoice extends AppCompatActivity {
         }
     }
 
+    // return the id of the clicked radio button.
+    private int storeSubmission() {
+        int radioID = 0;
+        if(rb1.isChecked()) {
+            radioID = 1;
+        }
+        else if(rb2.isChecked()) {
+            radioID = 2;
+        }
+        else if(rb3.isChecked()) {
+            radioID = 3;
+        }
+        else if(rb4.isChecked()) {
+            radioID = 4;
+        }
+        return radioID;
+    }
+
+    private void showAnswer() {
+        // don't accept anymore submissions after answer is displayed
+        Toast.makeText(getApplicationContext(), "No time left!",
+                Toast.LENGTH_SHORT).show();
+        submitButton.setClickable(false);
+        submitButton.setVisibility(View.INVISIBLE);
+        if(question != null) {
+            question.setActive(false);      // question is no longer active
+        }
+        // student never hit submit
+        // Check if any radio buttons were checked so they can still get credit if they had right answer selected
+        if(submission_index == 0) {
+            if(rb1.isChecked()) {
+                submission_index = 1;
+            }
+            else if(rb2.isChecked()) {
+                submission_index = 2;
+            }
+            else if(rb3.isChecked()) {
+                submission_index = 3;
+            }
+            else if(rb4.isChecked()) {
+                submission_index = 4;
+            }
+        }
+
+        // Change the correct answer's text to Green
+        // the index of the correct answer was stored in displayQuestion
+        if(answer_index == 0)
+            rb1.setTextColor(Color.GREEN);
+        else if(answer_index == 1)
+            rb2.setTextColor(Color.GREEN);
+        else if(answer_index == 2)
+            rb3.setTextColor(Color.GREEN);
+        else if(answer_index == 3)
+            rb4.setTextColor(Color.GREEN);
+
+        // if the submission index matches the correct answer index
+        if((submission_index - 1) == answer_index) {
+            Toast.makeText(this, "Correct!",
+                    Toast.LENGTH_SHORT).show();
+        }
+        // if the submission index is 0 because no answer was submitted
+        else if(submission_index == 0) {
+            Toast.makeText(this, "Time's up! No submission entered",
+                    Toast.LENGTH_SHORT).show();
+        }
+        // if there was a submission but the index does not match the correct answer index
+        else {
+            if((submission_index - 1) == 0) {
+                rb1.setTextColor(Color.RED);
+            }
+            else if((submission_index - 1) == 1) {
+                rb2.setTextColor(Color.RED);
+            }
+            else if((submission_index - 1) == 2) {
+                rb3.setTextColor(Color.RED);
+            }
+            else if((submission_index - 1) == 3) {
+                rb4.setTextColor(Color.RED);
+            }
+            Toast.makeText(this, "Incorrect",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         if(countDownTimer != null) {
             countDownTimer.cancel();
         }

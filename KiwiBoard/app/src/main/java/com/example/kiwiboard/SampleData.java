@@ -118,11 +118,12 @@ public class SampleData {
         choices = new ArrayList<>(Arrays.asList("James Hutton", "Alfred Wegener", "Charles Lyell", "Harry Hess"));
         mcanswer = 1;
         q14 = new Question(Question.QuestionType.MULTIPLECHOICE, description, choices, -1, 10,10, mcanswer,0,null, null, 0, null, null, 0);
-        q14.setActive(true);
+        //q14.setActive(true);
 
-        description = "What do you find difficult about Geology?";
-        q15 = new Question(Question.QuestionType.SHORTANSWER, description, null, -1, 10,10, 0,0,"I hear to help", null, 0, null, null, 0);
-        q15.setActive(true);
+        description = "What is albedo?";
+        String profAnswer = "Albedo is a measure of how much light that hits a surface is reflected without being absorbed.";
+        q15 = new Question(Question.QuestionType.SHORTANSWER, description, null, -1, 10,10, 0,0,profAnswer, null, 0, null, null, 0);
+        //q15.setActive(true);
 
         GeologyQuestions.add(q1);
         GeologyQuestions.add(q2);
@@ -178,6 +179,7 @@ public class SampleData {
 
         description = "Why does the water cycle flow in different orders on different landscapes?";
         q16 = new Question(Question.QuestionType.SHORTANSWER, description, null, -1, 10,10, 0,0,null, null, 0, null, null, 0);
+        q16.setTextanswer("YAY it works!!");
         q16.setInQueue(true);
 
         description = "The color of a mineral in powdered form is termed ______";

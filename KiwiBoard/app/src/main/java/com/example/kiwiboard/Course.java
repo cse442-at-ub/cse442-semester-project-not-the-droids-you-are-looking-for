@@ -5,6 +5,7 @@ import java.util.ArrayList;
 class Course {
     private String courseName;                  // Name of course
     private String instructorname;              // Name of instructor
+    private String ID;                          // ID of course
     private int classKey;                       // Class key
     private String description;                 // Class description
     private ArrayList<Question> questions;      // Question list
@@ -22,7 +23,19 @@ class Course {
         this.description = "";
         this.questions = questions;
         this.queue = new ArrayList<>();
-        this.students = students;
+        this.students = new ArrayList<>();
+        this.urls = new ArrayList<>();
+        this.sitenames = new ArrayList<>();
+    }
+
+    // Secondary constructor
+    public Course(String courseName, String instructorname, String description) {
+        this.courseName = courseName;
+        this.instructorname = instructorname;
+        this.description = description;
+        this.questions = new ArrayList<>();;
+        this.queue = new ArrayList<>();
+        this.students = new ArrayList<>();
         this.urls = new ArrayList<>();
         this.sitenames = new ArrayList<>();
     }
@@ -69,6 +82,8 @@ class Course {
         } else {
             question.setQuestionnumber(queue.size());
         }
+        question.setInQueue(true);
+        question.setActive(false);
         queue.add(question);
     }
     // Get the queue question at the index given
@@ -83,7 +98,15 @@ class Course {
 
     // Adds a new question using Question's default constructor with parameters
     public void addNewQueueQuestion(Question.QuestionType type, String description, ArrayList<String> choices, int questionnumber, double pointsreceived, int maxpoints, int mcanswer, double numericanswer, String textanswer, ArrayList<Integer> multipleanswers, int mcresponse, ArrayList<Integer> multipleresponses, String textresponse, double numericresponse){
-        queue.add(new Question(type, description, choices, questionnumber, pointsreceived, maxpoints, mcanswer, numericanswer, textanswer, multipleanswers, mcresponse, multipleresponses, textresponse, numericresponse));
+        Question question = new Question(type, description, choices, questionnumber, pointsreceived, maxpoints, mcanswer, numericanswer, textanswer, multipleanswers, mcresponse, multipleresponses, textresponse, numericresponse);
+        question.setInQueue(true);
+        question.setActive(false);
+        if (queue.isEmpty()){
+            question.setQuestionnumber(0);
+        } else {
+            question.setQuestionnumber(queue.size());
+        }
+        queue.add(question);
     }
 
     // Removes a question at a particular index. Indices start at 0
@@ -143,9 +166,9 @@ class Course {
         for(int i=0;i<numQuestions;i++)
         {
             sum+=averages.get(i);
-            maxSum=questions.get(i).getMaxpoints();
+            maxSum+=questions.get(i).getMaxpoints();
         }
-        return sum/maxSum*100;
+        return (sum/maxSum)*1000;
     }
 
     void setUrls(ArrayList<String> urls){ this.urls = urls;}
@@ -166,6 +189,11 @@ class Course {
     // Adds a new student from an existing Student object
     public void addStudent(Student student){
         students.add(student);
+    }
+
+    // Remove a new student from an existing Student object
+    public void removeStudent(int num){
+        students.remove(num);
     }
 
     // Adds a new student using Student's default constructor with parameters
@@ -192,6 +220,14 @@ class Course {
 
     public void setInstructorname(String instructorname) {
         this.instructorname = instructorname;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
     public int getClassKey() {

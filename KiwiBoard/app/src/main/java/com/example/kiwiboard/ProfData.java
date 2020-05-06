@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class ProfData {
 
-    private static String name;                 // Professor's name
+    private static String name = "";                 // Professor's name
+    private static String ID;                 // Professor's ID
     private static String email;                // Professor's email
     private static String password;             // Professor's password
     private static int currentcourse = -1;           // Professor's current course
@@ -15,8 +16,9 @@ public class ProfData {
     private static String university;
 
     // Default constructor with parameters
-    public ProfData(String name, String email, String password, int currentcourse, ArrayList<Course> courses) {
+    public ProfData(String name, String ID, String email, String password, int currentcourse, ArrayList<Course> courses) {
         ProfData.name = name;
+        ProfData.name = ID;
         ProfData.email = email;
         ProfData.password = password;
         ProfData.currentcourse = currentcourse;
@@ -37,6 +39,14 @@ public class ProfData {
 
     public static void setName(String name) {
         ProfData.name = name;
+    }
+
+    public static String getID() {
+        return ID;
+    }
+
+    public static void setID(String ID) {
+        ProfData.ID = ID;
     }
 
     public static String getEmail() {
@@ -129,6 +139,9 @@ public class ProfData {
     // Removes the course at the index. Indices start at 0.
     public static void removeCourse(int index){
         courses.remove(index);
+        if(index == currentcourse){
+            currentcourse = -1;
+        }
     }
 
     // Clears all professor data

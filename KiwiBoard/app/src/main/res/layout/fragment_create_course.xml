@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="@+id/CreateClass" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/txtClassname"
         style="@style/TextField"
         android:textAlignment="textStart"
         android:layout_width="168dp"
@@ -29,35 +29,37 @@
         app:layout_constraintTop_toTopOf="@+id/textView7" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/txtAccessCode"
+        style="@style/TextField"
+        android:textAlignment="textStart"
+        android:layout_width="129dp"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toStartOf="@+id/txtClassname"
+        app:layout_constraintTop_toTopOf="@+id/textView6" />
+    
+    <EditText
+        android:id="@+id/txtClassSize"
         style="@style/TextField"
         android:textAlignment="textStart"
         android:layout_width="89dp"
         android:layout_height="33dp"
         app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintStart_toStartOf="@+id/editText6"
+        app:layout_constraintStart_toStartOf="@+id/txtAccessCode"
         app:layout_constraintTop_toTopOf="@+id/textView5" />
-
-    <EditText
-        android:id="@+id/editText6"
-        style="@style/TextField"
-        android:textAlignment="textStart"
-        android:layout_width="129dp"
-        android:layout_height="30dp"
-        app:layout_constraintStart_toStartOf="@+id/editText4"
-        app:layout_constraintTop_toTopOf="@+id/textView6" />
+    
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnCreateCourse"
         android:layout_width="103dp"
         android:layout_height="54dp"
         android:background="#ffffff"
         android:text="Create"
+        android:onClick="createCourse"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.87"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
+        app:layout_constraintTop_toBottomOf="@+id/txtCourseDescription" />
 
     <TextView
         android:id="@+id/textView6"
@@ -79,7 +81,7 @@
         android:text="Create Class"
         android:textColor="#ffffff"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/editText4"
+        app:layout_constraintBottom_toTopOf="@+id/txtClassname"
         app:layout_constraintStart_toStartOf="@+id/textView7"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.473" />
@@ -102,9 +104,9 @@
         android:text="Class Description:"
         android:textColor="#ffffff"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/editText3"
-        app:layout_constraintStart_toStartOf="@+id/editText3"
-        app:layout_constraintTop_toBottomOf="@+id/editText5" />
+        app:layout_constraintBottom_toTopOf="@+id/txtCourseDescription"
+        app:layout_constraintStart_toStartOf="@+id/txtCourseDescription"
+        app:layout_constraintTop_toBottomOf="@+id/txtClassSize" />
 
     <TextView
         android:id="@+id/textView5"
@@ -118,12 +120,12 @@
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/txtCourseDescription"
         style="@style/TextField"
         android:textAlignment="textStart"
         android:layout_width="353dp"
         android:layout_height="236dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/btnCreateCourse"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

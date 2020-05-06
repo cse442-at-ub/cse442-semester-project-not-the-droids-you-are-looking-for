@@ -11,6 +11,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -34,13 +35,6 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prof_main);
 
-        // Load in sample courses for the professor
-        SampleData loader = new SampleData();
-        loader.loadProfCourses();
-        if (ProfData.getEmail() == null || ProfData.getEmail().equals(""))
-            loader.loadProfInfo();
-        ProfData.setCurrentcourse(0);
-
         Toolbar toolbar = findViewById(R.id.professor_toolbar);
         setSupportActionBar(toolbar);
 
@@ -62,6 +56,9 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
         navImage.getLayoutParams().height = 200;
         navImage.getLayoutParams().width = 200;
 
+        if (ProfData.getCourses() != null && ProfData.getCourses().size() > 0)
+            ProfData.setCurrentcourse(0);
+
         String coursetext;
         int currentcourse = ProfData.getCurrentcourse();
         if (currentcourse != -1){
@@ -72,14 +69,45 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
         TextView navheaderlbl = hview.findViewById(R.id.txtnavHeaderlbl);
         navheaderlbl.setText(coursetext);
 
-        TextView navsublbl = hview.findViewById(R.id.txtNavSublbl);
-        navsublbl.setText(ProfData.getEmail());
+        setEmailText(ProfData.getEmail());
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.professor_fragment_container,
-                    new ProfHomeFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_professor_home);
+            if (ProfData.getCourses() == null || ProfData.getCourses().size() == 0){
+                getSupportFragmentManager().beginTransaction().replace(R.id.professor_fragment_container,
+                        new CreateCourseFragment()).commit();
+                navigationView.setCheckedItem(R.id.nav_professor_create_class);
+           } else{
+                //getSupportFragmentManager().beginTransaction().replace(R.id.professor_fragment_container,
+               //         new ProfHomeFragment()).commit();
+               // navigationView.setCheckedItem(R.id.nav_professor_home);
+                getSupportFragmentManager().beginTransaction().replace(R.id.professor_fragment_container,
+                        new ProfCoursesFragment()).commit();
+                navigationView.setCheckedItem(R.id.nav_professor_classes);
+            }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        String coursetext;
+        int currentcourse = ProfData.getCurrentcourse();
+        if (currentcourse != -1){
+            coursetext = ProfData.getCourses().get(currentcourse).getCourseName();
+        } else {
+            coursetext = "No course selected";
+        }
+        setDrawerCourse(coursetext);
+
+        if(ProfData.getEmail() != null)
+            setEmailText(ProfData.getEmail());
+    }
+
+    public  void setEmailText(String email){
+        View hview = navigationView.getHeaderView(0);
+        TextView navsublbl = hview.findViewById(R.id.txtNavSublbl);
+        navsublbl.setText(email);
     }
 
     public void setToolbarText(String text){
@@ -131,7 +159,8 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
                 startActivity(new Intent(ProfMain.this, Login.class));
                 break;
             case R.id.nav_professor_settings:
-                startActivity(new Intent(ProfMain.this, ProfSettings.class));
+                //startActivity(new Intent(ProfMain.this, ProfSettings.class));
+                ProfSettings.LoadContext(this);
                 break;
         }
 
@@ -149,6 +178,12 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
     }
 
     // Buttons for fragments
+    public void switchToHome(){
+        getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.fade_in,
+                android.R.anim.fade_out).replace(R.id.professor_fragment_container,
+                new ProfHomeFragment()).commit();
+        navigationView.setCheckedItem(R.id.nav_professor_home);
+    }
 
     public void createQuestionMenu(View view) {
         PopupMenu popup = new PopupMenu(this, view);
@@ -190,23 +225,32 @@ public class ProfMain extends AppCompatActivity implements NavigationView.OnNavi
     // Gets the time info from the launcher dialog and completes the question launch process
     @Override
     public void launchQuestion(int minutes, int seconds) {
-        int cindex = ProfData.getCurrentcourse();          // Get the current course index
-        Course course = ProfData.getCourse(cindex);        // Get the current course
-        int qindex = ProfData.getLastclickedquestion();    // Get the last clicked question index
+        int cindex = ProfData.getCurrentcourse();               // Get the current course index
+        Course course = ProfData.getCourse(cindex);             // Get the current course
+        int qindex = ProfData.getLastclickedquestion();         // Get the last clicked question index
         Question question = course.getQueueQuestion(qindex);    // Get the last clicked question
 
-        course.removeQueueQuestion(qindex);   // Remove the question from the queue
-        question.setTimelimit(60*minutes + seconds);   // Set the question time limit in seconds
-        question.setInQueue(false);           // The question is no longer in the queue
-        question.setActive(true);             // The question is now active
-        course.addQuestion(question);         // Add the question into the question list
-        ProfData.setCourse(cindex, course);   // Update ProfData with the new course info
+        course.removeQueueQuestion(qindex);                      // Remove the question from the queue
+        question.setTimelimit(60*minutes + seconds);             // Set the question time limit in seconds
+        question.setInQueue(false);                              // The question is no longer in the queue
+        question.setActive(true);                                // The question is now active
+        question.setTimelaunched(System.currentTimeMillis());    // time that the question was launched
+        course.addQuestion(question);                            // Add the question into the question list
+        ProfData.setCourse(cindex, course);                      // Update ProfData with the new course info
         refreshHome();
     }
 
     public void editQueueQuestion(){
-        // Open the edit page here
-
+        int cindex = ProfData.getCurrentcourse();               // Get the current course index
+        Course course = ProfData.getCourse(cindex);             // Get the current course
+        int qindex = ProfData.getLastclickedquestion();         // Get the last clicked question index
+        Question question = course.getQueueQuestion(qindex);    // Get the last clicked question
+        if(question.getType() == Question.QuestionType.MULTIPLECHOICE || question.getType() == Question.QuestionType.TRUEFALSE) {
+            startActivity(new Intent(this, EditMultipleChoice.class));
+        }
+        if(question.getType() == Question.QuestionType.SHORTANSWER || question.getType() == Question.QuestionType.FILLINBLANK) {
+            startActivity(new Intent(this, EditShortAnswer.class));
+        }
     }
 
     public void deleteQueueQuestion(){

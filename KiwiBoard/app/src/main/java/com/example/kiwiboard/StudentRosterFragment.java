@@ -22,6 +22,10 @@ public class StudentRosterFragment extends Fragment {
 
         // Get the current course and declare variables
         int courseindex = StudentData.getCurrentcourse();
+        if(courseindex<0)
+        {
+            return rosterview;
+        }
         Course currentcourse = StudentData.getCourses().get(courseindex);
         ArrayList<Student> students = currentcourse.getStudents();
         int numStudents = students.size();

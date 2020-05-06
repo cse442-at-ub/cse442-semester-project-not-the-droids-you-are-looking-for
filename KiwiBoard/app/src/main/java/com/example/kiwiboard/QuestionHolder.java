@@ -35,9 +35,19 @@ public class QuestionHolder extends RecyclerView.ViewHolder {
                 if (StudentData.isStudentmode()) {
                     StudentData.setLastclickedquestion(qindex); // Notify student data of index
                     if (type == Question.QuestionType.MULTIPLECHOICE) {
-                        activityContext.startActivity(new Intent(activityContext, StudentMultipleChoice.class));
+                        if(question.isActive()) {
+                            activityContext.startActivity(new Intent(activityContext, StudentMultipleChoice.class));
+                        }
+                        else {
+                            activityContext.startActivity(new Intent(activityContext, StudentMCQuestionView.class));
+                        }
                     } else if (type == Question.QuestionType.SHORTANSWER) {
-                        activityContext.startActivity(new Intent(activityContext, StudentShortAnswer.class));
+                        if(question.isActive()) {
+                            activityContext.startActivity(new Intent(activityContext, StudentShortAnswer.class));
+                        }
+                        else {
+                            activityContext.startActivity(new Intent(activityContext, StudentSAQuestionView.class));
+                        }
                     }
                 }
                 if (ProfData.isProfessormode()){

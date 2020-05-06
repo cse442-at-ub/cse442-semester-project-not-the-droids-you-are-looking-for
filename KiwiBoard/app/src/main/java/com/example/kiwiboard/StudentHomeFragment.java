@@ -34,7 +34,6 @@ public class StudentHomeFragment extends Fragment {
         activeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recentRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        StudentData.setCurrentcourse(0);
         int courseindex = StudentData.getCurrentcourse();
         if (courseindex < 0){
             return studentView;
@@ -60,32 +59,59 @@ public class StudentHomeFragment extends Fragment {
         activeRecyclerView.setAdapter(activeAdapter);
         recentRecyclerView.setAdapter(recentAdapter);
 
+        return studentView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        int courseindex = StudentData.getCurrentcourse();
+        if (courseindex < 0){
+            return;
+        }
+
         generateActiveQuestionList();
         generateRecentQuestionList();
 
         activeAdapter.notifyDataSetChanged();
         recentAdapter.notifyDataSetChanged();
-
-        return studentView;
     }
 
     private void generateActiveQuestionList() {
-        // Get the current active question(s)
-        int numQuestions = questions.size();
-        if (numQuestions >= 2){
-            activeQuestions.add(questions.get(numQuestions - 1));
-            activeQuestions.add(questions.get(numQuestions - 2));
+        if (activeQuestions != null)
+            activeQuestions.clear();
+
+        if (questions != null) {
+            // Get the current active question(s)
+            for (Question question : questions) {
+                if (question.isActive())
+                    activeQuestions.add(question);
+            }
         }
     }
 
     private void generateRecentQuestionList() {
         // Get the current recent question(s)
-        int numQuestions = questions.size();
-        if (numQuestions > 2){
-            for (int i = numQuestions - 3; i > 0; i--){
-                recentQuestions.add(questions.get(i));
+        if (activeQuestions != null)
+            recentQuestions.clear();
+        int maxrecents = 7; // the maximum number of recent questions diplayed
+        int numQuestions;
+        if (questions == null){
+            numQuestions = 0;
+        } else {
+            numQuestions = questions.size();
+        }
+        int numRecentQuestions = 0;
+        Question question;
+        for(int q = numQuestions - 1; q >= 0; q--){
+            question = questions.get(q);
+            if (!question.isActive() && numRecentQuestions < maxrecents){
+                numRecentQuestions++;
+                recentQuestions.add(question);
             }
         }
+
     }
 
 }

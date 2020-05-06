@@ -1,72 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/themeColor"
+    android:orientation="vertical"
     tools:context=".StudentGradesFragment">
 
-
     <TextView
-        android:id="@+id/txtStuClassavg"
-        android:layout_width="46dp"
-        android:layout_height="27dp"
-        android:text="82%"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/tablecontainer"
-        app:layout_constraintStart_toStartOf="@+id/tablecontainer"
-        app:layout_constraintTop_toBottomOf="@+id/txtClassAvglbl" />
-
-    <EditText
         android:id="@+id/txtGradesTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:editable="false"
-        android:ems="10"
-        android:inputType="none"
-        android:text="My Grades"
-        app:layout_constraintBottom_toTopOf="@+id/txtClassAvglbl"
-        app:layout_constraintStart_toStartOf="@+id/txtClassAvglbl"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:text="My Grade"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="118dp"
+        tools:layout_editor_absoluteY="38dp" />
 
-    <ProgressBar
-        android:id="@+id/prgStuClassavg"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="165dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="46dp"
-        android:layout_marginEnd="138dp"
-        android:progress="82"
-        app:layout_constraintBottom_toBottomOf="@+id/txtStuClassavg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txtStuClassavg"
-        app:layout_constraintTop_toTopOf="@+id/txtStuClassavg" />
 
     <TextView
         android:id="@+id/txtClassAvglbl"
-        android:layout_width="130dp"
+        android:layout_width="150dp"
         android:layout_height="32dp"
         android:text="Class Average"
-        android:textSize="18sp"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="8dp"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/txtStuClassavg"
         app:layout_constraintStart_toStartOf="@+id/txtStuClassavg"
         app:layout_constraintTop_toBottomOf="@+id/txtGradesTitle" />
 
     <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="35dp"
+        android:layout_gravity="left"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="25dp"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="115dp"
+        tools:layout_editor_absoluteY="150dp">
+
+        <TextView
+            android:id="@+id/txtStuClassavg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="0%"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/tablecontainer"
+            app:layout_constraintStart_toStartOf="@+id/tablecontainer"
+            app:layout_constraintTop_toBottomOf="@+id/txtClassAvglbl"
+            android:textColor="#FFFFFF"/>
+
+        <ProgressBar
+            android:id="@+id/prgStuClassavg"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="165dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="46dp"
+            android:layout_marginEnd="138dp"
+            android:layout_gravity="center"
+            android:progress="0"
+            app:layout_constraintBottom_toBottomOf="@+id/txtStuClassavg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txtStuClassavg"
+            app:layout_constraintTop_toTopOf="@+id/txtStuClassavg" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/tablecontainer"
         android:layout_width="match_parent"
-        android:layout_height="461dp"
+        android:layout_height="match_parent"
         android:layout_margin="8dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/prgStuClassavg">
+        android:background="@drawable/ic_rounded_corners">
 
         <TableRow
             android:id="@+id/tblrowtitles"
-            android:layout_width="362dp"
+            android:layout_width="410dp"
             android:layout_height="49dp" >
 
             <TextView
@@ -76,8 +95,11 @@
                 android:paddingTop="5dp"
                 android:paddingEnd="10dp"
                 android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
                 android:text="Q#"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#171817"/>
 
             <TextView
                 android:id="@+id/txtsPointslbl"
@@ -85,8 +107,11 @@
                 android:layout_height="match_parent"
                 android:padding="5dp"
                 android:paddingEnd="10dp"
+                android:layout_marginLeft="6dp"
                 android:text="Points"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#171817"/>
 
             <TextView
                 android:id="@+id/txtsTotallbl"
@@ -94,8 +119,11 @@
                 android:layout_height="match_parent"
                 android:padding="5dp"
                 android:paddingEnd="10dp"
+                android:layout_marginLeft="6dp"
                 android:text="Total"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#171817"/>
 
             <TextView
                 android:id="@+id/txtsPerclbl"
@@ -104,18 +132,21 @@
                 android:padding="5dp"
                 android:paddingStart="2dp"
                 android:paddingEnd="20dp"
+                android:layout_marginLeft="6dp"
                 android:text="%"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#171817"/>
         </TableRow>
 
         <ScrollView
             android:id="@+id/scrllstudent"
-            android:layout_width="362dp"
+            android:layout_width="410dp"
             android:layout_height="match_parent">
 
             <TableLayout
                 android:id="@+id/tblStudentGrades"
-                android:layout_width="359dp"
+                android:layout_width="410dp"
                 android:layout_height="415dp"
                 android:fadeScrollbars="true"
                 android:isScrollContainer="true"
@@ -138,4 +169,4 @@
     </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

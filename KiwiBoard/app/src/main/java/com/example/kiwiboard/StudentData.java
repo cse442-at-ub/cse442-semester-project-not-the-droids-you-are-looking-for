@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class StudentData {
     
     private static String name;                 // Student's name
+    private static String ID;                   // Student's ID
     private static String email;                // Student's email
     private static String password;             // Student's password
     private static int currentcourse = -1;           // Student's currently selected course
@@ -16,6 +17,7 @@ public class StudentData {
     // Default constructor
     public StudentData(){
         StudentData.name = name;
+        StudentData.ID = ID;
         StudentData.email = email;
         StudentData.password = password;
         StudentData.currentcourse = -1;
@@ -28,6 +30,14 @@ public class StudentData {
 
     public static void setName(String name) {
         StudentData.name = name;
+    }
+
+    public static String getID() {
+        return ID;
+    }
+
+    public static void setID(String ID) {
+        StudentData.ID = ID;
     }
 
     public static String getEmail() {
@@ -112,6 +122,9 @@ public class StudentData {
     // Removes the course at the index. Indices start at 0.
     public static void removeCourse(int index){
         courses.remove(index);
+        if(index == currentcourse){
+            currentcourse = -1;
+        }
     }
 
     // Clears all student data

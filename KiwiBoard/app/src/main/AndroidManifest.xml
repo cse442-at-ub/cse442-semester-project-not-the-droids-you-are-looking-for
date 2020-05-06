@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.kiwiboard">
 
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,10 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".IndividualGrades"></activity>
+        <activity android:name=".EditShortAnswer"></activity>
+        <activity android:name=".StudentSAQuestionView"></activity>
+        <activity android:name=".IndividualGrades" />
         <activity android:name=".ProfMCQuestionView" />
-        <activity android:name=".ProfSAQuestionView"></activity>
-        <activity android:name=".StudentMCQuestionView"></activity>
+        <activity android:name=".ProfSAQuestionView" />
+        <activity android:name=".StudentMCQuestionView" />
         <activity android:name=".ProfMultipleChoice" />
         <activity android:name=".StudentRegistration" />
         <activity android:name=".ResetPassword" />
@@ -32,6 +38,7 @@
         <activity android:name=".ProfQuestionLogFragment" />
         <activity android:name=".ProfReportFragment" />
         <activity android:name=".CreateMultipleChoice" />
+        <activity android:name=".EditMultipleChoice" />
         <activity android:name=".CreateCourseFragment" />
         <activity android:name=".CreateShortAnswer" />
         <activity android:name=".StudentShortAnswer" />

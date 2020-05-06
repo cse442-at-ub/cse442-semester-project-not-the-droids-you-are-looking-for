@@ -38,7 +38,7 @@ public class IndividualGrades extends AppCompatActivity {
         Question question;
         double pointsreceived;
         double percentage;
-        int maxpoints;
+        double maxpoints;
         ArrayList<Double> averages = currentcourse.calculateAverages();
 
         // Display student name to text view

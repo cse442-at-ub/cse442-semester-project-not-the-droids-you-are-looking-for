@@ -31,11 +31,7 @@ public class StudentMain extends AppCompatActivity implements NavigationView.OnN
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_main);
 
-        // Load in sample courses for the student
-        SampleData loader = new SampleData();
-        loader.loadStudentCourses();
-        if (StudentData.getEmail() == null || StudentData.getEmail().equals(""))
-            loader.loadStudentInfo();
+
 
         Toolbar toolbar = findViewById(R.id.student_toolbar);
         setSupportActionBar(toolbar);
@@ -56,6 +52,9 @@ public class StudentMain extends AppCompatActivity implements NavigationView.OnN
         navImage.getLayoutParams().height = 200;
         navImage.getLayoutParams().width = 200;
 
+        if (StudentData.getCourses() != null && StudentData.getCourses().size() > 0)
+            StudentData.setCurrentcourse(0);
+
         String coursetext;
         int currentcourse = StudentData.getCurrentcourse();
         if (currentcourse >= 0){
@@ -66,20 +65,48 @@ public class StudentMain extends AppCompatActivity implements NavigationView.OnN
 
         setDrawerCourse(coursetext);
 
-        TextView navsublbl = hview.findViewById(R.id.txtNavSublbl);
-        navsublbl.setText(StudentData.getEmail());
+        setEmailText(StudentData.getEmail());
 
         setToolbarText(coursetext);
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
-                    new StudentHomeFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_student_home);
+            if (StudentData.getCourses() == null || StudentData.getCourses().size() == 0){
+                getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
+                        new AddCourseFragment()).commit();
+                navigationView.setCheckedItem(R.id.nav_student_addclass);
+            } else {
+                getSupportFragmentManager().beginTransaction().replace(R.id.student_fragment_container,
+                        new StudentHomeFragment()).commit();
+                navigationView.setCheckedItem(R.id.nav_student_home);
+            }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        String coursetext;
+        int currentcourse = ProfData.getCurrentcourse();
+        if (currentcourse != -1){
+            coursetext = ProfData.getCourses().get(currentcourse).getCourseName();
+        } else {
+            coursetext = "No course selected";
+        }
+        setDrawerCourse(coursetext);
+
+        if(StudentData.getEmail() != null)
+            setEmailText(StudentData.getEmail());
     }
 
     public void setToolbarText(String text){
         Objects.requireNonNull(getSupportActionBar()).setTitle(text);
+    }
+
+    public  void setEmailText(String email){
+        View hview = navigationView.getHeaderView(0);
+        TextView navsublbl = hview.findViewById(R.id.txtNavSublbl);
+        navsublbl.setText(email);
     }
 
     public void setDrawerCourse(String text){
@@ -122,7 +149,8 @@ public class StudentMain extends AppCompatActivity implements NavigationView.OnN
                 startActivity(new Intent(StudentMain.this, Login.class));
                 break;
             case R.id.nav_student_settings:
-                startActivity(new Intent(StudentMain.this, StudentSettings.class));
+                //startActivity(new Intent(StudentMain.this, StudentSettings.class));
+                StudentSettings.LoadContext(this);
                 break;
         }
 

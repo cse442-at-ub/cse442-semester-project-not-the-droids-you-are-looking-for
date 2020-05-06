@@ -1,6 +1,7 @@
 package com.example.kiwiboard;
 
 import java.lang.invoke.MutableCallSite;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -11,6 +12,7 @@ class Question {
     }
 
     // Question attributes
+    private String ID = "";                     // Question ID
     private QuestionType type;                  // Question type
     private String description;                 // Question description
     private final int MAXCHOICES = 5;           // Max amount of MC and Select All choices
@@ -19,16 +21,18 @@ class Question {
     private int questionnumber;                 // The index of the question
     private boolean inQueue = false;            // Whether the question is in the queue
     private boolean isActive = false;           // Whether the question is active
-    private int timelaunched = 0;               // Exact time when the question was launched
+    private boolean submissionEntered = false;  // Did the student enter a submission for the question yet
+    private boolean isLaunched = false;                 // TEMPORARY: For Asynchronous Student Timer for Sprint 4.
+    private long timelaunched = 0;               // Exact time when the question was launched
     private int timelimit = 0;                  // Amount of time the question lasts
 
     private double pointsreceived;               // Points received by student. Null for professors.
-    private int maxpoints;                       // Max points possible
+    private double maxpoints;                       // Max points possible
 
     // Answers
     private int mcanswer;                        // Field for mc, and T/F answers
     private double numericanswer;                // Field for numeric answers
-    private String textanswer;                      // Field for textual answers
+    private String textanswer;                   // Field for textual answers
     private ArrayList<Integer> multipleanswers;  // Fields for multiple answers
 
     // Answer submissions from student
@@ -38,8 +42,9 @@ class Question {
     private double numericresponse;              // The student's numeric submission
 
 
-    // Constructuor with parameters
+    // Constructor with parameters
     public Question(QuestionType type, String description, ArrayList<String> choices, int questionnumber, double pointsreceived, int maxpoints, int mcanswer, double numericanswer, String textanswer, ArrayList<Integer> multipleanswers, int mcresponse, ArrayList<Integer> multipleresponses, String textresponse, double numericresponse) {
+        this.ID = "";
         this.type = type;
         this.description = description;
         this.choices = choices;
@@ -54,6 +59,11 @@ class Question {
         this.multipleresponses = multipleresponses;
         this.textresponse = textresponse;
         this.numericresponse = numericresponse;
+    }
+
+    public Question(QuestionType type, String description) {
+        this.type = type;
+        this.description = description;
     }
 
     // Clear all question data
@@ -71,6 +81,14 @@ class Question {
         this.multipleresponses = new ArrayList<Integer>();
         this.textresponse = null;
         this.numericresponse = 0;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
     // Get the question type
@@ -138,6 +156,22 @@ class Question {
         isActive = active;
     }
 
+    // Check if the question is has been clicked by student already.
+    public boolean isLaunched() {
+        return isLaunched;
+    }
+
+    // Set whether the question has been opened already or not.
+    public void setLaunched(boolean launched) {
+        isLaunched = launched;
+    }
+
+    // was a submission entered for the question
+    public boolean getSubmissionEntered() { return submissionEntered; }
+
+    // set submission entered to true or false
+    public void setSubmissionEntered(boolean submitted) { submissionEntered = submitted; }
+
     // Get the number of points received by the student
     public double getPointsreceived() {
         return pointsreceived;
@@ -148,11 +182,11 @@ class Question {
         this.pointsreceived = pointsreceived;
     }
 
-    public int getMaxpoints() {
+    public double getMaxpoints() {
         return maxpoints;
     }
 
-    public void setMaxpoints(int maxpoints) {
+    public void setMaxpoints(double maxpoints) {
         this.maxpoints = maxpoints;
     }
 
@@ -236,11 +270,13 @@ class Question {
         this.multipleresponses = multipleresponses;
     }
 
-    public int getTimelaunched() {
+    // get the time it was launched in millis
+    public long getTimelaunched() {
         return timelaunched;
     }
 
-    public void setTimelaunched(int timelaunched) {
+    // set the time it was launched in millis (System.currentTimeinMillis)
+    public void setTimelaunched(long timelaunched) {
         this.timelaunched = timelaunched;
     }
 
@@ -282,7 +318,7 @@ class Question {
                     }
                 }
                 if (correct - incorrect > 0) {
-                    return (correct - incorrect) / multipleanswers.size() * maxpoints;
+                    return (double)(correct - incorrect) / multipleanswers.size() * maxpoints;
                 }else{
                     return 0;
                 }

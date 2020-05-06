@@ -15,6 +15,7 @@ import java.util.Locale;
 
 public class StudentShortAnswer extends AppCompatActivity {
     private ArrayList<Question> questions;
+    private Question question;
     private Course currentCourse;
     private ProgressBar progressBar;
     private TextView txtCountdownText;
@@ -39,7 +40,7 @@ public class StudentShortAnswer extends AppCompatActivity {
         questionNumber = findViewById(R.id.SA_questionNumber);
         txtCountdownText = findViewById(R.id.SA_txt_countdown);
         progressBar = findViewById(R.id.SA_progressBar);
-        answer = findViewById(R.id.SA_txt_answer);
+        answer = (EditText) findViewById(R.id.SA_txt_answer);
         submitButton = findViewById(R.id.SA_submitButton);
         questionDescription = findViewById(R.id.SA_questionTextView);
 
@@ -86,39 +87,69 @@ public class StudentShortAnswer extends AppCompatActivity {
 
 
     private void displayQuestion() {
-        Question question = getQuestion();
+        question = getQuestion();
         if(question == null) {
             return;
         }
         questionDescription.setText(question.getDescription());     // set text for question description
         questionNumber.setText("#" + question.getQuestionnumber());     // set text for question number
         timeLeftInMillis = COUNTDOWN_IN_MILLIS;
+
+
+        if(question.isLaunched()) {
+            // compare the current time to time it was posted
+            // if the time difference is less than the timeLimit then there is still time Left
+            long timeDifference = System.currentTimeMillis() - question.getTimelaunched();
+            if(timeDifference > COUNTDOWN_IN_MILLIS)
+                timeLeftInMillis = 0;
+            else
+                timeLeftInMillis = COUNTDOWN_IN_MILLIS - (System.currentTimeMillis() - question.getTimelaunched());
+            answer.setText(question.getTextresponse());
+        }
+        else {
+            question.setLaunched(true);
+            question.setTimelaunched(System.currentTimeMillis());
+            timeLeftInMillis = COUNTDOWN_IN_MILLIS;
+        }
         startTimer();
     }
 
     private void startTimer() {
-        countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                timeLeftInMillis = millisUntilFinished;
-                updateCountDownText();
-                // need to set the percentage for the progress bar
-                // 1. Progress Bar only had 100 different settings. 0-100 integers
-                int progress = (int) (100 * timeLeftInMillis / COUNTDOWN_IN_MILLIS);
-                progressBar.setProgress(progress);
+        if(timeLeftInMillis > 0) {
+            countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    timeLeftInMillis = millisUntilFinished;
+                    updateCountDownText();
+                    // need to set the percentage for the progress bar
+                    // 1. Progress Bar only had 100 different settings. 0-100 integers
+                    int progress = (int) (100 * timeLeftInMillis / COUNTDOWN_IN_MILLIS);
+                    progressBar.setProgress(progress);
 
-            }
-            @Override
-            public void onFinish() {
-                timeLeftInMillis = 0;
-                updateCountDownText();
-                countDownTimer.cancel();
-                progressBar.clearAnimation();
-                // checkAnswer will lock in the answer selected when time runs out
-                // when coded cancel the countDownTimer inside of it
-                // checkAnswer();
-            }
-        }.start();
+                }
+                @Override
+                public void onFinish() {
+                    timeLeftInMillis = 0;
+                    question.setActive(false);
+                    updateCountDownText();
+                    countDownTimer.cancel();
+                    progressBar.clearAnimation();
+                    switch_to_main();
+
+
+                    // checkAnswer will lock in the answer selected when time runs out
+                    // when coded cancel the countDownTimer inside of it
+                    // checkAnswer();
+                }
+            }.start();
+        }
+        else {
+            int progress = 0;
+            timeLeftInMillis = 0;
+            updateCountDownText();
+            progressBar.setProgress(progress);
+            progressBar.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void updateCountDownText() {
@@ -159,43 +190,32 @@ public class StudentShortAnswer extends AppCompatActivity {
     }
 
 
-    //public void set_description(){ txt_box.setText(question.getDescription()); }
-    /*
-    *   public void switch_to_main(View view)
-    *   This function will be used switch from the short Activity and store the current students
-    *   answer in a question object
-    *
-     */
+    public void switch_to_main(){
+        String result = collect_answer();
+        int index_c = StudentData.getCurrentcourse(), index_q = StudentData.getLastclickedquestion();
 
-    /*
-    public void switch_to_main(View view){
-        String answer = collect_answer();
+        if(result.compareTo("") == 0){
+            Toast.makeText(getApplicationContext(),"Please fill in an answer.",Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        Toast toast = Toast.makeText(getApplicationContext(),"Submitting Answer!",Toast.LENGTH_SHORT);
-        toast.show();
+        Toast.makeText(getApplicationContext(),"Submitting Answer!",Toast.LENGTH_SHORT).show();
 
-        System.out.println("Answer Collected:\t" + answer);
-        startActivity(new Intent(this, ProfMain.class));
+        Course course = StudentData.getCourse(index_c);
+        Question question = course.getQuestion(index_q);
+        question.setTextresponse(result);
 
-        question.setTextresponse(collect_answer());
+        course.setQuestion(index_q,question);
+        StudentData.setCourse(index_c,course);
 
         this.finish();
-        startActivity(new Intent(StudentShortAnswer.this, StudentMain.class));
     }
-    */
 
-    /*
-     *  public void clear_txt_anwser(View view)
-     *  This function will delete all text in the txt_answer
-     *
-     *  Credit: https://stackoverflow.com/questions/5308200/clear-text-in-edittext-when-entered
-     *  used to derive line 26
-
-   // public void clear_txt_answer(View view) { try { answer_view.getText().clear(); } catch (Exception e){} }
-
+    public void cover_switch_to_main(View view){
+        switch_to_main();
+    }
+    
     // collect the text stored in txt_answer as a string
-    public String collect_answer() {
-        return answer.getText().toString();
-    }
-    */
+    public String collect_answer() { return answer.getText().toString();}
+
 }

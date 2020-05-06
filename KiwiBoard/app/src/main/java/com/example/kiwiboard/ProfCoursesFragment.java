@@ -30,6 +30,9 @@ public class ProfCoursesFragment extends Fragment {
 
         // Get professors active courses logged
         courses = ProfData.getCourses();
+        if (courses == null){
+            return profView;
+        }
         numCourses = courses.size();
 
         // Fill course names to display
@@ -70,6 +73,7 @@ public class ProfCoursesFragment extends Fragment {
                 ProfMain profMain = (ProfMain) getActivity();
                 profMain.setToolbarText(coursetext);
                 profMain.setDrawerCourse(coursetext);
+                profMain.switchToHome();
             }
         });
 

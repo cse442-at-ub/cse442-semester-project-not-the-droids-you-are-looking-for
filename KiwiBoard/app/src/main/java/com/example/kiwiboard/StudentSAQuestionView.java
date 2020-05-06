@@ -9,18 +9,26 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class ProfSAQuestionView extends AppCompatActivity {
+public class StudentSAQuestionView extends AppCompatActivity {
     private TextView answer;
     private TextView description;
     private Question question;
     private Toolbar toolbar;
+    private TextView getAnswer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_prof_sa_question_view);
+        setContentView(R.layout.activity_student_sa_question_view);
+        question = getQuestion();
 
-        toolbar = (Toolbar) findViewById(R.id.Prof_SA_Quest_Toolbar);
-        toolbar.setTitle("Question Log: Question " + (ProfData.getLastclickedquestion() + 1));
+        answer = (TextView) findViewById(R.id.Stud_SA_Quest_View_Answer_TXT);
+        if(question.getTextresponse() == null)
+            answer.setText("You never answered this question.");
+        else
+            answer.setText(question.getTextresponse());
+
+        toolbar = (Toolbar)findViewById(R.id.Stud_SA_QuestView_Toolbar);
+        toolbar.setTitle("Question: " + (StudentData.getLastclickedquestion() + 1));
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_back));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,28 +38,24 @@ public class ProfSAQuestionView extends AppCompatActivity {
             }
         });
 
-        question = getQuestion();
-
-        answer = (TextView) findViewById(R.id.Prof_SA_Quest_View_Answer_TXT);
-        answer.setText(question.getTextanswer());
-
-        description = (TextView) findViewById(R.id.Prof_SA_Quest_View_Desp_TXT);
+        description = (TextView) findViewById(R.id.Stud_SA_Quest_View_Desp_TXT);
         description.setText(question.getDescription());
+        getAnswer = (TextView) findViewById(R.id.stud_SA_Quest_View_Answer_CorrectTXT);
+        getAnswer.setText( question.getTextanswer());
     }
     private Question getQuestion(){
-        int courseindex = ProfData.getCurrentcourse();
+        int courseindex = StudentData.getCurrentcourse();
         if(courseindex < 0) {
             return null;
         }
-        Course currentcourse = ProfData.getCourses().get(courseindex);
+        Course currentcourse = StudentData.getCourses().get(courseindex);
 
-        int qindex = ProfData.getLastclickedquestion();
+        int qindex = StudentData.getLastclickedquestion();
         if (qindex < 0)
             return null;
         ArrayList<Question> questions = currentcourse.getQuestions();
         return questions.get(qindex);
     }
-    @Override
     protected void onResume() {
         super.onResume();
         View decorView = getWindow().getDecorView();

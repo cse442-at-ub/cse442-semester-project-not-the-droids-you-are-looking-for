@@ -36,6 +36,11 @@ public class StudentQuestionLogFragment extends Fragment {
         }
         */
 
+        if(courseindex<0)
+        {
+            return rosterview;
+        }
+
         final Course currentcourse = StudentData.getCourses().get(courseindex);
         questions = currentcourse.getQuestions();
         int numQuestions = questions.size();
@@ -52,7 +57,10 @@ public class StudentQuestionLogFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 StudentData.setLastclickedquestion(i);
-                startActivity(new Intent(getActivity(), StudentMCQuestionView.class));
+                if(questions.get(i).getChoices() == null)
+                    startActivity(new Intent(getActivity(), StudentSAQuestionView.class));
+                else
+                    startActivity(new Intent(getActivity(), StudentMCQuestionView.class));
             }
         });
 

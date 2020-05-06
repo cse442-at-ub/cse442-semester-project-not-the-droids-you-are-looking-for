@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.Fragment;
 
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,34 +18,40 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class StudentGradesFragment extends Fragment {
     @Nullable
 @Override
 public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View rootView = inflater.inflate(R.layout.fragment_student_grades,container,false);
 
-        int courseindex = ProfData.getCurrentcourse();
+        int courseindex = StudentData.getCurrentcourse();
         // Check if a course has been selected
         if (courseindex < 0){
             return rootView;
         }
 
-        Course currentcourse = ProfData.getCourses().get(courseindex);
+        Course currentcourse = StudentData.getCourses().get(courseindex);
         ArrayList<Question> questions = currentcourse.getQuestions();
         Question question;
         double pointsreceived, percentage;
-        int maxpoints;
+        double maxpoints;
         ArrayList<Double> averages = currentcourse.calculateAverages();
 
         // Class Average
         TextView avgTotal=(TextView)rootView.findViewById(R.id.txtStuClassavg);
         double Classaverage = currentcourse.calculateClassAverage();
-        avgTotal.setText(Classaverage+"%");
-        ProgressBar avgProgress = (ProgressBar) rootView.findViewById(R.id.prgStuClassavg);
-        avgProgress.setProgress((int) Classaverage);
+        DecimalFormat dec = new DecimalFormat("#0.00");
+        avgTotal.setText(dec.format(Classaverage) + " % ");
+
+        Resources res = getResources();
+        Drawable drawable = res.getDrawable(R.drawable.ic_progress_bar);
+        ProgressBar mProgress = (ProgressBar) rootView.findViewById(R.id.prgStuClassavg);
+        mProgress.setProgress((int) Classaverage);
+        mProgress.setMax(100); // Maximum Progress
+        mProgress.setProgressDrawable(drawable);
 
         // Table layout
 
@@ -71,7 +79,7 @@ public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup c
             qnum.setId(i);
             //qnum.setTextColor(Color.WHITE);
             qnum.setTextSize(20);
-            qnum.setPadding(5, 5, 80, 5);
+            qnum.setPadding(20, 5, 80, 5);
             tr.addView(qnum);
 
             TextView numpoints = new TextView(getActivity());
@@ -99,12 +107,15 @@ public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup c
             tr.addView(percent);
 
 
-            ProgressBar tv3 = new ProgressBar(new ContextThemeWrapper(getActivity(), R.style.horizontalProgressSmall), null,0);
-            tv3.setProgress((int)percentage);
-            tv3.setId(i+i+i);
-            tv3.setMinimumWidth(50);
-            tv3.setPadding(25, 20, 5, 10);
-            tr.addView(tv3);
+            //ProgressBar tv3 = new ProgressBar(new ContextThemeWrapper(getActivity(), R.style.horizontalProgressSmall), null,0);
+            Drawable drawables = res.getDrawable(R.drawable.ic_progress_bar);
+            ProgressBar nProgress = new ProgressBar(new ContextThemeWrapper(getActivity(), R.style.horizontalProgressSmall), null,0);
+            nProgress.setProgress((int) percentage);
+            nProgress.setMax(100); // Maximum Progress
+            nProgress.setId(i+i+i);
+            nProgress.setProgressDrawable(drawables);
+            nProgress.setPadding(25, 20, 5, 10);
+            tr.addView(nProgress,265,75);
 
             gradesTable.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
 

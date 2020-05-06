@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StudentGradesFragment">
+    tools:context=".ProfReportFragment">
 
 
     <TextView
         android:id="@+id/txtProfClassavg"
-        android:layout_width="46dp"
+        android:layout_width="80dp"
         android:layout_height="27dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:text="82%"
+        android:text="0%"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/tablecontainerProf"
         app:layout_constraintStart_toStartOf="@+id/tablecontainerProf"
@@ -41,11 +41,13 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="165dp"
         android:layout_height="26dp"
+        android:maxHeight="20dp"
+        android:maxWidth="20dp"
         android:layout_marginStart="66dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="111dp"
         android:layout_marginBottom="10dp"
-        android:progress="82"
+        android:progress="0"
         app:layout_constraintBottom_toBottomOf="@+id/txtProfClassavg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/txtProfClassavg"

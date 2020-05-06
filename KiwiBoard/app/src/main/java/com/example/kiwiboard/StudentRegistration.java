@@ -56,8 +56,8 @@ public class StudentRegistration extends AppCompatActivity {
                 // create the user only if all the textfields are not null
                 if(!name.equals("") && !email.equals("") && !password.equals("")) {
                     createUser();
-                    StudentData.setStudentmode(true); // Activate professor mode
-                    startActivity(new Intent(StudentRegistration.this, StudentMain.class));
+                    //StudentData.setStudentmode(true); // Activate professor mode
+                    //startActivity(new Intent(StudentRegistration.this, StudentMain.class));
                 }
                 // make background red to indicate error to user.
                 else {
@@ -87,7 +87,6 @@ public class StudentRegistration extends AppCompatActivity {
         });
 
         professorRegistration.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
                 startActivity(new Intent(StudentRegistration.this, ProfRegistration.class));
                 finish();
@@ -96,9 +95,14 @@ public class StudentRegistration extends AppCompatActivity {
     }
 
     public void createUser() {
-        StudentData.clearAllData();
         StudentData.setName(name);
         StudentData.setEmail(email);
         StudentData.setPassword(password);
+        Server.register(this, name, email, password);
+    }
+
+    public void launchStudent(){
+        finish();
+        startActivity(new Intent(this, StudentMain.class));
     }
 }

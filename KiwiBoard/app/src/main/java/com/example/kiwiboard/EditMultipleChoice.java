@@ -1,20 +1,19 @@
 package com.example.kiwiboard;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import java.util.ArrayList;
 
-public class CreateMultipleChoice extends AppCompatActivity {
+public class EditMultipleChoice extends AppCompatActivity {
 
     private int choicenum = 2;
     private RadioButton[] rb;
@@ -25,12 +24,13 @@ public class CreateMultipleChoice extends AppCompatActivity {
 
     private ArrayList<Course> courses = ProfData.getCourses();
     private int cindex = ProfData.getCurrentcourse();
+    private int qindex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_multiple_choice);
-        setToolbar("Create Question");
+        setToolbar("Edit Question");
 
         // Find all views from the xml
         txtDesc = (EditText) findViewById(R.id.txtprofQuestionInputBox);
@@ -59,8 +59,35 @@ public class CreateMultipleChoice extends AppCompatActivity {
         del[3] = (ImageButton) findViewById(R.id.btnremovechoice4);
         del[4] = (ImageButton) findViewById(R.id.btnremovechoice5);
 
-        // Hide rbs 3 through 5 by default
+
+        int cindex = ProfData.getCurrentcourse();
+        if (cindex < 0) {
+            return;
+        }
+        Course course = ProfData.getCourse(cindex);
+        qindex = ProfData.getLastclickedquestion();
+        Question question = course.getQueueQuestion(qindex);
+
+        String description = question.getDescription();
+        ArrayList<String> choices = question.getChoices();
+        int mcanswer = question.getMcanswer();
+        double points = question.getMaxpoints();
+
+        txtDesc.setText(description);
+        txtpts.setText("".concat(""+points));
+
+        choicenum = choices.size();
+        for (int choice = 0; choice < choices.size(); choice++){
+            mc[choice].setText(choices.get(choice));
+            if(choice == mcanswer){
+                rb[choice].setChecked(true);
+            }
+        }
+
+        // Hide unused RBs
         updateVisibilities();
+
+
 
     }
 
@@ -235,13 +262,12 @@ public class CreateMultipleChoice extends AppCompatActivity {
         Question question = new Question(Question.QuestionType.MULTIPLECHOICE, description);
         question.setChoices(choices);
         question.setMcanswer(mcanswer);
-        question.setMaxpoints(points);
+        question.setPointsreceived(points);
         question.setActive(false);
         question.setInQueue(true);
 
-        course.addQueueQuestion(question);
+        course.setQueueQuestion(qindex, question);
         ProfData.setCourse(cindex, course);
-        Server.createQueueQuestion(this, question);
 
         Toast.makeText(this, "Question added to queue", Toast.LENGTH_SHORT).show();
         finish();
@@ -259,18 +285,6 @@ public class CreateMultipleChoice extends AppCompatActivity {
         return true;
     }
 
-    public static boolean isInteger(String string) {
-        if (string == null) {
-            return false;
-        }
-        try {
-            int num = Integer.parseInt(string);
-        } catch (NumberFormatException nfe) {
-            return false;
-        }
-        return true;
-    }
-
     public int getStatusBarHeight() {
         int result = 0;
         int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
@@ -278,14 +292,6 @@ public class CreateMultipleChoice extends AppCompatActivity {
             result = getResources().getDimensionPixelSize(resourceId);
         }
         return result;
-    }
-
-    private void setMargins (View view, int left, int top, int right, int bottom) {
-        if (view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
-            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
-            p.setMargins(left, top, right, bottom);
-            view.requestLayout();
-        }
     }
 
     public void setToolbar(String title){

@@ -15,9 +15,14 @@ public class StudentMCQuestionView extends AppCompatActivity {
     private Course currentCourse;
     private int courseIndex;
     private int questionIndex;
+    private Question question;
     private TextView txt_questionNumber;
     private TextView txt_questionDescription;
     private RadioGroup radioGroup;
+    private RadioButton rb1;
+    private RadioButton rb2;
+    private RadioButton rb3;
+    private RadioButton rb4;
     private ArrayList<String> choices;
 
     @Override
@@ -31,13 +36,18 @@ public class StudentMCQuestionView extends AppCompatActivity {
         txt_questionNumber = findViewById(R.id.studentMC_questionNumber);
         txt_questionDescription = findViewById(R.id.studentMC_questionTextView);
         radioGroup = findViewById(R.id.studentMC_choices);
-
+        rb1 = findViewById(R.id.studentMC_multchoice1);
+        rb2 = findViewById(R.id.studentMC_multchoice2);
+        rb3 = findViewById(R.id.studentMC_multchoice3);
+        rb4 = findViewById(R.id.studentMC_multchoice4);
 
         courseIndex = StudentData.getCurrentcourse();
         currentCourse = StudentData.getCourses().get(courseIndex);
         questions = currentCourse.getQuestions();
         choices = questions.get(courseIndex).getChoices();
         displayQuestion();
+
+
     }
 
 
@@ -58,7 +68,7 @@ public class StudentMCQuestionView extends AppCompatActivity {
     private void displayQuestion() {
         radioGroup.clearCheck();
 
-        Question question = getQuestion();
+        question = getQuestion();
         if(question == null) {
             return;
         }
@@ -68,33 +78,48 @@ public class StudentMCQuestionView extends AppCompatActivity {
 
         if(question.getChoices() != null) {
             // populate the choices into the radio button texts
-            choices = questions.get(questionIndex).getChoices();
-            RadioButton rb1 = findViewById(R.id.studentMC_multchoice1);
-            RadioButton rb2 = findViewById(R.id.studentMC_multchoice2);
-            RadioButton rb3 = findViewById(R.id.studentMC_multchoice3);
-            RadioButton rb4 = findViewById(R.id.studentMC_multchoice4);
-            String choice1 = choices.get(0);
-            String choice2 = choices.get(1);
-            String choice3 = choices.get(2);
-            String choice4 = choices.get(3);
-            String answer = question.getTextanswer();
+            choices = questions.get(question.getQuestionnumber() - 1).getChoices();
+            int answer_index = question.getMcanswer();
 
-            rb1.setText(choice1);
-            if(rb1.getText().equals(answer)) {
-                rb1.setTextColor(Color.GREEN);
+            RadioButton rblist[] = new RadioButton[4];
+            rblist[0] = findViewById(R.id.studentMC_multchoice1);
+            rblist[1] = findViewById(R.id.studentMC_multchoice2);
+            rblist[2] = findViewById(R.id.studentMC_multchoice3);
+            rblist[3] = findViewById(R.id.studentMC_multchoice4);
+
+            int i = 0;
+            // populate the choices into the radio button texts
+
+            for (i = 0; i < 4; i++){
+
+                if(i == question.getMcresponse() ) {
+                    rblist[i].setTextColor(Color.RED);
+
+                }
+                if(i == answer_index ){
+                    rblist[i].setTextColor(Color.GREEN);
+                    rblist[i].setChecked(true);
+                }
+                if(i < choices.size())
+                    rblist[i].setText(choices.get(i));
+                else
+                    rblist[i].setVisibility(View.GONE);
             }
-            rb2.setText(choice2);
-            if(rb2.getText().equals(answer)) {
-                rb2.setTextColor(Color.GREEN);
-            }
-            rb3.setText(choice3);
-            if(rb3.getText().equals(answer)) {
-                rb3.setTextColor(Color.GREEN);
-            }
-            rb4.setText(choice4);
-            if(rb4.getText().equals(answer)) {
-                rb4.setTextColor(Color.GREEN);
-            }
+
+//            rb1.setText(choice1);       // rb1 is choices [0]
+//            rb2.setText(choice2);       // rb2 is choices [1]
+//            rb3.setText(choice3);       // rb3 is choices [2]
+//            rb4.setText(choice4);       // rb4 is choices [3]
+//
+//            // display the correct answer to the student
+//            if(answer_index == 0)
+//                rb1.setTextColor(Color.GREEN);
+//            else if(answer_index == 1)
+//                rb2.setTextColor(Color.GREEN);
+//            else if(answer_index == 2)
+//                rb3.setTextColor(Color.GREEN);
+//            else if(answer_index == 3)
+//                rb4.setTextColor(Color.GREEN);
         }
     }
     @Override
@@ -104,10 +129,6 @@ public class StudentMCQuestionView extends AppCompatActivity {
         // Hide the status bar.
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
-        // Remember that you should never show the action bar if the
-        // status bar is hidden, so hide that too if necessary.
-        //ActionBar actionBar = getActionBar();
-        //actionBar.hide();
     }
 
 
